@@ -19,7 +19,7 @@ public class UserInMemoryRepository implements UserRepository
 	
 	private List<User> populateUsers()
 	{
-		User u1 = new User("tudor", "secret");
+		User u1 = new User("jk", "secret");
 		User u2 = new User("bob", "dob");
 		User u3 = new User("john", "sn0w");
 		User u4 = new User("mary", "queenofscots1542");
