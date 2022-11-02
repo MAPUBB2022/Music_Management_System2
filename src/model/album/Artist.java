@@ -9,8 +9,8 @@ public class Artist
 	public Artist(String stage_name)
 	{
 		this.stage_name = stage_name;
-		this.name = null;
-		this.salary = null;
+		this.name = "";
+		this.salary = 0f;
 	}
 	
 	public String getName()

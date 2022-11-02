@@ -4,6 +4,7 @@ import model.album.Album;
 import model.album.Artist;
 import model.concert.Concert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MusicLabel
@@ -19,10 +20,10 @@ public class MusicLabel
 	{
 		this.name = name;
 		this.address = address;
-		this.revenue = null;
-		this.artistList = null;
-		this.albumList = null;
-		this.upcomingEvents = null;
+		this.revenue = 0f;
+		this.artistList = new ArrayList<>();
+		this.albumList = new ArrayList<>();
+		this.upcomingEvents = new ArrayList<>();
 	}
 	
 	public String getName()

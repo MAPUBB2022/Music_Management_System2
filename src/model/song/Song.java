@@ -4,6 +4,7 @@ package model.song;
 import model.album.Artist;
 import model.album.Band;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +31,10 @@ public abstract class Song
 		this.releaseDate = releaseDate;
 		this.singer = artist;
 		this.band_singers = null;
-		this.tags = null;
-		this.lyrics = null;
-		this.relatedSongs = null;
-		this.streamCount = null;
+		this.tags = new ArrayList<>();
+		this.lyrics = "";
+		this.relatedSongs = new ArrayList<>();
+		this.streamCount = 0;
 	}
 	
 	public Song(String name, String rating, Date releaseDate, Band band_singers)
@@ -43,10 +44,10 @@ public abstract class Song
 		this.releaseDate = releaseDate;
 		this.band_singers = band_singers;
 		this.singer = null;
-		this.tags = null;
-		this.lyrics = null;
-		this.relatedSongs = null;
-		this.streamCount = null;
+		this.tags = new ArrayList<>();
+		this.lyrics = "";
+		this.relatedSongs = new ArrayList<>();
+		this.streamCount = 0;
 	}
 	
 	public String getName()

@@ -1,5 +1,6 @@
 package model.album;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class Band
 	{
 		this.name = name;
 		this.formationDate = null;
-		this.origin = null;
-		this.artistList = null;
+		this.origin = "";
+		this.artistList = new ArrayList<>();
 	}
 	
 	public String getName()
@@ -56,17 +57,5 @@ public class Band
 	public void setArtistList(List<Artist> artistList)
 	{
 		this.artistList = artistList;
-	}
-	
-	@Override
-	public String toString()
-	{
-		StringBuilder str = new StringBuilder("Band - " + name + "\nFormation Date: " + formationDate + "\nOrigin: " + origin);
-		if (artistList.size() > 0) {
-			str.append("\nList of Artists: ");
-			for (Artist artist : artistList)
-				str.append(artist.toString()).append(" ");
-		}
-		return str.toString();
 	}
 }

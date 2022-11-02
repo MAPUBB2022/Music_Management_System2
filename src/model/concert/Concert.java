@@ -24,9 +24,9 @@ public class Concert implements Profitable
 		this.location = location;
 		this.date = date;
 		this.capacity = capacity;
-		this.ticketPrice = null;
-		this.ticketsSold = null;
-		this.rentCosts = null;
+		this.ticketPrice = 0f;
+		this.ticketsSold = 0;
+		this.rentCosts = 0f;
 	}
 	
 	public String getName()

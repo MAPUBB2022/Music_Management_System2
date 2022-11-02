@@ -4,6 +4,7 @@ import model.song.Song;
 import interfaces.Profitable;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,12 +25,12 @@ public class Album implements Profitable
 		this.title = title;
 		this.artist = artist;
 		this.band = null;
-		this.songList=null;
-		this.language=null;
-		this.productionCost=null;
-		this.releaseDate=null;
-		this.copiesSold=null;
-		this.discPrice=null;
+		this.songList = new ArrayList<>();
+		this.language = "";
+		this.productionCost = 0f;
+		this.releaseDate = null;
+		this.copiesSold = 0;
+		this.discPrice = 0f;
 	}
 	
 	public Album(String title, Band band)
@@ -37,12 +38,12 @@ public class Album implements Profitable
 		this.title = title;
 		this.artist = null;
 		this.band = band;
-		this.songList=null;
-		this.language=null;
-		this.productionCost=null;
-		this.releaseDate=null;
-		this.copiesSold=null;
-		this.discPrice=null;
+		this.songList = new ArrayList<>();
+		this.language = "";
+		this.productionCost = 0f;
+		this.releaseDate = null;
+		this.copiesSold = 0;
+		this.discPrice = 0f;
 	}
 	
 	public String getTitle()
