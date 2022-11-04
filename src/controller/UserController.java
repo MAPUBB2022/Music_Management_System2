@@ -32,7 +32,7 @@ public class UserController implements IUserController
 	@Override
 	public void showArtists()
 	{
-	
+	 //new code goes here
 	}
 	
 	@Override
