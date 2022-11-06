@@ -85,4 +85,17 @@ public class MusicLabel
 	{
 		this.upcomingEvents = upcomingEvents;
 	}
+	
+	@SuppressWarnings("StringConcatenationInLoop")
+	@Override
+	public String toString()
+	{
+		String artists = "";
+		String albums = "";
+		for (Artist artist : this.artistList)
+			artists += artist.toString();
+		for (Album album : this.albumList)
+			albums += album.toString();
+		return "Music Label: " + name + "\nAddress: " + address + "\nRevenue: " + revenue + "\nArtists: " + artists + "\nAlbums: " + albums + "\nUpcoming Events: " + upcomingEvents + "\n";
+	}
 }

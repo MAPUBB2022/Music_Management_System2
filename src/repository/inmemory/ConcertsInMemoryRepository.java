@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConcertsInMemoryRepository implements ICrudRepository<Integer, Concert>
+public class ConcertsInMemoryRepository implements ICrudRepository<String, Concert>
 {
 	private List<Concert> concertList;
 	
@@ -48,15 +48,19 @@ public class ConcertsInMemoryRepository implements ICrudRepository<Integer, Conc
 	}
 	
 	@Override
-	public void update(Integer index, Concert entity)
+	public void update(String name, Concert entity)
 	{
-		this.concertList.set(index, entity);
+		Concert concert = findByID(name);
+		if (concert == null) return;
+		this.concertList.set(this.concertList.indexOf(concert), entity);
 	}
 	
 	@Override
-	public Concert findByID(Integer index)
+	public Concert findByID(String name)
 	{
-		return this.concertList.get(index);
+		for (Concert concert : this.concertList)
+			if (concert.getName().equals(name)) return concert;
+		return null;
 	}
 	
 	@Override

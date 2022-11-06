@@ -46,6 +46,6 @@ public class Artist
 	@Override
 	public String toString()
 	{
-		return "Artist: " + name + "\nSalary: " + salary + "\n";
+		return "Artist: " + stage_name + " - " + name + "\nSalary: " + salary + "\n";
 	}
 }

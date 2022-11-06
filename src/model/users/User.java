@@ -21,4 +21,10 @@ public class User
 	{
 		return password;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "User\n" + "Username: " + username + "\nPassword: " + password + "\n";
+	}
 }

@@ -58,4 +58,13 @@ public class Band
 	{
 		this.artistList = artistList;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder endString = new StringBuilder("Band: " + name + "\n Date of Formation: " + formationDate + "\nOrigin: " + origin + "\n");
+		for (Artist artist : this.artistList)
+			endString.append(artist.toString());
+		return endString.append("\n").toString();
+	}
 }

@@ -140,9 +140,20 @@ public abstract class Song
 		this.streamCount = streamCount;
 	}
 	
+	@SuppressWarnings("StringConcatenationInLoop")
 	@Override
 	public String toString()
 	{
-		return "Music{" + "name='" + name + '\'' + ", rating='" + rating + '\'' + ", apparitionDate=" + releaseDate + '}';
+		String tags = "";
+		String related = "";
+		for (Tags tag : this.tags)
+			tags += tag + " ";
+		for (Song song : this.relatedSongs)
+			related += song.name + "; ";
+		StringBuilder endString = new StringBuilder(name + " by ");
+		if (this.singer != null) endString.append(this.singer.getName());
+		else endString.append(this.band_singers.getName());
+		endString.append("\nRating: ").append(rating).append("\nTags: ").append(tags).append("\nRelease Date: ").append(releaseDate).append("\nStream Count: ").append(streamCount).append("\nLyrics: ").append(lyrics).append("\nRelated Songs: ").append(related);
+		return endString.append("\n").toString();
 	}
 }

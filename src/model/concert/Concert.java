@@ -114,4 +114,14 @@ public class Concert implements Profitable
 	{
 		return ticketPrice * ticketsSold - rentCosts;
 	}
+	
+	@SuppressWarnings("StringConcatenationInLoop")
+	@Override
+	public String toString()
+	{
+		String artists = "";
+		for (Artist artist : this.artistList)
+			artists += artist.getName() + " ";
+		return "Concert: " + name + "\nArtists: " + artists + "\nLocation: " + location + "\nDate: " + date + "\nCapacity: " + capacity + "\nTicket Price: " + ticketPrice + "\nTickets Sold: " + ticketsSold + "\nRent Costs: " + rentCosts + "\n";
+	}
 }
