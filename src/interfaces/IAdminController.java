@@ -10,45 +10,45 @@ import model.users.User;
 
 public interface IAdminController extends IController
 {
-	void addAlbum(Album album);
+	String addAlbum(Album album);
 	
-	void deleteAlbum(Album album);
+	String deleteAlbum(Album album);
 	
 	void modifyAlbum(Album album);
 	
-	void addArtist(Artist artist);
+	String addArtist(Artist artist);
 	
-	void deleteArtist(Artist artist);
+	String deleteArtist(Artist artist);
 	
 	void modifyArtist(Artist artist);
 	
-	void addBand(Band band);
+	String addBand(Band band);
 	
-	void deleteBand(Band band);
+	String deleteBand(Band band);
 	
 	void modifyBand(Band band);
 	
-	void addConcert(Concert concert);
+	String addConcert(Concert concert);
 	
-	void deleteConcert(Concert concert);
+	String deleteConcert(Concert concert);
 	
 	void modifyConcert(Concert concert);
 	
-	void addMusicLabel(MusicLabel musicLabel);
+	String addMusicLabel(MusicLabel musicLabel);
 	
-	void deleteMusicLabel(MusicLabel musicLabel);
+	String deleteMusicLabel(MusicLabel musicLabel);
 	
 	void modifyMusicLabel(MusicLabel musicLabel);
 	
-	void addSong(Song song);
+	String addSong(Song song);
 	
-	void deleteSong(Song song);
+	String deleteSong(Song song);
 	
 	void modifySong(Song song);
 	
-	void addUser(User user);
+	String addUser(User user);
 	
-	void deleteUser(User user);
+	String deleteUser(User user);
 	
 	void modifyUser(User user);
 	
