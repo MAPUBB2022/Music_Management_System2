@@ -14,43 +14,43 @@ public interface IAdminController extends IController
 	
 	String deleteAlbum(Album album);
 	
-	void modifyAlbum(Album album);
+	String modifyAlbum(Album album);
 	
 	String addArtist(Artist artist);
 	
 	String deleteArtist(Artist artist);
 	
-	void modifyArtist(Artist artist);
+	String modifyArtist(Artist artist);
 	
 	String addBand(Band band);
 	
 	String deleteBand(Band band);
 	
-	void modifyBand(Band band);
+	String modifyBand(Band band);
 	
 	String addConcert(Concert concert);
 	
 	String deleteConcert(Concert concert);
 	
-	void modifyConcert(Concert concert);
+	String modifyConcert(Concert concert);
 	
 	String addMusicLabel(MusicLabel musicLabel);
 	
 	String deleteMusicLabel(MusicLabel musicLabel);
 	
-	void modifyMusicLabel(MusicLabel musicLabel);
+	String modifyMusicLabel(MusicLabel musicLabel);
 	
 	String addSong(Song song);
 	
 	String deleteSong(Song song);
 	
-	void modifySong(Song song);
+	String modifySong(Song song);
 	
 	String addUser(User user);
 	
 	String deleteUser(User user);
 	
-	void modifyUser(User user);
+	String modifyUser(User user);
 	
 	void showConcerts();
 	
