@@ -30,27 +30,31 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public void showArtists()
+	public String showArtists()
 	{
-	
+
+		return null;
 	}
 	
 	@Override
-	public void showAlbums()
+	public String showAlbums()
 	{
-	
+
+		return null;
 	}
 	
 	@Override
-	public void showAlbumsForArtist(Artist artist)
+	public String showAlbumsForArtist(Artist artist)
 	{
-	
+
+		return null;
 	}
 	
 	@Override
-	public void showUpcomingConcerts()
+	public String showUpcomingConcerts()
 	{
-	
+
+		return null;
 	}
 	
 	@Override

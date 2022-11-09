@@ -313,7 +313,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public String sortAlbumsByProductionCost()
+	public String sortAlbumsByProductionCost() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
@@ -326,32 +326,38 @@ public class AdminController implements IAdminController
 	}
 	
 	@Override
-	public void showConcerts() throws NullPointerException
+	public String showConcerts() throws NullPointerException
+	{
+		if (this.concertList == null) throw new NullPointerException();
+		StringBuilder endString = new StringBuilder();
+		for (Concert concert : this.concertList.findAll())
+			endString.append(concert.toString());
+		return endString.toString().equals("") ? "[WARNING] Concert List is Empty\n" : endString.toString();
+	}
+
+	@Override
+	public String showArtists() throws NullPointerException
+	{
+		if (this.artistList == null) throw new NullPointerException();
+		StringBuilder endString = new StringBuilder();
+		for (Artist artist : this.artistList.findAll())
+			endString.append(artist.toString());
+		return endString.toString().equals("") ? "[WARNING] Artist List is Empty\n" : endString.toString();
+	}
+	
+	@Override
+	public String showAlbums() throws NullPointerException
+	{
+		if (this.albumList == null) throw new NullPointerException();
+		StringBuilder endString = new StringBuilder();
+		for (Album album : this.albumList.findAll())
+			endString.append(album.toString());
+		return endString.toString().equals("") ? "[WARNING] Album List is Empty\n" : endString.toString();
+	}
+	
+	@Override
+	public String showUpcomingConcerts() throws NullPointerException
 	{
 
-	}
-	
-	@Override
-	public void showArtists()
-	{
-	
-	}
-	
-	@Override
-	public void showAlbums()
-	{
-	
-	}
-	
-	@Override
-	public void showAlbumsForArtist(Artist artist)
-	{
-	
-	}
-	
-	@Override
-	public void showUpcomingConcerts()
-	{
-	
 	}
 }

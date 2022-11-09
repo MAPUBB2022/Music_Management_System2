@@ -4,13 +4,11 @@ import model.album.Artist;
 
 public interface IController
 {
-	void showArtists();
+	String showArtists();
 	
-	void showAlbums();
+	String showAlbums();
 	
-	void showAlbumsForArtist(Artist artist);
-	
-	void showUpcomingConcerts();
+	String showUpcomingConcerts();
 	
 	String sortAlbumsByRevenue();
 	

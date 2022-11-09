@@ -52,7 +52,7 @@ public interface IAdminController extends IController
 	
 	String modifyUser(User user);
 	
-	void showConcerts();
+	String showConcerts();
 	
 	String sortAlbumsByProductionCost();
 }
