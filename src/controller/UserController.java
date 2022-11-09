@@ -54,31 +54,31 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public void sortAlbumsByRevenue()
+	public String sortAlbumsByRevenue()
 	{
 	
 	}
 	
 	@Override
-	public void sortSongsByRating()
+	public String sortSongsByRating()
 	{
 	
 	}
 	
 	@Override
-	public void sortSongsByReleaseDate()
+	public String sortSongsByReleaseDate()
 	{
 	
 	}
 	
 	@Override
-	public void sortArtistsByName()
+	public String sortArtistsByName()
 	{
 	
 	}
 	
 	@Override
-	public void sortAlbumsByReleaseDate()
+	public String sortAlbumsByReleaseDate()
 	{
 	
 	}

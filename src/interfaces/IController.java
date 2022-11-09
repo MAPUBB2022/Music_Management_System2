@@ -12,13 +12,13 @@ public interface IController
 	
 	void showUpcomingConcerts();
 	
-	void sortAlbumsByRevenue();
+	String sortAlbumsByRevenue();
 	
-	void sortSongsByRating();
+	String sortSongsByRating();
 	
-	void sortSongsByReleaseDate();
+	String sortSongsByReleaseDate();
 	
-	void sortArtistsByName();
+	String sortArtistsByName();
 	
-	void sortAlbumsByReleaseDate();
+	String sortAlbumsByReleaseDate();
 }
