@@ -44,13 +44,6 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public String showAlbumsForArtist(Artist artist)
-	{
-
-		return null;
-	}
-	
-	@Override
 	public String showUpcomingConcerts()
 	{
 
@@ -60,31 +53,31 @@ public class UserController implements IUserController
 	@Override
 	public String sortAlbumsByRevenue()
 	{
-	
+		return null;
 	}
 	
 	@Override
 	public String sortSongsByRating()
 	{
-	
+		return null;
 	}
 	
 	@Override
 	public String sortSongsByReleaseDate()
 	{
-	
+		return null;
 	}
 	
 	@Override
 	public String sortArtistsByName()
 	{
-	
+		return null;
 	}
 	
 	@Override
 	public String sortAlbumsByReleaseDate()
 	{
-	
+		return null;
 	}
 	
 	@Override

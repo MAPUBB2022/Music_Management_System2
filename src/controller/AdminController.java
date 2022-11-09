@@ -11,6 +11,7 @@ import model.song.Song;
 import model.users.User;
 
 import java.util.Comparator;
+import java.util.Date;
 
 public class AdminController implements IAdminController
 {
@@ -358,6 +359,14 @@ public class AdminController implements IAdminController
 	@Override
 	public String showUpcomingConcerts() throws NullPointerException
 	{
-
+		if (this.concertList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		StringBuilder endString = new StringBuilder();
+		Date today = new Date();
+		for (Concert concert : this.concertList.findAll()) {
+			if (concert.getDate().after(today)) endString.append(concert.toString());
+		}
+		return endString.toString().equals("") ? "[WARNING] No Upcoming Concert exist\n" : endString.toString();
 	}
 }
