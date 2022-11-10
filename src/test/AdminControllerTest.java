@@ -2,10 +2,19 @@ package test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import repository.inmemory.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdminControllerTest {
+    ArtistsInMemoryRepository artists;
+    AlbumsInMemoryRepository albums;
+    UserInMemoryRepository users;
+    BandsInMemoryRepository bands;
+    MusicLabelsInMemoryRepository labels;
+    SongsInMemoryRepository songs;
+    ConcertsInMemoryRepository cnocerts;
+
     @BeforeEach
     void setUP(){
 
