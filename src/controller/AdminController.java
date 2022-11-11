@@ -151,10 +151,10 @@ public class AdminController implements IAdminController
 		for(Concert concerts:concertList.findAll()) {
 			if (concerts.equals(concert)) {
 				concertList.update(String.valueOf(concertList.findAll().indexOf(concerts)), concert);
-				return "Album modified successfully\n";
+				return "Concert modified successfully\n";
 			}
 		}
-		return "[ERROR] Album not in List\n";
+		return "[ERROR] Concert not in List\n";
 	}
 	
 	@Override
