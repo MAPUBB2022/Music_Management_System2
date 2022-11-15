@@ -68,4 +68,13 @@ public class ConcertsInMemoryRepository implements ICrudRepository<String, Conce
 	{
 		return this.concertList;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder endString = new StringBuilder();
+		for (Concert concert : this.concertList)
+			endString.append(concert.toString()).append("\n");
+		return endString.toString();
+	}
 }

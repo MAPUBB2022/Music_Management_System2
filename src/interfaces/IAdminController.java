@@ -46,8 +46,6 @@ public interface IAdminController extends IController
 	
 	void modifySong(Song song);
 	
-	void addUser(User user);
-	
 	void deleteUser(User user);
 	
 	void modifyUser(User user);

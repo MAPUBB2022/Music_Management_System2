@@ -7,6 +7,7 @@ import model.album.Artist;
 import model.concert.Concert;
 import model.concert.Ticket;
 import model.song.Song;
+import model.users.User;
 
 
 import java.util.*;
@@ -20,27 +21,50 @@ public class UserController implements IUserController
 	private final ICrudRepository<String, Concert> concertList;
 	private final ICrudRepository<Integer, Song> songList;
 	
+	private final ICrudRepository<String, User> userList;
+	
 	private List<Song> myFavourites;
 	
 	private List<Ticket> myTickets;
 	
-	public UserController(ICrudRepository<Integer, Album> albumList, ICrudRepository<Integer, Artist> artistList, ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList)
+	public UserController(ICrudRepository<Integer, Album> albumList, ICrudRepository<Integer, Artist> artistList, ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList, ICrudRepository<String, User> userList)
 	{
 		this.albumList = albumList;
 		this.artistList = artistList;
 		this.concertList = concertList;
 		this.songList = songList;
+		this.userList = userList;
 		this.myFavourites = new ArrayList<>();
 		this.myTickets = new ArrayList<>();
+	}
+	
+	public ICrudRepository<Integer, Album> getAlbumList()
+	{
+		return albumList;
+	}
+	
+	public ICrudRepository<Integer, Artist> getArtistList()
+	{
+		return artistList;
+	}
+	
+	public ICrudRepository<String, Concert> getConcertList()
+	{
+		return concertList;
+	}
+	
+	public ICrudRepository<Integer, Song> getSongList()
+	{
+		return songList;
 	}
 	
 	@Override
 	public String showArtists() throws NullPointerException
 	{
-		String endString = "";
 		if (this.artistList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Artist List is NULL");
 		}
+		String endString = "";
 		for (Artist artist : this.artistList.findAll())
 			endString += artist.toString();
 		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
@@ -50,7 +74,7 @@ public class UserController implements IUserController
 	public String showAlbums() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		String endString = "";
 		for (Album album : this.albumList.findAll())
@@ -62,7 +86,7 @@ public class UserController implements IUserController
 	public String showAlbumsForArtist(Artist artist) throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		String endString = "";
 		for (Album album : this.albumList.findAll()) {
@@ -75,7 +99,7 @@ public class UserController implements IUserController
 	public String showUpcomingConcerts() throws NullPointerException
 	{
 		if (this.concertList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Concert List is NULL");
 		}
 		String endString = "";
 		Date today = new Date();
@@ -89,7 +113,7 @@ public class UserController implements IUserController
 	public String sortAlbumsByRevenue() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		String endString = "";
 		this.albumList.findAll().sort((album1, album2) -> (int) (album1.calculateProfit() - album2.calculateProfit()));
@@ -103,7 +127,7 @@ public class UserController implements IUserController
 	public String sortSongsByRating() throws NullPointerException
 	{
 		if (this.songList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Song List is NULL");
 		}
 		String endString = "";
 		this.songList.findAll().sort(Comparator.comparing(Song::getRating));
@@ -117,7 +141,7 @@ public class UserController implements IUserController
 	public String sortSongsByReleaseDate() throws NullPointerException
 	{
 		if (this.songList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Song List is NULL");
 		}
 		String endString = "";
 		this.songList.findAll().sort(Comparator.comparing(Song::getReleaseDate));
@@ -130,7 +154,7 @@ public class UserController implements IUserController
 	public String sortArtistsByName() throws NullPointerException
 	{
 		if (this.artistList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Artist List is NULL");
 		}
 		String endString = "";
 		this.artistList.findAll().sort(Comparator.comparing(Artist::getStage_name));
@@ -143,7 +167,7 @@ public class UserController implements IUserController
 	public String sortAlbumsByReleaseDate() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		String endString = "";
 		this.albumList.findAll().sort(Comparator.comparing(Album::getReleaseDate));
@@ -192,7 +216,7 @@ public class UserController implements IUserController
 	@Override
 	public String showTickets() throws NullPointerException
 	{
-		if (this.myTickets == null) throw new NullPointerException();
+		if (this.myTickets == null) throw new NullPointerException("[ERROR] Ticket List is NULL");
 		String endString = "";
 		for (Ticket ticket : this.myTickets)
 			endString += ticket.toString();
@@ -232,5 +256,14 @@ public class UserController implements IUserController
 			endString += songs.get(random3).getName() + " by " + songs.get(random3).getSinger().getStage_name();
 		}
 		return endString;
+	}
+	
+	@Override
+	public boolean addUser(User user)
+	{
+		if (user == null) throw new NullPointerException("[ERROR] User List is NULL");
+		if (this.userList.findAll().contains(user)) return false;
+		this.userList.add(user);
+		return true;
 	}
 }

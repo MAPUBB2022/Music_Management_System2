@@ -53,4 +53,13 @@ public class BandsInMemoryRepository implements ICrudRepository<Integer, Band>
 	{
 		return this.bandList;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder endString = new StringBuilder();
+		for (Band band : this.bandList)
+			endString.append(band.toString()).append("\n");
+		return endString.toString();
+	}
 }

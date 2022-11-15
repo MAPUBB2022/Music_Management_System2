@@ -150,8 +150,8 @@ public class Album implements Profitable
 	@Override
 	public String toString()
 	{
-		String singer = this.artist != null ? this.artist.getName() : this.band.getName();
-		StringBuilder endString = new StringBuilder("Album: " + title + " by " + singer + "\nLanguage: " + language + "\nRelease Date: " + releaseDate + "\nCopies Sold: " + copiesSold + "\nProduction Cost: " + productionCost + "\nPrice per Disc" + discPrice + "\n");
+		String singer = this.artist != null ? this.artist.getStage_name() : this.band.getName();
+		StringBuilder endString = new StringBuilder("Album: " + title + " by " + singer + "\nLanguage: " + language + "\nRelease Date: " + releaseDate + "\nCopies Sold: " + copiesSold + "\nProduction Cost: " + productionCost + "\nPrice per Disc: " + discPrice + "\n");
 		for (Song song : this.songList)
 			endString.append(song.getName()).append("; ");
 		return endString.append("\n").toString();

@@ -6,10 +6,13 @@ public class User
 	private String username;
 	private String password;
 	
+	private boolean isAdmin;
+	
 	public User(String username, String password)
 	{
 		this.username = username;
 		this.password = password;
+		this.isAdmin = false;
 	}
 	
 	public String getUsername()
@@ -20,6 +23,16 @@ public class User
 	public String getPassword()
 	{
 		return password;
+	}
+	
+	public boolean isAdmin()
+	{
+		return isAdmin;
+	}
+	
+	public void setAdminStatus(boolean admin)
+	{
+		isAdmin = admin;
 	}
 	
 	@Override

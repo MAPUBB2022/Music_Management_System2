@@ -65,4 +65,13 @@ public class ArtistsInMemoryRepository implements ICrudRepository<Integer, Artis
 	{
 		return artistList;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder endString = new StringBuilder();
+		for (Artist artist : this.artistList)
+			endString.append(artist.toString()).append("\n");
+		return endString.toString();
+	}
 }

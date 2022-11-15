@@ -68,4 +68,13 @@ public class AlbumsInMemoryRepository implements ICrudRepository<Integer, Album>
 	{
 		return this.inMemoryAlbums;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder endString = new StringBuilder();
+		for (Album album : this.inMemoryAlbums)
+			endString.append(album.toString()).append("\n");
+		return endString.toString();
+	}
 }

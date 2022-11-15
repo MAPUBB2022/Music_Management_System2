@@ -61,4 +61,11 @@ public class SongsInMemoryRepository implements ICrudRepository<Integer, Song>
 	{
 		return this.songList;
 	}
+	
+	@Override
+	public String toString()
+	{
+		
+		return "SongsInMemoryRepository{" + "songList=" + songList + '}';
+	}
 }

@@ -58,4 +58,13 @@ public class MusicLabelsInMemoryRepository implements ICrudRepository<Integer, M
 	{
 		return this.musicLabelList;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder endString = new StringBuilder();
+		for (MusicLabel musicLabel : this.musicLabelList)
+			endString.append(musicLabel.toString()).append("\n");
+		return endString.toString();
+	}
 }

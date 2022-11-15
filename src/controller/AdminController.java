@@ -120,9 +120,9 @@ public class AdminController implements IAdminController
 	}
 	
 	@Override
-	public void addUser(User user)
+	public boolean addUser(User user)
 	{
-	
+		return false;
 	}
 	
 	@Override
