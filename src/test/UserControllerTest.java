@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 import repository.inmemory.*;
+
 class UserControllerTest {
     ArtistsInMemoryRepository artists;
     AlbumsInMemoryRepository albums;

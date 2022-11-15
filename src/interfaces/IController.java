@@ -1,6 +1,7 @@
 package interfaces;
 
 import model.album.Artist;
+import model.users.User;
 
 public interface IController
 {
@@ -19,4 +20,6 @@ public interface IController
 	String sortArtistsByName();
 	
 	String sortAlbumsByReleaseDate();
+
+	boolean addUser(User user);
 }

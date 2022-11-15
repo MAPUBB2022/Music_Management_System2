@@ -8,6 +8,7 @@ import model.album.Band;
 import model.concert.Concert;
 import model.label.MusicLabel;
 import model.song.Song;
+import model.users.User;
 
 
 public class UserController implements IUserController
@@ -79,7 +80,12 @@ public class UserController implements IUserController
 	{
 		return null;
 	}
-	
+
+	@Override
+	public boolean addUser(User user) {
+		return false;
+	}
+
 	@Override
 	public void addFavourite(Song song)
 	{

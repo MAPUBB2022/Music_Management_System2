@@ -9,7 +9,6 @@ import model.concert.Concert;
 import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.Comparator;
 import java.util.Date;
@@ -218,12 +217,9 @@ public class AdminController implements IAdminController
 	}
 	
 	@Override
-	public String addUser(User user)
+	public boolean addUser(User user)
 	{
-		if(this.userList.findAll().contains(user))
-			return "[ERROR] User already contained in List\n";
-		this.userList.add(user);
-		return "[] User added\n";
+		return false;
 	}
 	
 	@Override
@@ -370,4 +366,6 @@ public class AdminController implements IAdminController
 		}
 		return endString.toString().equals("") ? "[WARNING] No Upcoming Concert exist\n" : endString.toString();
 	}
+
+
 }
