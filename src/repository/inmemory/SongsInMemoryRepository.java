@@ -65,7 +65,9 @@ public class SongsInMemoryRepository implements ICrudRepository<Integer, Song>
 	@Override
 	public String toString()
 	{
-		
-		return "SongsInMemoryRepository{" + "songList=" + songList + '}';
+		StringBuilder endString = new StringBuilder();
+		for (Song song : this.songList)
+			endString.append(song.toString()).append("\n");
+		return endString.toString();
 	}
 }
