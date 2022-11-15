@@ -82,8 +82,8 @@ public class UserController implements IUserController
 	}
 
 	@Override
-	public boolean addUser(User user) {
-		return false;
+	public String addUser(User user) {
+		return null;
 	}
 
 	@Override

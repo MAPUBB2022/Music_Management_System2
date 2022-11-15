@@ -21,5 +21,5 @@ public interface IController
 	
 	String sortAlbumsByReleaseDate();
 
-	boolean addUser(User user);
+	String addUser(User user);
 }

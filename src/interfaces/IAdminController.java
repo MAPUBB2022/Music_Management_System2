@@ -46,7 +46,7 @@ public interface IAdminController extends IController
 	
 	String modifySong(Song song);
 	
-	boolean addUser(User user);
+	String addUser(User user);
 	
 	String deleteUser(User user);
 	

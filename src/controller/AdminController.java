@@ -217,9 +217,12 @@ public class AdminController implements IAdminController
 	}
 	
 	@Override
-	public boolean addUser(User user)
+	public String addUser(User user)
 	{
-		return false;
+		if(this.userList.findAll().contains(user))
+			return "[ERROR] Song already contained in List\n";
+		this.userList.add(user);
+		return "[] Song added\n";
 	}
 	
 	@Override
