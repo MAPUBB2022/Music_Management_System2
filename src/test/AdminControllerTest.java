@@ -244,44 +244,4 @@ class AdminControllerTest {
 
         Assertions.assertEquals(users.findByID(u.getUsername()), u); // checks if entity on index 0 has been updated correctly
     }
-
-    @Test
-    void sortAlbumsByRevenue() {
-    }
-
-    @Test
-    void sortSongsByRating() {
-    }
-
-    @Test
-    void sortSongsByReleaseDate() {
-    }
-
-    @Test
-    void sortArtistsByName() {
-    }
-
-    @Test
-    void sortAlbumsByReleaseDate() {
-    }
-
-    @Test
-    void sortAlbumsByProductionCost() {
-    }
-
-    @Test
-    void showConcerts() {
-    }
-
-    @Test
-    void showArtists() {
-    }
-
-    @Test
-    void showAlbums() {
-    }
-
-    @Test
-    void showUpcomingConcerts() {
-    }
 }
