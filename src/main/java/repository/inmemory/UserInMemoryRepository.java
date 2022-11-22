@@ -30,13 +30,15 @@ public class UserInMemoryRepository implements UserRepository
 	@Override
 	public void add(User entity)
 	{
-		this.userList.add(entity);
+		if(!this.userList.contains(entity))
+			this.userList.add(entity);
 	}
 	
 	@Override
 	public void remove(User entity)
 	{
-		this.userList.remove(entity);
+		if(findByID(entity.getUsername()) != null)
+			this.userList.remove(entity);
 	}
 	
 	@Override
