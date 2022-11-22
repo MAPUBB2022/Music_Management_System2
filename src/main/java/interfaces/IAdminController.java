@@ -54,5 +54,5 @@ public interface IAdminController extends IController
 	
 	String showConcerts();
 	
-	String sortAlbumsByProductionCost();
+	void sortAlbumsByProductionCost();
 }

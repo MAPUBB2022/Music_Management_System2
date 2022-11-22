@@ -65,7 +65,7 @@ public class UserController implements IUserController
 	@Override
 	public void sortSongsByReleaseDate()
 	{
-		return null;
+
 	}
 	
 	@Override
@@ -87,7 +87,7 @@ public class UserController implements IUserController
 	@Override
 	public boolean addFavourite(Song song)
 	{
-	
+		return false;
 	}
 	
 	@Override
