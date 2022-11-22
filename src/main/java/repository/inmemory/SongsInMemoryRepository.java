@@ -3,6 +3,7 @@ package repository.inmemory;
 import interfaces.ICrudRepository;
 import model.album.Artist;
 import model.album.Band;
+import model.label.MusicLabel;
 import model.song.*;
 
 import java.text.ParseException;
@@ -10,8 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
-public class SongsInMemoryRepository implements ICrudRepository<Integer, Song>
+public class SongsInMemoryRepository implements ICrudRepository<String, Song>
 {
 	private List<Song> songList;
 	
@@ -35,25 +37,32 @@ public class SongsInMemoryRepository implements ICrudRepository<Integer, Song>
 	@Override
 	public void add(Song entity)
 	{
-		this.songList.add(entity);
+		if(!this.songList.contains(entity))
+			this.songList.add(entity);
 	}
 	
 	@Override
 	public void remove(Song entity)
 	{
-		this.songList.remove(entity);
+		if(findByID(entity.getName()) != null)
+			this.songList.remove(entity);
 	}
 	
 	@Override
-	public void update(Integer index, Song entity)
+	public void update(String name, Song entity)
 	{
-		this.songList.set(index, entity);
-	}
+		Song song = findByID(name);
+		if(song != null)
+			this.songList.set(this.songList.indexOf(song), entity);	}
 	
 	@Override
-	public Song findByID(Integer index)
+	public Song findByID(String name)
 	{
-		return this.songList.get(index);
+		for(Song song: songList){
+			if(song.getName().equals(name))
+				return song;
+		}
+		return null;
 	}
 	
 	@Override

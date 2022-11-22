@@ -2,6 +2,7 @@ package repository.inmemory;
 
 import interfaces.ICrudRepository;
 import model.album.Artist;
+import model.album.Band;
 import model.concert.Concert;
 
 import java.text.ParseException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConcertsInMemoryRepository implements ICrudRepository<Integer, Concert>
+public class ConcertsInMemoryRepository implements ICrudRepository<String, Concert>
 {
 	private List<Concert> concertList;
 	
@@ -38,25 +39,33 @@ public class ConcertsInMemoryRepository implements ICrudRepository<Integer, Conc
 	@Override
 	public void add(Concert entity)
 	{
-		this.concertList.add(entity);
+		if(!this.concertList.contains(entity))
+			this.concertList.add(entity);
 	}
 	
 	@Override
 	public void remove(Concert entity)
 	{
-		this.concertList.remove(entity);
+		if(findByID(entity.getName()) != null)
+			this.concertList.remove(entity);
 	}
 	
 	@Override
-	public void update(Integer index, Concert entity)
+	public void update(String name, Concert entity)
 	{
-		this.concertList.set(index, entity);
+		Concert concert = findByID(name);
+		if(concert != null)
+			this.concertList.set(this.concertList.indexOf(concert), entity);
 	}
 	
 	@Override
-	public Concert findByID(Integer index)
+	public Concert findByID(String name)
 	{
-		return this.concertList.get(index);
+		for(Concert concert: concertList){
+			if(concert.getName().equals(name))
+				return concert;
+		}
+		return null;
 	}
 	
 	@Override
