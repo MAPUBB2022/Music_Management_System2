@@ -2,6 +2,7 @@ package repository.inmemory;
 
 
 import interfaces.UserRepository;
+import model.label.MusicLabel;
 import model.users.User;
 
 import java.util.ArrayList;
@@ -44,23 +45,19 @@ public class UserInMemoryRepository implements UserRepository
 	@Override
 	public void update(String s, User entity)
 	{
-		int index = 0;
-		for (User user : this.userList) {
-			if (user.getUsername().equals(s)) break;
-			index++;
-		}
-		this.userList.set(index, entity);
+		User user = findByID(s);
+		if(user != null)
+			this.userList.set(this.userList.indexOf(user), entity);
 	}
 	
 	@Override
-	public User findByID(String s)
+	public User findByID(String username)
 	{
-		int index = 0;
-		for (User user : this.userList) {
-			if (user.getUsername().equals(s)) break;
-			index++;
+		for(User user: userList){
+			if(user.getUsername().equals(username))
+				return user;
 		}
-		return this.userList.get(index);
+		return null;
 	}
 	
 	@Override
@@ -72,12 +69,10 @@ public class UserInMemoryRepository implements UserRepository
 	@Override
 	public User findByUsernameAndPassword(String username, String password)
 	{
-		User user = null;
-		for (User user1 : this.userList)
+		for (User user1 : userList)
 			if (user1.getUsername().equals(username) && user1.getPassword().equals(password)) {
-				user = user1;
-				break;
+				return user1;
 			}
-		return user;
+		return null;
 	}
 }
