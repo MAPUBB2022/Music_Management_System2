@@ -18,7 +18,7 @@ public class MusicLabel
 	
 	public MusicLabel(String name, String address)
 	{
-		this.name = name;
+		this.name = name; //Unique
 		this.address = address;
 		this.revenue = 0f;
 		this.artistList = new ArrayList<>();

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MusicLabelsInMemoryRepository implements ICrudRepository<Integer, MusicLabel>
+public class MusicLabelsInMemoryRepository implements ICrudRepository<String, MusicLabel>
 {
 	private List<MusicLabel> musicLabelList;
 	
@@ -32,25 +32,28 @@ public class MusicLabelsInMemoryRepository implements ICrudRepository<Integer, M
 	@Override
 	public void add(MusicLabel entity)
 	{
-		this.musicLabelList.add(entity);
+		if (findByID(entity.getName()) == null) this.musicLabelList.add(entity);
 	}
 	
 	@Override
 	public void remove(MusicLabel entity)
 	{
-		this.musicLabelList.remove(entity);
+		if (findByID(entity.getName()) != null) this.musicLabelList.remove(entity);
 	}
 	
 	@Override
-	public void update(Integer index, MusicLabel entity)
+	public void update(String name, MusicLabel entity)
 	{
-		this.musicLabelList.set(index, entity);
+		MusicLabel musicLabel = findByID(name);
+		if (musicLabel != null) this.musicLabelList.set(this.musicLabelList.indexOf(musicLabel), entity);
 	}
 	
 	@Override
-	public MusicLabel findByID(Integer index)
+	public MusicLabel findByID(String name)
 	{
-		return this.musicLabelList.get(index);
+		for (MusicLabel musicLabel : this.musicLabelList)
+			if (musicLabel.getName().equals(name)) return musicLabel;
+		return null;
 	}
 	
 	@Override

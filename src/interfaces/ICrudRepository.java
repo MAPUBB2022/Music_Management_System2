@@ -13,4 +13,6 @@ public interface ICrudRepository<ID, E>
 	E findByID(ID id);
 	
 	List<E> findAll();
+	
+	String toString();
 }

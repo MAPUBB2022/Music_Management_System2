@@ -38,21 +38,20 @@ public class ConcertsInMemoryRepository implements ICrudRepository<String, Conce
 	@Override
 	public void add(Concert entity)
 	{
-		this.concertList.add(entity);
+		if (findByID(entity.getName()) == null) this.concertList.add(entity);
 	}
 	
 	@Override
 	public void remove(Concert entity)
 	{
-		this.concertList.remove(entity);
+		if (findByID(entity.getName()) != null) this.concertList.remove(entity);
 	}
 	
 	@Override
 	public void update(String name, Concert entity)
 	{
 		Concert concert = findByID(name);
-		if (concert == null) return;
-		this.concertList.set(this.concertList.indexOf(concert), entity);
+		if (concert != null) this.concertList.set(this.concertList.indexOf(concert), entity);
 	}
 	
 	@Override

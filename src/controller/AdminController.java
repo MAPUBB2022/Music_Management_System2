@@ -178,37 +178,31 @@ public class AdminController implements IAdminController
 	}
 	
 	@Override
-	public String sortAlbumsByRevenue()
+	public void sortAlbumsByRevenue()
 	{
-		
-		return null;
+	
 	}
 	
 	@Override
-	public String sortSongsByRating()
+	public void sortSongsByRating()
 	{
-		
-		return null;
+	
 	}
 	
 	@Override
-	public String sortSongsByReleaseDate()
+	public void sortSongsByReleaseDate()
 	{
-		
-		return null;
+	
 	}
 	
 	@Override
-	public String sortArtistsByName()
+	public void sortArtistsByName()
 	{
-		
-		return null;
+	
 	}
 	
 	@Override
-	public String sortAlbumsByReleaseDate()
+	public void sortAlbumsByReleaseDate()
 	{
-		
-		return null;
 	}
 }

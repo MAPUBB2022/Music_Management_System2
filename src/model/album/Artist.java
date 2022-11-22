@@ -3,7 +3,7 @@ package model.album;
 public class Artist
 {
 	private String name;
-	private String stage_name;
+	private String stage_name; //Unique
 	private Float salary;
 	
 	public Artist(String stage_name)

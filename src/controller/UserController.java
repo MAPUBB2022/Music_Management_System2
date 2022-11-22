@@ -16,10 +16,10 @@ import java.util.*;
 @SuppressWarnings("StringConcatenationInLoop")
 public class UserController implements IUserController
 {
-	private final ICrudRepository<Integer, Album> albumList;
-	private final ICrudRepository<Integer, Artist> artistList;
+	private final ICrudRepository<String, Album> albumList;
+	private final ICrudRepository<String, Artist> artistList;
 	private final ICrudRepository<String, Concert> concertList;
-	private final ICrudRepository<Integer, Song> songList;
+	private final ICrudRepository<String, Song> songList;
 	
 	private final ICrudRepository<String, User> userList;
 	
@@ -27,7 +27,7 @@ public class UserController implements IUserController
 	
 	private List<Ticket> myTickets;
 	
-	public UserController(ICrudRepository<Integer, Album> albumList, ICrudRepository<Integer, Artist> artistList, ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList, ICrudRepository<String, User> userList)
+	public UserController(ICrudRepository<String, Album> albumList, ICrudRepository<String, Artist> artistList, ICrudRepository<String, Concert> concertList, ICrudRepository<String, Song> songList, ICrudRepository<String, User> userList)
 	{
 		this.albumList = albumList;
 		this.artistList = artistList;
@@ -38,12 +38,12 @@ public class UserController implements IUserController
 		this.myTickets = new ArrayList<>();
 	}
 	
-	public ICrudRepository<Integer, Album> getAlbumList()
+	public ICrudRepository<String, Album> getAlbumList()
 	{
 		return albumList;
 	}
 	
-	public ICrudRepository<Integer, Artist> getArtistList()
+	public ICrudRepository<String, Artist> getArtistList()
 	{
 		return artistList;
 	}
@@ -53,7 +53,7 @@ public class UserController implements IUserController
 		return concertList;
 	}
 	
-	public ICrudRepository<Integer, Song> getSongList()
+	public ICrudRepository<String, Song> getSongList()
 	{
 		return songList;
 	}
@@ -64,9 +64,7 @@ public class UserController implements IUserController
 		if (this.artistList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Artist List is NULL");
 		}
-		String endString = "";
-		for (Artist artist : this.artistList.findAll())
-			endString += artist.toString();
+		String endString = this.artistList.toString();
 		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
 	}
 	
@@ -76,9 +74,7 @@ public class UserController implements IUserController
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
-		String endString = "";
-		for (Album album : this.albumList.findAll())
-			endString += album.toString();
+		String endString = this.albumList.toString();
 		return endString.equals("") ? "[WARNING] Album List is Empty\n" : endString;
 	}
 	
@@ -88,10 +84,7 @@ public class UserController implements IUserController
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
-		String endString = "";
-		for (Album album : this.albumList.findAll()) {
-			if (album.getArtist().equals(artist)) endString += album.toString();
-		}
+		String endString = this.albumList.toString();
 		return endString.equals("") ? "[WARNING] No Albums found for specified Artist\n" : endString;
 	}
 	
@@ -110,86 +103,69 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public String sortAlbumsByRevenue() throws NullPointerException
+	public void sortAlbumsByRevenue() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
-		String endString = "";
 		this.albumList.findAll().sort((album1, album2) -> (int) (album1.calculateProfit() - album2.calculateProfit()));
-		for (Album album : this.albumList.findAll())
-			endString += album.toString();
-		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
+//		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
 	}
 	
-	@SuppressWarnings("DuplicatedCode")
 	@Override
-	public String sortSongsByRating() throws NullPointerException
+	public void sortSongsByRating() throws NullPointerException
 	{
 		if (this.songList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Song List is NULL");
 		}
-		String endString = "";
 		this.songList.findAll().sort(Comparator.comparing(Song::getRating));
-		for (Song song : this.songList.findAll())
-			endString += song.toString();
-		return endString.equals("") ? "[WARNING] Song List is Empty\n" : endString;
+//		return endString.equals("") ? "[WARNING] Song List is Empty\n" : endString;
 	}
 	
-	@SuppressWarnings("DuplicatedCode")
 	@Override
-	public String sortSongsByReleaseDate() throws NullPointerException
+	public void sortSongsByReleaseDate() throws NullPointerException
 	{
 		if (this.songList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Song List is NULL");
 		}
-		String endString = "";
 		this.songList.findAll().sort(Comparator.comparing(Song::getReleaseDate));
-		for (Song song : this.songList.findAll())
-			endString += song.toString();
-		return endString.equals("") ? "[WARNING] Song List is Empty\n" : endString;
+//		return endString.equals("") ? "[WARNING] Song List is Empty\n" : endString;
 	}
 	
 	@Override
-	public String sortArtistsByName() throws NullPointerException
+	public void sortArtistsByName() throws NullPointerException
 	{
 		if (this.artistList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Artist List is NULL");
 		}
-		String endString = "";
 		this.artistList.findAll().sort(Comparator.comparing(Artist::getStage_name));
-		for (Artist artist : this.artistList.findAll())
-			endString += artist.toString();
-		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
+//		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
 	}
 	
 	@Override
-	public String sortAlbumsByReleaseDate() throws NullPointerException
+	public void sortAlbumsByReleaseDate() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
-		String endString = "";
 		this.albumList.findAll().sort(Comparator.comparing(Album::getReleaseDate));
-		for (Album album : this.albumList.findAll())
-			endString += album.toString();
-		return endString.equals("") ? "[WARNING] Album List is Empty\n" : endString;
+//		return endString.equals("") ? "[WARNING] Album List is Empty\n" : endString;
 	}
 	
 	@Override
-	public String addFavourite(Song song)
+	public boolean addFavourite(Song song)
 	{
-		if (this.myFavourites.contains(song)) return "[ERROR] Song already contained in List\n";
+		if (this.myFavourites.contains(song)) return false; //"[ERROR] Song already contained in List\n";
 		this.myFavourites.add(song);
-		return "[] Song added\n";
+		return true; //"[] Song added\n";
 	}
 	
 	@Override
-	public String removeFavourite(Song song)
+	public boolean removeFavourite(Song song)
 	{
-		if (!this.myFavourites.contains(song)) return "[ERROR] Song not in List\n";
+		if (!this.myFavourites.contains(song)) return false; //"[ERROR] Song not in List\n";
 		this.myFavourites.remove(song);
-		return "[] Song deleted\n";
+		return true; //"[] Song deleted\n";
 	}
 	
 	@Override
@@ -202,15 +178,15 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public String buyTicket(Concert concert)
+	public boolean buyTicket(Concert concert)
 	{
 		Concert con = this.concertList.findByID(concert.getName());
 		if (con.getTicketsSold() < con.getCapacity()) {
 			this.myTickets.add(new Ticket(con.getName(), con.getLocation(), con.getDate(), new Date(), con.getTicketPrice()));
 			con.setTicketsSold(con.getTicketsSold() + 1);
-			return "[] Ticket Purchase Successful\n";
+			return true; //"[] Ticket Purchase Successful\n";
 		}
-		return "[ERROR] Tickets unavailable\n";
+		return false; //"[ERROR] Tickets unavailable\n";
 	}
 	
 	@Override
@@ -223,15 +199,21 @@ public class UserController implements IUserController
 		return endString.equals("") ? "[WARNING] Ticket List is Empty\n" : endString;
 	}
 	
+	
+	private int generateRandom(int begin, int end)
+	{
+		return begin + (int) (Math.random() * ((end - begin) + 1));
+	}
+	
 	@Override
 	public String showRecommended()
 	{
 		String endString = "";
 		if (!myFavourites.isEmpty()) {
 			int min = 0, max = myFavourites.size() - 1;
-			int random1 = min + (int) (Math.random() * ((max - min) + 1));
-			int random2 = min + (int) (Math.random() * ((max - min) + 1));
-			int random3 = min + (int) (Math.random() * ((max - min) + 1));
+			int random1 = generateRandom(min, max);
+			int random2 = generateRandom(min, max);
+			int random3 = generateRandom(min, max);
 			if (myFavourites.get(random1).getRelatedSongs().get(random2).getSinger() != null)
 				endString += myFavourites.get(random1).getRelatedSongs().get(random2).getName() + " by " + myFavourites.get(random1).getRelatedSongs().get(random2).getSinger().getStage_name();
 			else
@@ -247,9 +229,9 @@ public class UserController implements IUserController
 			
 		} else {
 			int min = 0, max = songList.findAll().size() - 1;
-			int random1 = min + (int) (Math.random() * ((max - min) + 1));
-			int random2 = min + (int) (Math.random() * ((max - min) + 1));
-			int random3 = min + (int) (Math.random() * ((max - min) + 1));
+			int random1 = generateRandom(min, max);
+			int random2 = generateRandom(min, max);
+			int random3 = generateRandom(min, max);
 			List<Song> songs = songList.findAll();
 			endString += songs.get(random1).getName() + " by " + songs.get(random1).getSinger().getStage_name();
 			endString += songs.get(random2).getName() + " by " + songs.get(random2).getSinger().getStage_name();

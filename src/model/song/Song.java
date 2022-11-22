@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class Song
 {
-	private String name;
+	private String name; //Unique
 	private String rating;
 	private Date releaseDate;
 	private Artist singer;

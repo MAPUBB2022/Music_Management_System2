@@ -59,68 +59,93 @@ public class UserUI
 					System.out.println(this.controller.showArtists());
 				}
 				case 2 -> {
-					this.controller.showAlbums();
+					System.out.println(this.controller.showAlbums());
 				}
 				case 3 -> {
 					System.out.println("\nEnter Artist Stage Name: ");
 					Scanner artistIn = new Scanner(System.in);
 					String stageName = artistIn.nextLine();
-					Artist artist = new Artist(stageName);
-					System.out.println(this.controller.showAlbumsForArtist(artist));
+					Artist artist = this.controller.getArtistList().findByID(stageName);
+					try {
+						System.out.println(this.controller.showAlbumsForArtist(artist));
+					}
+					catch (NullPointerException e) {
+						System.out.println(e.toString());
+					}
 				}
 				case 4 -> {
-					this.controller.showUpcomingConcerts();
+					System.out.println(this.controller.showUpcomingConcerts());
 				}
 				case 5 -> {
-					System.out.println(this.controller.sortAlbumsByRevenue());
+					this.controller.sortAlbumsByRevenue();
+					System.out.println(this.controller.getAlbumList().toString());
 				}
 				case 6 -> {
 					this.controller.sortSongsByRating();
+					System.out.println(this.controller.getSongList().toString());
 				}
 				case 7 -> {
 					this.controller.sortSongsByReleaseDate();
+					System.out.println(this.controller.getSongList().toString());
 				}
 				case 8 -> {
 					this.controller.sortArtistsByName();
+					System.out.println(this.controller.getArtistList().toString());
 				}
 				case 9 -> {
 					this.controller.sortAlbumsByReleaseDate();
+					System.out.println(this.controller.getAlbumList().toString());
 				}
 				case 10 -> {
 					System.out.println("\nEnter Song Name to be added: ");
 					Scanner songIn = new Scanner(System.in);
 					String songName = songIn.nextLine();
-					Song song = this.controller.getSongList().findByID(1); //TODO find by name, not index
-					this.controller.addFavourite(song);
+					Song song = this.controller.getSongList().findByID(songName);
+					try {
+						this.controller.addFavourite(song);
+					}
+					catch (NullPointerException e) {
+						System.out.println(e.toString());
+					}
 				}
 				case 11 -> {
 					System.out.println("\nEnter Song Name to be removed: ");
 					Scanner songIn = new Scanner(System.in);
 					String songName = songIn.nextLine();
-					Song song = this.controller.getSongList().findByID(1); //TODO find by name, not index
-					this.controller.removeFavourite(song);
+					Song song = this.controller.getSongList().findByID(songName);
+					try {
+						this.controller.removeFavourite(song);
+					}
+					catch (NullPointerException e) {
+						System.out.println(e.toString());
+					}
 				}
 				case 12 -> {
-					this.controller.showFavourites();
+					System.out.println(this.controller.showFavourites());
 				}
 				case 13 -> {
-					this.controller.getConcertList().findAll().toString(); //TODO implement toString for repos
+					System.out.println(this.controller.getConcertList().toString());
 					System.out.println("\nEnter Concert Name: ");
 					Scanner concertIn = new Scanner(System.in);
 					String concertName = concertIn.nextLine();
 					Concert concert = this.controller.getConcertList().findByID(concertName);
-					this.controller.buyTicket(concert);
+					try {
+						this.controller.buyTicket(concert);
+					}
+					catch (NullPointerException e) {
+						System.out.println(e.toString());
+					}
 				}
 				case 14 -> {
-					this.controller.showTickets();
+					System.out.println(this.controller.showTickets());
 				}
 				case 15 -> {
-					this.controller.showRecommended();
+					System.out.println(this.controller.showRecommended());
 				}
 				case 16 -> {
 					exit = true;
 				}
-				default -> System.out.println("Invalid Input!");
+				default -> System.out.println("Invalid Input!\n");
 			}
 		}
 	}

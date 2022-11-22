@@ -20,45 +20,41 @@ public class UserInMemoryRepository implements UserRepository
 	private List<User> populateUsers()
 	{
 		User u1 = new User("jk", "secret");
+		u1.setAdminStatus(true);
 		User u2 = new User("bob", "dob");
 		User u3 = new User("john", "sn0w");
 		User u4 = new User("mary", "queenofscots1542");
 		User u5 = new User("admin", "password");
+		u5.setAdminStatus(true);
 		return new ArrayList<>(Arrays.asList(u1, u2, u3, u4, u5));
 	}
 	
 	@Override
 	public void add(User entity)
 	{
-		this.userList.add(entity);
+		if (findByUsernameAndPassword(entity.getUsername(), entity.getPassword()) == null) this.userList.add(entity);
 	}
 	
 	@Override
 	public void remove(User entity)
 	{
-		this.userList.remove(entity);
+		if (findByUsernameAndPassword(entity.getUsername(), entity.getPassword()) != null) this.userList.remove(entity);
 	}
 	
 	@Override
-	public void update(String s, User entity)
+	public void update(String username, User entity)
 	{
-		int index = 0;
-		for (User user : this.userList) {
-			if (user.getUsername().equals(s)) break;
-			index++;
-		}
-		this.userList.set(index, entity);
+		User user = findByID(username);
+		if (user != null) this.userList.set(this.userList.indexOf(user), entity);
 	}
 	
 	@Override
-	public User findByID(String s)
+	public User findByID(String username)
 	{
-		int index = 0;
 		for (User user : this.userList) {
-			if (user.getUsername().equals(s)) break;
-			index++;
+			if (user.getUsername().equals(username)) return user;
 		}
-		return this.userList.get(index);
+		return null;
 	}
 	
 	@Override
@@ -70,12 +66,10 @@ public class UserInMemoryRepository implements UserRepository
 	@Override
 	public User findByUsernameAndPassword(String username, String password)
 	{
-		User user = null;
-		for (User user1 : this.userList)
-			if (user1.getUsername().equals(username) && user1.getPassword().equals(password)) {
-				user = user1;
-				break;
+		for (User user : this.userList)
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				return user;
 			}
-		return user;
+		return null;
 	}
 }

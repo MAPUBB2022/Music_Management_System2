@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Band
 {
-	private String name;
+	private String name; //Unique
 	private Date formationDate;
 	private String origin;
 	private List<Artist> artistList;

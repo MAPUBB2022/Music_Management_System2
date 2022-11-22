@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BandsInMemoryRepository implements ICrudRepository<Integer, Band>
+public class BandsInMemoryRepository implements ICrudRepository<String, Band>
 {
 	private List<Band> bandList;
 	
@@ -27,25 +27,28 @@ public class BandsInMemoryRepository implements ICrudRepository<Integer, Band>
 	@Override
 	public void add(Band entity)
 	{
-		this.bandList.add(entity);
+		if (findByID(entity.getName()) == null) this.bandList.add(entity);
 	}
 	
 	@Override
 	public void remove(Band entity)
 	{
-		this.bandList.remove(entity);
+		if (findByID(entity.getName()) != null) this.bandList.remove(entity);
 	}
 	
 	@Override
-	public void update(Integer index, Band entity)
+	public void update(String name, Band entity)
 	{
-		this.bandList.set(index, entity);
+		Band band = findByID(name);
+		if (band != null) this.bandList.set(this.bandList.indexOf(band), entity);
 	}
 	
 	@Override
-	public Band findByID(Integer index)
+	public Band findByID(String name)
 	{
-		return this.bandList.get(index);
+		for (Band band : this.bandList)
+			if (band.getName().equals(name)) return band;
+		return null;
 	}
 	
 	@Override

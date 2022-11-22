@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Concert implements Profitable
 {
-	private String name;
+	private String name; //Unique
 	private List<Artist> artistList;
 	private String location;
 	private Date date;

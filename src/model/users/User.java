@@ -3,8 +3,8 @@ package model.users;
 
 public class User
 {
-	private String username;
-	private String password;
+	private String username; //Unique
+	private String password; //Unique
 	
 	private boolean isAdmin;
 	

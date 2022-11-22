@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Album implements Profitable
 {
-	private String title;
+	private String title; //Unique
 	private Artist artist;
 	private Band band;
 	private List<Song> songList;
