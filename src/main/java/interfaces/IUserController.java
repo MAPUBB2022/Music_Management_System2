@@ -5,13 +5,15 @@ import model.song.Song;
 
 public interface IUserController extends IController
 {
-	void addFavourite(Song song);
+	boolean addFavourite(Song song);
+
+	boolean removeFavourite(Song song);
 	
-	void removeFavourite(Song song);
+	String showFavourites();
 	
-	void showFavourites();
+	boolean buyTicket(Concert concert);
+
+	String showTickets();
 	
-	void buyTicket(Concert concert);
-	
-	void showRecommended();
+	String showRecommended();
 }

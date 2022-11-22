@@ -219,12 +219,12 @@ AdminController implements IAdminController
 	}
 	
 	@Override
-	public String addUser(User user)
+	public boolean addUser(User user)
 	{
 		if(this.userList.findAll().contains(user))
-			return "[ERROR] Song already contained in List\n";
+			return false;
 		this.userList.add(user);
-		return "[] Song added\n";
+		return true;
 	}
 	
 	@Override
@@ -249,85 +249,61 @@ AdminController implements IAdminController
 	}
 
 	@Override
-	public String sortAlbumsByRevenue() throws NullPointerException
+	public void sortAlbumsByRevenue() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
 		}
-		StringBuilder endString = new StringBuilder();
 		this.albumList.findAll().sort((album1, album2) -> (int) (album1.calculateProfit() - album2.calculateProfit()));
-		for (Album album : this.albumList.findAll())
-			endString.append(album.toString());
-		return endString.toString().equals("") ? "[WARNING] Artist List is Empty\n" : endString.toString();
 	}
 
 	@SuppressWarnings("DuplicatedCode")
 	@Override
-	public String sortSongsByRating() throws NullPointerException
+	public void sortSongsByRating() throws NullPointerException
 	{
 		if (this.songList.findAll() == null) {
 			throw new NullPointerException();
 		}
-		StringBuilder endString = new StringBuilder();
 		this.songList.findAll().sort(Comparator.comparing(Song::getRating));
-		for (Song song : this.songList.findAll())
-			endString.append(song.toString());
-		return endString.toString().equals("") ? "[WARNING] Song List is Empty\n" : endString.toString();
 	}
 
 	@SuppressWarnings("DuplicatedCode")
 	@Override
-	public String sortSongsByReleaseDate() throws NullPointerException
+	public void sortSongsByReleaseDate() throws NullPointerException
 	{
 		if (this.songList.findAll() == null) {
 			throw new NullPointerException();
 		}
-		StringBuilder endString = new StringBuilder();
 		this.songList.findAll().sort(Comparator.comparing(Song::getReleaseDate));
-		for (Song song : this.songList.findAll())
-			endString.append(song.toString());
-		return endString.toString().equals("") ? "[WARNING] Song List is Empty\n" : endString.toString();
 	}
 
 	@Override
-	public String sortArtistsByName() throws NullPointerException
+	public void sortArtistsByName() throws NullPointerException
 	{
 		if (this.artistList.findAll() == null) {
 			throw new NullPointerException();
 		}
-		StringBuilder endString = new StringBuilder();
 		this.artistList.findAll().sort(Comparator.comparing(Artist::getStage_name));
-		for (Artist artist : this.artistList.findAll())
-			endString.append(artist.toString());
-		return endString.toString().equals("") ? "[WARNING] Artist List is Empty\n" : endString.toString();
 	}
 
 	@Override
-	public String sortAlbumsByReleaseDate() throws NullPointerException
+	public void sortAlbumsByReleaseDate() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
 		}
-		StringBuilder endString = new StringBuilder();
 		this.albumList.findAll().sort(Comparator.comparing(Album::getReleaseDate));
-		for (Album album : this.albumList.findAll())
-			endString.append(album.toString());
-		return endString.toString().equals("") ? "[WARNING] Album List is Empty\n" : endString.toString();
 	}
 
 	@Override
-	public String sortAlbumsByProductionCost() throws NullPointerException
+	public void sortAlbumsByProductionCost() throws NullPointerException
 	{
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
 		}
-		StringBuilder endString = new StringBuilder();
 		this.albumList.findAll().sort(Comparator.comparing(Album::getProductionCost));
-		for (Album album : this.albumList.findAll())
-			endString.append(album.toString());
-		return endString.toString().equals("") ? "[WARNING] Album List is Empty\n" : endString.toString();
 	}
-	
+
 	@Override
 	public String showConcerts() throws NullPointerException
 	{

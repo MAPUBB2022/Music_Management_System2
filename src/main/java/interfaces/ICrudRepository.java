@@ -9,6 +9,8 @@ public interface ICrudRepository<ID, E>
 	void remove(E entity);
 	
 	void update(ID id, E entity);
+
+	String toString();
 	
 	E findByID(ID id);
 	

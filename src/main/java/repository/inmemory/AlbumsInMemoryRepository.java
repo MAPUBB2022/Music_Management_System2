@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AlbumsInMemoryRepository implements ICrudRepository<Integer, Album>
+public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 {
 	private List<Album> inMemoryAlbums;
 	
@@ -42,25 +42,33 @@ public class AlbumsInMemoryRepository implements ICrudRepository<Integer, Album>
 	@Override
 	public void add(Album entity)
 	{
-		this.inMemoryAlbums.add(entity);
+		if(findByID(entity.getTitle()) == null)
+			this.inMemoryAlbums.add(entity);
 	}
 	
 	@Override
 	public void remove(Album entity)
 	{
-		this.inMemoryAlbums.remove(entity);
+		if(findByID(entity.getTitle()) != null)
+			this.inMemoryAlbums.remove(entity);
 	}
 	
 	@Override
-	public void update(Integer index, Album entity)
+	public void update(String name, Album entity)
 	{
-		this.inMemoryAlbums.set(index, entity);
+		Album album = findByID(name);
+		if(album != null)
+			this.inMemoryAlbums.set(this.inMemoryAlbums.indexOf(album), entity);
 	}
 	
 	@Override
-	public Album findByID(Integer index)
+	public Album findByID(String name)
 	{
-		return this.inMemoryAlbums.get(index);
+		for(Album album: inMemoryAlbums){
+			if(album.getTitle().equals(name))
+				return album;
+		}
+		return null;
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package interfaces;
 
-import model.album.Artist;
 import model.users.User;
 
 public interface IController
@@ -11,15 +10,15 @@ public interface IController
 	
 	String showUpcomingConcerts();
 	
-	String sortAlbumsByRevenue();
-	
-	String sortSongsByRating();
-	
-	String sortSongsByReleaseDate();
-	
-	String sortArtistsByName();
-	
-	String sortAlbumsByReleaseDate();
+	void sortAlbumsByRevenue();
 
-	String addUser(User user);
+	void sortSongsByRating();
+
+	void sortSongsByReleaseDate();
+
+	void sortArtistsByName();
+
+	void sortAlbumsByReleaseDate();
+
+	boolean addUser(User user);
 }

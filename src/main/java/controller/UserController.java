@@ -52,67 +52,70 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public String sortAlbumsByRevenue()
+	public void sortAlbumsByRevenue()
+	{
+	}
+	
+	@Override
+	public void sortSongsByRating()
+	{
+
+	}
+	
+	@Override
+	public void sortSongsByReleaseDate()
 	{
 		return null;
 	}
 	
 	@Override
-	public String sortSongsByRating()
+	public void sortArtistsByName()
 	{
-		return null;
+
 	}
 	
 	@Override
-	public String sortSongsByReleaseDate()
+	public void sortAlbumsByReleaseDate()
 	{
-		return null;
+	}
+
+	@Override
+	public boolean addUser(User user) {
+		return false;
+	}
+
+	@Override
+	public boolean addFavourite(Song song)
+	{
+	
 	}
 	
 	@Override
-	public String sortArtistsByName()
+	public boolean removeFavourite(Song song)
 	{
-		return null;
+		return false;
 	}
 	
 	@Override
-	public String sortAlbumsByReleaseDate()
+	public String showFavourites()
 	{
+	return null;
+	}
+	
+	@Override
+	public boolean buyTicket(Concert concert)
+	{
+	return false;
+	}
+
+	@Override
+	public String showTickets() {
 		return null;
 	}
 
 	@Override
-	public String addUser(User user) {
-		return null;
-	}
-
-	@Override
-	public void addFavourite(Song song)
+	public String showRecommended()
 	{
-	
-	}
-	
-	@Override
-	public void removeFavourite(Song song)
-	{
-	
-	}
-	
-	@Override
-	public void showFavourites()
-	{
-	
-	}
-	
-	@Override
-	public void buyTicket(Concert concert)
-	{
-	
-	}
-	
-	@Override
-	public void showRecommended()
-	{
-	
+	return null;
 	}
 }
