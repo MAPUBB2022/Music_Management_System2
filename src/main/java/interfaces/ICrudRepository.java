@@ -1,5 +1,7 @@
 package interfaces;
 
+import model.album.Artist;
+
 import java.util.List;
 
 public interface ICrudRepository<ID, E>
@@ -13,6 +15,6 @@ public interface ICrudRepository<ID, E>
 	String toString();
 	
 	E findByID(ID id);
-	
+
 	List<E> findAll();
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ArtistsInMemoryRepository implements ICrudRepository<Integer, Artist>
+public class ArtistsInMemoryRepository implements ICrudRepository<String, Artist>
 {
 	private List<Artist> artistList;
 	
@@ -39,25 +39,33 @@ public class ArtistsInMemoryRepository implements ICrudRepository<Integer, Artis
 	@Override
 	public void add(Artist entity)
 	{
-		this.artistList.add(entity);
+		if(!this.artistList.contains(entity))
+			this.artistList.add(entity);
 	}
 	
 	@Override
 	public void remove(Artist entity)
 	{
-		this.artistList.remove(entity);
+		if(findByID(entity.getName())!=null)
+			this.artistList.remove(entity);
 	}
 	
 	@Override
-	public void update(Integer index, Artist entity)
+	public void update(String name, Artist entity)
 	{
-		this.artistList.set(index, entity);
+		Artist artist = findByID(name);
+		if(artist != null)
+			this.artistList.set(this.artistList.indexOf(artist), entity);
 	}
 	
 	@Override
-	public Artist findByID(Integer index)
+	public Artist findByID(String name)
 	{
-		return this.artistList.get(index);
+		for(Artist artist: artistList){
+			if(artist.getName().equals(name))
+				return artist;
+		}
+		return null;
 	}
 	
 	@Override

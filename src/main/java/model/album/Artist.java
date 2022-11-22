@@ -48,4 +48,5 @@ public class Artist
 	{
 		return "Artist: " + name + "\nSalary: " + salary + "\n";
 	}
+
 }

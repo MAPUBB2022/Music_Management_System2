@@ -70,7 +70,7 @@ public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<Album> findAll()
 	{
