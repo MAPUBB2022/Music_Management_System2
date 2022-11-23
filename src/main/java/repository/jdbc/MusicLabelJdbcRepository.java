@@ -31,6 +31,10 @@ public class MusicLabelJdbcRepository implements ICrudRepository<String, MusicLa
             PreparedStatement statement = con.prepareStatement("insert into MusicLabels(name, address, revenue, artistList, albumList, upcomingEvents) values (?, ?, ?, ?, ?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
+            statement.setString(3, "1234");
+            statement.setString(4, "1234");
+            statement.setString(5, "1234");
+            statement.setString(6, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {

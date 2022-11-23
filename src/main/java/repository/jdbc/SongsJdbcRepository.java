@@ -36,6 +36,10 @@ public class SongsJdbcRepository implements ICrudRepository<String, Song> {
             PreparedStatement statement = con.prepareStatement("insert into Songs(name, rating, releaseDate, singer, band_singers) values (?, ?, ?, ?, ?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
+            statement.setString(2, "1234");
+            statement.setString(2, "1234");
+            statement.setString(2, "1234");
+            statement.setString(2, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {

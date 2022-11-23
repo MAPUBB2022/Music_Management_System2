@@ -29,6 +29,8 @@ public class BandsJdbcRepository implements ICrudRepository<String, Band> {
             PreparedStatement statement = con.prepareStatement("insert into Bands(name, formationDate, origin, artistList) values (?, ?, ?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
+            statement.setString(3, "1234");
+            statement.setString(4, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {

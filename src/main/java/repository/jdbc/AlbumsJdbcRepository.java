@@ -27,8 +27,15 @@ public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
         Connection con = JDBCConnection.getInstance();
         try {
             PreparedStatement statement = con.prepareStatement("insert into Albums(title, arttist, band, songList, language, productionCost,releaseDate, copiesSold, discPrice) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            statement.setString(1, "ion");
+            statement.setString(1, "1234");
             statement.setString(2, "1234");
+            statement.setString(3, "1234");
+            statement.setString(4, "1234");
+            statement.setString(5, "1234");
+            statement.setString(6, "1234");
+            statement.setString(7, "1234");
+            statement.setString(8, "1234");
+            statement.setString(9, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {

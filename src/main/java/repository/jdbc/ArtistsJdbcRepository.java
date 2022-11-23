@@ -29,6 +29,7 @@ public class ArtistsJdbcRepository implements ICrudRepository<String, Artist> {
             PreparedStatement statement = con.prepareStatement("insert into Artists(name, stage_name, salary) values (?, ?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
+            statement.setString(3, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {
