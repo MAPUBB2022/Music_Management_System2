@@ -24,11 +24,6 @@ public class SongsJdbcRepository implements ICrudRepository<String, Song> {
         this.connection = connection;
     }
 
-    private String name;
-    private String rating;
-    private Date releaseDate;
-    private Artist singer;
-    private Band band_singers;
     public void populateUsers()
     {
         Connection con = JDBCConnection.getInstance();
