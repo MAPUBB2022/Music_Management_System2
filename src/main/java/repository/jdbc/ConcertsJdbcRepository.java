@@ -27,11 +27,15 @@ public class ConcertsJdbcRepository implements ICrudRepository<String, Concert> 
     {
         Connection con = JDBCConnection.getInstance();
         try {
-            PreparedStatement statement = con.prepareStatement("insert into Concerts(name, formationDate, origin, artistList) values (?, ?, ?, ?)");
+            PreparedStatement statement = con.prepareStatement("insert into Concerts(name, artistList, location, date, capacity, ticketPrice, ticketsSold, rentCosts) values (?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
             statement.setString(3, "1234");
             statement.setString(4, "1234");
+            statement.setString(5, "1234");
+            statement.setString(6, "1234");
+            statement.setString(7, "1234");
+            statement.setString(8, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {
