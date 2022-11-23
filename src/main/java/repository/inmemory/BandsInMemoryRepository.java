@@ -26,25 +26,34 @@ public class BandsInMemoryRepository implements ICrudRepository<String, Band>
 	}
 	
 	@Override
-	public void add(Band entity)
+	public boolean add(Band entity)
 	{
-		if(!this.bandList.contains(entity))
+		if(!this.bandList.contains(entity)) {
 			this.bandList.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(Band entity)
+	public boolean remove(Band entity)
 	{
-		if(findByID(entity.getName()) != null)
+		if(findByID(entity.getName()) != null) {
 			this.bandList.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, Band entity)
+	public Band update(String name, Band entity)
 	{
 		Band band = findByID(name);
-		if(band != null)
+		if(band != null){
 			this.bandList.set(this.bandList.indexOf(band), entity);
+			return band;
+		}
+		return null;
 	}
 	
 	@Override

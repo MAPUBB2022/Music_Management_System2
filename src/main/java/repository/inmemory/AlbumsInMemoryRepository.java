@@ -40,25 +40,34 @@ public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 	}
 	
 	@Override
-	public void add(Album entity)
+	public boolean add(Album entity)
 	{
-		if(findByID(entity.getTitle()) == null)
+		if(findByID(entity.getTitle()) == null) {
 			this.inMemoryAlbums.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(Album entity)
+	public boolean remove(Album entity)
 	{
-		if(findByID(entity.getTitle()) != null)
+		if(findByID(entity.getTitle()) != null){
 			this.inMemoryAlbums.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, Album entity)
+	public Album update(String name, Album entity)
 	{
 		Album album = findByID(name);
-		if(album != null)
+		if(album != null) {
 			this.inMemoryAlbums.set(this.inMemoryAlbums.indexOf(album), entity);
+			return album;
+		}
+		return null;
 	}
 	
 	@Override

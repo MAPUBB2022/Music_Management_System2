@@ -37,25 +37,34 @@ public class ArtistsInMemoryRepository implements ICrudRepository<String, Artist
 	
 	
 	@Override
-	public void add(Artist entity)
+	public boolean add(Artist entity)
 	{
-		if(!this.artistList.contains(entity))
+		if(!this.artistList.contains(entity)) {
 			this.artistList.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(Artist entity)
+	public boolean remove(Artist entity)
 	{
-		if(findByID(entity.getName())!=null)
+		if(findByID(entity.getName())!=null){
 			this.artistList.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, Artist entity)
+	public Artist update(String name, Artist entity)
 	{
 		Artist artist = findByID(name);
-		if(artist != null)
+		if(artist != null) {
 			this.artistList.set(this.artistList.indexOf(artist), entity);
+			return artist;
+		}
+		return null;
 	}
 	
 	@Override

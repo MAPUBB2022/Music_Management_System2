@@ -35,26 +35,35 @@ public class SongsInMemoryRepository implements ICrudRepository<String, Song>
 	}
 	
 	@Override
-	public void add(Song entity)
+	public boolean add(Song entity)
 	{
-		if(!this.songList.contains(entity))
+		if(!this.songList.contains(entity)) {
 			this.songList.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(Song entity)
+	public boolean remove(Song entity)
 	{
-		if(findByID(entity.getName()) != null)
+		if(findByID(entity.getName()) != null) {
 			this.songList.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, Song entity)
-	{
+	public Song update(String name, Song entity) {
 		Song song = findByID(name);
-		if(song != null)
-			this.songList.set(this.songList.indexOf(song), entity);	}
-	
+		if (song != null) {
+			this.songList.set(this.songList.indexOf(song), entity);
+			return song;
+		}
+		return null;
+	}
+
 	@Override
 	public Song findByID(String name)
 	{

@@ -31,25 +31,34 @@ public class MusicLabelsInMemoryRepository implements ICrudRepository<String, Mu
 	}
 	
 	@Override
-	public void add(MusicLabel entity)
+	public boolean add(MusicLabel entity)
 	{
-		if(!this.musicLabelList.contains(entity))
+		if(!this.musicLabelList.contains(entity)) {
 			this.musicLabelList.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(MusicLabel entity)
+	public boolean remove(MusicLabel entity)
 	{
-		if(findByID(entity.getName()) != null)
+		if(findByID(entity.getName()) != null) {
 			this.musicLabelList.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, MusicLabel entity)
+	public MusicLabel update(String name, MusicLabel entity)
 	{
 		MusicLabel label = findByID(name);
-		if(label != null)
+		if(label != null) {
 			this.musicLabelList.set(this.musicLabelList.indexOf(label), entity);
+			return label;
+		}
+		return null;
 	}
 	
 	@Override

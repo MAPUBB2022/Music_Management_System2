@@ -34,23 +34,20 @@ public class JdbcRepository implements UserRepository
 
     }
 
-
-
     @Override
-    public void remove(User entity) {
-
+    public boolean remove(User entity) {
+        return false;
     }
 
-
     @Override
-    public void update(String s, User newEntity)
+    public User update(String s, User newEntity)
     {
-
+        return newEntity;
     }
 
     @Override
-    public void add(User entity) {
-
+    public boolean add(User entity) {
+        return false;
     }
 
     @Override
