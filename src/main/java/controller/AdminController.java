@@ -39,183 +39,242 @@ AdminController implements IAdminController
 	}
 
 	@Override
-	public String addAlbum(Album album)
+	public void addAlbum(Album album)
 	{
-		if(this.albumList.findAll().contains(album))
-			return "[ERROR] Album already contained in List\n";
-		this.albumList.add(album);
-		return "[] Album added\n";
+		try {
+			if (this.albumList.findAll().contains(album))
+				this.albumList.add(album);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String deleteAlbum(Album album)
+	public void deleteAlbum(Album album)
 	{
-		if (!this.albumList.findAll().contains(album))
-			return "[ERROR] Song not in List\n";
-		this.albumList.remove(album);
-		return "[] Album deleted\n";
+		try {
+			if (!this.albumList.findAll().contains(album))
+				this.albumList.remove(album);
+
+		}
+		catch(Exception error) {
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String modifyAlbum(Album album)
+	public void modifyAlbum(Album album)
 	{
-		for(Album albums:albumList.findAll()) {
-			if (albums.equals(album)) {
-				albumList.update(albumList.findAll().indexOf(albums), album);
-				return "Album modified successfully\n";
+			try {
+				for (Album albums : albumList.findAll()) {
+					if (albums.equals(album)) {
+						albumList.update(albumList.findAll().indexOf(albums), album);
+						break;
+					}
+				}
+			}
+			catch(Exception error){
+				System.out.println(error.getMessage());
+			}
+
+	}
+	
+	@Override
+	public void addArtist(Artist artist)
+	{
+		try {
+			if(this.artistList.findAll().contains(artist))
+				this.artistList.add(artist);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
+	}
+	
+	@Override
+	public void deleteArtist(Artist artist)
+	{
+		try {
+			if (!this.artistList.findAll().contains(artist))
+				this.artistList.remove(artist);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
+	}
+	
+	@Override
+	public void modifyArtist(Artist artist)
+	{
+		try {
+			for (Artist artists : artistList.findAll()) {
+				if (artist.equals(artists)) {
+					artistList.update(artistList.findAll().indexOf(artists), artist);
+					break;
+				}
 			}
 		}
-		return "[ERROR] Album not in List\n";
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
+
 	}
 	
 	@Override
-	public String addArtist(Artist artist)
+	public void addBand(Band band)
 	{
-		if(this.artistList.findAll().contains(artist))
-			return "[ERROR] Artist already contained in List\n";
-		this.artistList.add(artist);
-		return "[] Artist added\n";
+		try {
+			if(this.bandList.findAll().contains(band))
+				this.bandList.add(band);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String deleteArtist(Artist artist)
+	public void deleteBand(Band band)
 	{
-		if (!this.artistList.findAll().contains(artist))
-			return "[ERROR] Artist not in List\n";
-		this.artistList.remove(artist);
-		return "[] Artist deleted\n";
+		try {
+			if (!this.bandList.findAll().contains(band))
+				this.bandList.remove(band);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String modifyArtist(Artist artist)
+	public void modifyBand(Band band)
 	{
-		for(Artist artists:artistList.findAll()) {
-			if (artist.equals(artists)) {
-				artistList.update(artistList.findAll().indexOf(artists), artist);
-				return "Artist modified successfully\n";
+		try {
+			for (Band bands : bandList.findAll()) {
+				if (bands.equals(band)) {
+					bandList.update(bandList.findAll().indexOf(bands), band);
+				}
 			}
 		}
-		return "[ERROR] Artist not in List\n";
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String addBand(Band band)
+	public void addConcert(Concert concert)
 	{
-		if(this.bandList.findAll().contains(band))
-			return "[ERROR] Band already contained in List\n";
-		this.bandList.add(band);
-		return "[] Band added\n";
+		try {
+			if(this.concertList.findAll().contains(concert))
+				this.concertList.add(concert);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String deleteBand(Band band)
+	public void deleteConcert(Concert concert)
 	{
-		if (!this.bandList.findAll().contains(band))
-			return "[ERROR] Band not in List\n";
-		this.bandList.remove(band);
-		return "[] Band deleted\n";
+		try {
+			if (!this.concertList.findAll().contains(concert))
+				this.concertList.remove(concert);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String modifyBand(Band band)
+	public void modifyConcert(Concert concert)
 	{
-		for(Band bands:bandList.findAll()) {
-			if (bands.equals(band)) {
-				bandList.update(bandList.findAll().indexOf(bands), band);
-				return "Band modified successfully\n";
+		try {
+			for (Concert concerts : concertList.findAll()) {
+				if (concerts.equals(concert)) {
+					concertList.update(String.valueOf(concertList.findAll().indexOf(concerts)), concert);
+				}
 			}
 		}
-		return "[ERROR] Band not in List\n";
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String addConcert(Concert concert)
+	public void addMusicLabel(MusicLabel musicLabel)
 	{
-		if(this.concertList.findAll().contains(concert))
-			return "[ERROR] Concert already contained in List\n";
-		this.concertList.add(concert);
-		return "[] Concert added\n";
+		try {
+			if(this.labelList.findAll().contains(musicLabel))
+				this.labelList.add(musicLabel);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String deleteConcert(Concert concert)
+	public void deleteMusicLabel(MusicLabel musicLabel)
 	{
-		if (!this.concertList.findAll().contains(concert))
-			return "[ERROR] Concert not in List\n";
-		this.concertList.remove(concert);
-		return "[] Concert deleted\n";
+		try {
+			if(!this.labelList.findAll().contains(musicLabel))
+				this.labelList.remove(musicLabel);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String modifyConcert(Concert concert)
+	public void modifyMusicLabel(MusicLabel musicLabel)
 	{
-		for(Concert concerts:concertList.findAll()) {
-			if (concerts.equals(concert)) {
-				concertList.update(String.valueOf(concertList.findAll().indexOf(concerts)), concert);
-				return "Concert modified successfully\n";
+		try {
+			for (MusicLabel labels : labelList.findAll()) {
+				if (labels.equals(musicLabel)) {
+					labelList.update(labelList.findAll().indexOf(labels), musicLabel);
+				}
 			}
 		}
-		return "[ERROR] Concert not in List\n";
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String addMusicLabel(MusicLabel musicLabel)
+	public void addSong(Song song)
 	{
-		if(this.labelList.findAll().contains(musicLabel))
-			return "[ERROR] Label already contained in List\n";
-		this.labelList.add(musicLabel);
-		return "[] Label added\n";
+		try {
+			if(this.songList.findAll().contains(song))
+				this.songList.add(song);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String deleteMusicLabel(MusicLabel musicLabel)
+	public void deleteSong(Song song)
 	{
-		if (!this.labelList.findAll().contains(musicLabel))
-			return "[ERROR] Label not in List\n";
-		this.labelList.remove(musicLabel);
-		return "[] Label deleted\n";
+		try {
+			if (!this.songList.findAll().contains(song))
+				this.songList.remove(song);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String modifyMusicLabel(MusicLabel musicLabel)
+	public void modifySong(Song song)
 	{
-		for(MusicLabel labels:labelList.findAll()) {
-			if (labels.equals(musicLabel)) {
-				labelList.update(labelList.findAll().indexOf(labels), musicLabel);
-				return "Label modified successfully\n";
+		try {
+			for (Song songs : songList.findAll()) {
+				if (song.equals(songs)) {
+					songList.update(songList.findAll().indexOf(songs), song);
+				}
 			}
 		}
-		return "[ERROR] Label not in List\n";
-	}
-	
-	@Override
-	public String addSong(Song song)
-	{
-		if(this.songList.findAll().contains(song))
-			return "[ERROR] Song already contained in List\n";
-		this.songList.add(song);
-		return "[] Song added\n";
-	}
-	
-	@Override
-	public String deleteSong(Song song)
-	{
-		if (!this.songList.findAll().contains(song))
-			return "[ERROR] Song not in List\n";
-		this.songList.remove(song);
-		return "[] Song deleted\n";
-	}
-	
-	@Override
-	public String modifySong(Song song)
-	{
-		for(Song songs:songList.findAll()) {
-			if (song.equals(songs)) {
-				songList.update(songList.findAll().indexOf(songs), song);
-				return "Song modified successfully\n";
-			}
+		catch(Exception error){
+			System.out.println(error.getMessage());
 		}
-		return "[ERROR] Song not in List\n";
 	}
 	
 	@Override
@@ -228,24 +287,30 @@ AdminController implements IAdminController
 	}
 	
 	@Override
-	public String deleteUser(User user)
+	public void deleteUser(User user)
 	{
-		if (!this.userList.findAll().contains(user))
-			return "[ERROR] User not in List\n";
-		this.userList.remove(user);
-		return "[] User deleted\n";
+		try {
+			if (!this.userList.findAll().contains(user))
+				this.userList.remove(user);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public String modifyUser(User user)
+	public void modifyUser(User user)
 	{
-		for(User users:userList.findAll()) {
-			if (users.equals(user)) {
-				userList.update(userList.findAll().indexOf(users), user);
-				return "User modified successfully\n";
+		try {
+			for (User users : userList.findAll()) {
+				if (users.equals(user)) {
+					userList.update(userList.findAll().indexOf(users), user);
+				}
 			}
 		}
-		return "[ERROR] User not in List\n";
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 
 	@Override

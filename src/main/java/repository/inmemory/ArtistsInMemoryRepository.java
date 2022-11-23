@@ -37,34 +37,35 @@ public class ArtistsInMemoryRepository implements ICrudRepository<String, Artist
 	
 	
 	@Override
-	public boolean add(Artist entity)
+	public void add(Artist entity) throws Error
 	{
 		if(!this.artistList.contains(entity)) {
 			this.artistList.add(entity);
-			return true;
+			return;
 		}
-		return false;
+		throw new Error("[Error] Artist doesn't exists!");
+
 	}
 	
 	@Override
-	public boolean remove(Artist entity)
+	public void remove(Artist entity) throws Error
 	{
 		if(findByID(entity.getName())!=null){
 			this.artistList.remove(entity);
-			return true;
+			return;
 		}
-		return false;
+		throw new Error("[Error] Artist doesn't exists!");
 	}
 	
 	@Override
-	public Artist update(String name, Artist entity)
+	public Artist update(String name, Artist entity) throws Error
 	{
 		Artist artist = findByID(name);
 		if(artist != null) {
 			this.artistList.set(this.artistList.indexOf(artist), entity);
 			return artist;
 		}
-		return null;
+		throw new Error("[Error] Artist doesn't exists!");
 	}
 	
 	@Override
@@ -74,12 +75,14 @@ public class ArtistsInMemoryRepository implements ICrudRepository<String, Artist
 			if(artist.getName().equals(name))
 				return artist;
 		}
-		return null;
+		throw new Error("[Error] Artist doesn't exists!");
 	}
 	
 	@Override
 	public List<Artist> findAll()
 	{
-		return artistList;
+		if (!artistList.isEmpty())
+			return artistList;
+		throw new Error("[Error] Artist list is empty!");
 	}
 }

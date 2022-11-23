@@ -10,47 +10,47 @@ import model.users.User;
 
 public interface IAdminController extends IController
 {
-	String addAlbum(Album album);
+	void addAlbum(Album album);
 	
-	String deleteAlbum(Album album);
+	void deleteAlbum(Album album);
 	
-	String modifyAlbum(Album album);
+	void modifyAlbum(Album album);
 	
-	String addArtist(Artist artist);
+	void addArtist(Artist artist);
 	
-	String deleteArtist(Artist artist);
+	void deleteArtist(Artist artist);
 	
-	String modifyArtist(Artist artist);
+	void modifyArtist(Artist artist);
 	
-	String addBand(Band band);
+	void addBand(Band band);
 	
-	String deleteBand(Band band);
+	void deleteBand(Band band);
 	
-	String modifyBand(Band band);
+	void modifyBand(Band band);
 	
-	String addConcert(Concert concert);
+	void addConcert(Concert concert);
 	
-	String deleteConcert(Concert concert);
+	void deleteConcert(Concert concert);
 	
-	String modifyConcert(Concert concert);
+	void modifyConcert(Concert concert);
 	
-	String addMusicLabel(MusicLabel musicLabel);
+	void addMusicLabel(MusicLabel musicLabel);
 	
-	String deleteMusicLabel(MusicLabel musicLabel);
+	void deleteMusicLabel(MusicLabel musicLabel);
 	
-	String modifyMusicLabel(MusicLabel musicLabel);
+	void modifyMusicLabel(MusicLabel musicLabel);
 	
-	String addSong(Song song);
+	void addSong(Song song);
 	
-	String deleteSong(Song song);
+	void deleteSong(Song song);
 	
-	String modifySong(Song song);
+	void modifySong(Song song);
 	
 	boolean addUser(User user);
 	
-	String deleteUser(User user);
+	void deleteUser(User user);
 	
-	String modifyUser(User user);
+	void modifyUser(User user);
 	
 	String showConcerts();
 	
