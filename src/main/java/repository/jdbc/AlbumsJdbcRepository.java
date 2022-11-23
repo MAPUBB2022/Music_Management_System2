@@ -1,19 +1,23 @@
 package repository.jdbc;
 
-import interfaces.UserRepository;
+import interfaces.ICrudRepository;
+import model.album.Album;
+import model.album.Artist;
+import model.album.Band;
+import model.song.Song;
 import model.users.User;
+import repository.inmemory.AlbumsInMemoryRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
-public class JdbcRepository implements UserRepository
-{
-
+public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
     private JDBCConnection connection;
 
-    public JdbcRepository(JDBCConnection connection)
+    public AlbumsJdbcRepository(JDBCConnection connection)
     {
         this.connection = connection;
     }
@@ -22,10 +26,9 @@ public class JdbcRepository implements UserRepository
     {
         Connection con = JDBCConnection.getInstance();
         try {
-            PreparedStatement statement = con.prepareStatement("insert into Users(username, password, status) values (?, ?, ?)");
+            PreparedStatement statement = con.prepareStatement("insert into Albums(title, arttist, band, songList, language, productionCost,releaseDate, copiesSold, discPrice) values (?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
-            statement.setString(3, "false");
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -35,35 +38,28 @@ public class JdbcRepository implements UserRepository
     }
 
     @Override
-    public boolean remove(User entity) {
+    public boolean add(Album entity) {
         return false;
     }
 
     @Override
-    public User update(String s, User newEntity)
-    {
-        return newEntity;
-    }
-
-    @Override
-    public boolean add(User entity) {
+    public boolean remove(Album entity) {
         return false;
     }
 
     @Override
-    public User findByID(String s)
-    {
+    public Album update(String s, Album entity) {
         return null;
     }
 
     @Override
-    public List<User> findAll() {
+    public Album findByID(String s) {
         return null;
     }
 
     @Override
-    public User findByUsernameAndPassword(String username, String password)
-    {
+    public List<Album> findAll() {
         return null;
     }
+
 }

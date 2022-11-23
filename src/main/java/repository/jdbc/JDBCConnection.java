@@ -15,7 +15,7 @@ public class JDBCConnection
         Connection con = null;
         try {
             DriverManager.registerDriver(new SQLServerDriver());
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=Seminar_4_MAP", "guest", "1234");
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP", "MAP_project", "1234");
         }
         catch (SQLException e) {
             System.out.println("Error getting connection " + e);
