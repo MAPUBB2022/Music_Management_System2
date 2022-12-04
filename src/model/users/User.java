@@ -38,6 +38,6 @@ public class User
 	@Override
 	public String toString()
 	{
-		return "User\n" + "Username: " + username + "\nPassword: " + password + "\n";
+		return "User\n" + "Username: " + username + "\nPassword: " + password + "\nAdmin Status: " + isAdmin + "\n";
 	}
 }

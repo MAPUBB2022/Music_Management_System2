@@ -24,38 +24,62 @@ public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 	
 	private List<Album> populateAlbums() throws ParseException
 	{
-		Band band = new Band("Black Sabbath");
-		Album a1 = new Album("Paranoid", band);
-		a1.addSong(new Rock("War Pigs", "", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
-		a1.addSong(new Rock("Paranoid", "", new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
-		a1.addSong(new Rock("Iron Man", "", new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
+		BandsInMemoryRepository bands = new BandsInMemoryRepository();
+		ArtistsInMemoryRepository artists = new ArtistsInMemoryRepository();
+		SongsInMemoryRepository songs = new SongsInMemoryRepository();
 		
-		Artist artist = new Artist("Eminem");
-		Album a2 = new Album("The Eminem Show", artist);
-		a2.addSong(new Rap("Without Me", "", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), artist));
-		a2.addSong(new Rap("Sing For The Moment", "", new SimpleDateFormat("dd.MM.yyyy").parse("03.07.2012"), artist));
-		a2.addSong(new Rap("Till I Collapse", "", new SimpleDateFormat("dd.MM.yyyy").parse("09.08.2012"), artist));
+		Album a1 = new Album("Paranoid", bands.findByID("Black Sabbath"));
+		a1.setCopiesSold(500000);
+		a1.setLanguage("English");
+		a1.setDiscPrice(6.5f);
+		a1.setProductionCost(800000f);
+		a1.setReleaseDate(new SimpleDateFormat("dd.MM.yyyy").parse("10.01.2008"));
+		a1.addSong(songs.findByID("War Pigs"));
+		a1.addSong(songs.findByID("Paranoid"));
+		a1.addSong(songs.findByID("Iron Man"));
+		
+		Album a2 = new Album("The Eminem Show", artists.findByID("Eminem"));
+		a2.setCopiesSold(554000);
+		a2.setLanguage("English");
+		a2.setDiscPrice(8.5f);
+		a2.setProductionCost(895000f);
+		a2.setReleaseDate(new SimpleDateFormat("dd.MM.yyyy").parse("10.03.2010"));
+		a2.addSong(songs.findByID("Without Me"));
+		a2.addSong(songs.findByID("Sing For The Moment"));
+		a2.addSong(songs.findByID("Till I Collapse"));
 		
 		return new ArrayList<>(Arrays.asList(a1, a2));
 	}
 	
 	@Override
-	public void add(Album entity)
+	public boolean add(Album entity)
 	{
-		if (findByID(entity.getTitle()) == null) this.inMemoryAlbums.add(entity);
+		if (findByID(entity.getTitle()) == null) {
+			this.inMemoryAlbums.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(Album entity)
+	public boolean remove(Album entity)
 	{
-		if (findByID(entity.getTitle()) != null) this.inMemoryAlbums.remove(entity);
+		if (findByID(entity.getTitle()) != null) {
+			this.inMemoryAlbums.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, Album entity)
+	public Album update(String name, Album entity)
 	{
 		Album album = findByID(name);
-		if (album != null) this.inMemoryAlbums.set(this.inMemoryAlbums.indexOf(album), entity);
+		if (album != null) {
+			this.inMemoryAlbums.set(this.inMemoryAlbums.indexOf(album), entity);
+			return album;
+		}
+		return null;
 	}
 	
 	@Override

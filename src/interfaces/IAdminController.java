@@ -10,47 +10,47 @@ import model.users.User;
 
 public interface IAdminController extends IController
 {
-	void addAlbum(Album album);
+	boolean addAlbum(Album album);
 	
-	void deleteAlbum(Album album);
+	boolean deleteAlbum(Album album);
 	
-	void modifyAlbum(Album album);
+	Album modifyAlbum(Album album);
 	
-	void addArtist(Artist artist);
+	boolean addArtist(Artist artist);
 	
-	void deleteArtist(Artist artist);
+	boolean deleteArtist(Artist artist);
 	
-	void modifyArtist(Artist artist);
+	Artist modifyArtist(Artist artist);
 	
-	void addBand(Band band);
+	boolean addBand(Band band);
 	
-	void deleteBand(Band band);
+	boolean deleteBand(Band band);
 	
-	void modifyBand(Band band);
+	Band modifyBand(Band band);
 	
-	void addConcert(Concert concert);
+	boolean addConcert(Concert concert);
 	
-	void deleteConcert(Concert concert);
+	boolean deleteConcert(Concert concert);
 	
-	void modifyConcert(Concert concert);
+	Concert modifyConcert(Concert concert);
 	
-	void addMusicLabel(MusicLabel musicLabel);
+	boolean addMusicLabel(MusicLabel musicLabel);
 	
-	void deleteMusicLabel(MusicLabel musicLabel);
+	boolean deleteMusicLabel(MusicLabel musicLabel);
 	
-	void modifyMusicLabel(MusicLabel musicLabel);
+	MusicLabel modifyMusicLabel(MusicLabel musicLabel);
 	
-	void addSong(Song song);
+	boolean addSong(Song song);
 	
-	void deleteSong(Song song);
+	boolean deleteSong(Song song);
 	
-	void modifySong(Song song);
+	Song modifySong(Song song);
 	
-	void deleteUser(User user);
+	boolean deleteUser(User user);
 	
-	void modifyUser(User user);
+	User modifyUser(User user);
 	
-	void showConcerts();
+	String showConcerts();
 	
 	void sortAlbumsByProductionCost();
 }

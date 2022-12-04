@@ -1,26 +1,46 @@
-import controller.UserController;
-import model.album.Album;
-import model.album.Artist;
-import repository.inmemory.AlbumsInMemoryRepository;
-import repository.inmemory.ArtistsInMemoryRepository;
-import repository.inmemory.ConcertsInMemoryRepository;
-import repository.inmemory.SongsInMemoryRepository;
+import interfaces.UserRepository;
+import model.users.User;
+import repository.inmemory.UserInMemoryRepository;
 import view.UserUI;
 
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class Main
 {
 	public static void main(String[] args) throws ParseException
 	{
-//		AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
-//		albumsInMemoryRepository.add(new Album("ceva", new Artist("bob")));
-//		for (Album album : albumsInMemoryRepository.findAll())
-//			System.out.println(album.toString());
-//		System.out.println(albumsInMemoryRepository.findAll().toString());
-//		UserController controller = new UserController(albumsInMemoryRepository,new ArtistsInMemoryRepository(),new ConcertsInMemoryRepository(), new SongsInMemoryRepository());
-//		System.out.println(controller.showArtists());
-		UserUI ui = new UserUI("In Memory");
-		ui.Menu();
+		System.out.println("[WARNING] Choose Saving Method:\n1 - In Memory\n2 - JSON File\n3 - Database(JDBC)\n\nChoice: ");
+		Scanner scanner = new Scanner(System.in);
+		int saveMethod = Integer.parseInt(scanner.next());
+		
+		while (saveMethod < 1 || saveMethod > 3) {
+			System.out.println("Invalid Input, Try Again\n\nChoice: ");
+			saveMethod = Integer.parseInt(scanner.next());
+		}
+		
+		String username, password;
+		System.out.println("Now, let's authenticate...\nUsername: ");
+		username = scanner.next();
+		System.out.println("Password: ");
+		password = scanner.next();
+		UserRepository userRepository = null;
+		
+		switch (saveMethod) {
+			case 1 -> userRepository = new UserInMemoryRepository();
+			case 2 -> System.out.println("Not yet implemented");
+			case 3 -> System.out.println("Not yet implemented!");
+		}
+		
+		assert userRepository != null;
+		User user = userRepository.findByUsernameAndPassword(username, password);
+		
+		if (user == null) {
+			System.out.println("Invalid User!");
+			return;
+		}
+		
+		UserUI ui = user.isAdmin() ? new UserUI(saveMethod, true) : new UserUI(saveMethod, false);
+		ui.switchMenu();
 	}
 }

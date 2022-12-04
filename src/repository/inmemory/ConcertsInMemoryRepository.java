@@ -21,37 +21,54 @@ public class ConcertsInMemoryRepository implements ICrudRepository<String, Conce
 	
 	private List<Concert> populateConcerts() throws ParseException
 	{
-		Artist c1a1 = new Artist("Martyn Ware");
-		Artist c1a2 = new Artist("Ian Craig Marsh");
-		Artist c1a3 = new Artist("Glenn Gregory");
-		List<Artist> c1Artists = new ArrayList<>(Arrays.asList(c1a1, c1a2, c1a3));
+		ArtistsInMemoryRepository repo = new ArtistsInMemoryRepository();
+		Artist artist1 = repo.findByID("Martyn Ware");
+		Artist artist2 = repo.findByID("Ian Craig Marsh");
+		Artist artist3 = repo.findByID("Glenn Gregory");
 		
-		Artist c2a1 = new Artist("Baba Dochia");
-		Artist c2a2 = new Artist("Smiley");
-		List<Artist> c2Artists = new ArrayList<>(Arrays.asList(c2a1, c2a2));
+		Artist artist4 = repo.findByID("Baba Dochia");
+		Artist artist5 = repo.findByID("Smiley");
 		
-		Concert c1 = new Concert("Heaven 17", c1Artists, "Liverpool, Great Britain", new SimpleDateFormat("dd.MM.yyyy").parse("26.11.2012"), 2500);
-		Concert c2 = new Concert("Baba Dochia", c2Artists, "Cluj-Napoca, Cluj", new SimpleDateFormat("dd.MM.yyyy").parse("05.11.2012"), 800);
+		Concert c1 = new Concert("Heaven 17", Arrays.asList(artist1, artist2, artist3), "Liverpool, Great Britain", new SimpleDateFormat("dd.MM.yyyy").parse("26.11.2012"), 2500);
+		c1.setTicketsSold(30);
+		c1.setTicketPrice(37.5f);
+		c1.setRentCosts(50000f);
+		Concert c2 = new Concert("Baba Dochia", Arrays.asList(artist4, artist5), "Cluj-Napoca, Cluj", new SimpleDateFormat("dd.MM.yyyy").parse("05.11.2012"), 800);
+		c2.setTicketsSold(20);
+		c2.setTicketPrice(50f);
+		c2.setRentCosts(150000f);
 		return new ArrayList<>(Arrays.asList(c1, c2));
 	}
 	
 	@Override
-	public void add(Concert entity)
+	public boolean add(Concert entity)
 	{
-		if (findByID(entity.getName()) == null) this.concertList.add(entity);
+		if (findByID(entity.getName()) == null) {
+			this.concertList.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(Concert entity)
+	public boolean remove(Concert entity)
 	{
-		if (findByID(entity.getName()) != null) this.concertList.remove(entity);
+		if (findByID(entity.getName()) != null) {
+			this.concertList.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String name, Concert entity)
+	public Concert update(String name, Concert entity)
 	{
 		Concert concert = findByID(name);
-		if (concert != null) this.concertList.set(this.concertList.indexOf(concert), entity);
+		if (concert != null) {
+			this.concertList.set(this.concertList.indexOf(concert), entity);
+			return concert;
+		}
+		return null;
 	}
 	
 	@Override

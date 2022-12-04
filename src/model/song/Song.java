@@ -37,12 +37,12 @@ public abstract class Song
 		this.streamCount = 0;
 	}
 	
-	public Song(String name, String rating, Date releaseDate, Band band_singers)
+	public Song(String name, String rating, Date releaseDate, Band bandSingers)
 	{
 		this.name = name;
 		this.rating = rating;
 		this.releaseDate = releaseDate;
-		this.band_singers = band_singers;
+		this.band_singers = bandSingers;
 		this.singer = null;
 		this.tags = new ArrayList<>();
 		this.lyrics = "";
@@ -90,12 +90,12 @@ public abstract class Song
 		this.singer = singer;
 	}
 	
-	public Band getBand_singers()
+	public Band getBandSingers()
 	{
 		return band_singers;
 	}
 	
-	public void setBand_singers(Band band_singers)
+	public void setBandSingers(Band band_singers)
 	{
 		this.band_singers = band_singers;
 	}
@@ -140,18 +140,17 @@ public abstract class Song
 		this.streamCount = streamCount;
 	}
 	
-	@SuppressWarnings("StringConcatenationInLoop")
 	@Override
 	public String toString()
 	{
 		String tags = "";
 		String related = "";
 		for (Tags tag : this.tags)
+			//noinspection StringConcatenationInLoop
 			tags += tag + " ";
-		for (Song song : this.relatedSongs)
-			related += song.name + "; ";
+		related += relatedSongs.toString();
 		StringBuilder endString = new StringBuilder(name + " by ");
-		if (this.singer != null) endString.append(this.singer.getName());
+		if (this.singer != null) endString.append(this.singer.getStageName());
 		else endString.append(this.band_singers.getName());
 		endString.append("\nRating: ").append(rating).append("\nTags: ").append(tags).append("\nRelease Date: ").append(releaseDate).append("\nStream Count: ").append(streamCount).append("\nLyrics: ").append(lyrics).append("\nRelated Songs: ").append(related);
 		return endString.append("\n").toString();

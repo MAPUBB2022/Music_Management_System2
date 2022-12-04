@@ -3,12 +3,12 @@ package model.album;
 public class Artist
 {
 	private String name;
-	private String stage_name; //Unique
+	private String stageName; //Unique
 	private Float salary;
 	
-	public Artist(String stage_name)
+	public Artist(String stageName)
 	{
-		this.stage_name = stage_name;
+		this.stageName = stageName;
 		this.name = "";
 		this.salary = 0f;
 	}
@@ -23,14 +23,14 @@ public class Artist
 		this.name = name;
 	}
 	
-	public String getStage_name()
+	public String getStageName()
 	{
-		return stage_name;
+		return stageName;
 	}
 	
-	public void setStage_name(String stage_name)
+	public void setStageName(String stageName)
 	{
-		this.stage_name = stage_name;
+		this.stageName = stageName;
 	}
 	
 	public Float getSalary()
@@ -46,6 +46,6 @@ public class Artist
 	@Override
 	public String toString()
 	{
-		return "Artist: " + stage_name + " - " + name + "\nSalary: " + salary + "\n";
+		return "Artist: " + stageName + " - " + name + "\nSalary: " + salary + "\n";
 	}
 }

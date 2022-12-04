@@ -20,32 +20,44 @@ public class UserInMemoryRepository implements UserRepository
 	private List<User> populateUsers()
 	{
 		User u1 = new User("jk", "secret");
-		u1.setAdminStatus(true);
 		User u2 = new User("bob", "dob");
 		User u3 = new User("john", "sn0w");
 		User u4 = new User("mary", "queenofscots1542");
 		User u5 = new User("admin", "password");
+		u1.setAdminStatus(true);
 		u5.setAdminStatus(true);
 		return new ArrayList<>(Arrays.asList(u1, u2, u3, u4, u5));
 	}
 	
 	@Override
-	public void add(User entity)
+	public boolean add(User entity)
 	{
-		if (findByUsernameAndPassword(entity.getUsername(), entity.getPassword()) == null) this.userList.add(entity);
+		if (findByUsernameAndPassword(entity.getUsername(), entity.getPassword()) == null) {
+			this.userList.add(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void remove(User entity)
+	public boolean remove(User entity)
 	{
-		if (findByUsernameAndPassword(entity.getUsername(), entity.getPassword()) != null) this.userList.remove(entity);
+		if (findByUsernameAndPassword(entity.getUsername(), entity.getPassword()) != null) {
+			this.userList.remove(entity);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
-	public void update(String username, User entity)
+	public User update(String username, User entity)
 	{
 		User user = findByID(username);
-		if (user != null) this.userList.set(this.userList.indexOf(user), entity);
+		if (user != null) {
+			this.userList.set(this.userList.indexOf(user), entity);
+			return user;
+		}
+		return null;
 	}
 	
 	@Override

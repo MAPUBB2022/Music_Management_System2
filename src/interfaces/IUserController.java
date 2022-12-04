@@ -11,7 +11,7 @@ public interface IUserController extends IController
 	
 	String showFavourites();
 	
-	boolean buyTicket(Concert concert);
+	boolean buyTicket(Concert concert, Integer count);
 	
 	String showTickets();
 	

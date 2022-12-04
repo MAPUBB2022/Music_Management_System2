@@ -61,7 +61,7 @@ public class UserController implements IUserController
 	@Override
 	public String showArtists() throws NullPointerException
 	{
-		if (this.artistList.findAll() == null) {
+		if (this.artistList == null) {
 			throw new NullPointerException("[ERROR] Artist List is NULL");
 		}
 		String endString = this.artistList.toString();
@@ -71,7 +71,7 @@ public class UserController implements IUserController
 	@Override
 	public String showAlbums() throws NullPointerException
 	{
-		if (this.albumList.findAll() == null) {
+		if (this.albumList == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		String endString = this.albumList.toString();
@@ -81,17 +81,19 @@ public class UserController implements IUserController
 	@Override
 	public String showAlbumsForArtist(Artist artist) throws NullPointerException
 	{
-		if (this.albumList.findAll() == null) {
+		if (this.albumList == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
-		String endString = this.albumList.toString();
+		String endString = "";
+		for (Album album : this.albumList.findAll())
+			if (album.getArtist().equals(artist)) endString += album.toString();
 		return endString.equals("") ? "[WARNING] No Albums found for specified Artist\n" : endString;
 	}
 	
 	@Override
 	public String showUpcomingConcerts() throws NullPointerException
 	{
-		if (this.concertList.findAll() == null) {
+		if (this.concertList == null) {
 			throw new NullPointerException("[ERROR] Concert List is NULL");
 		}
 		String endString = "";
@@ -105,7 +107,7 @@ public class UserController implements IUserController
 	@Override
 	public void sortAlbumsByRevenue() throws NullPointerException
 	{
-		if (this.albumList.findAll() == null) {
+		if (this.albumList == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		this.albumList.findAll().sort((album1, album2) -> (int) (album1.calculateProfit() - album2.calculateProfit()));
@@ -115,7 +117,7 @@ public class UserController implements IUserController
 	@Override
 	public void sortSongsByRating() throws NullPointerException
 	{
-		if (this.songList.findAll() == null) {
+		if (this.songList == null) {
 			throw new NullPointerException("[ERROR] Song List is NULL");
 		}
 		this.songList.findAll().sort(Comparator.comparing(Song::getRating));
@@ -125,7 +127,7 @@ public class UserController implements IUserController
 	@Override
 	public void sortSongsByReleaseDate() throws NullPointerException
 	{
-		if (this.songList.findAll() == null) {
+		if (this.songList == null) {
 			throw new NullPointerException("[ERROR] Song List is NULL");
 		}
 		this.songList.findAll().sort(Comparator.comparing(Song::getReleaseDate));
@@ -135,17 +137,17 @@ public class UserController implements IUserController
 	@Override
 	public void sortArtistsByName() throws NullPointerException
 	{
-		if (this.artistList.findAll() == null) {
+		if (this.artistList == null) {
 			throw new NullPointerException("[ERROR] Artist List is NULL");
 		}
-		this.artistList.findAll().sort(Comparator.comparing(Artist::getStage_name));
+		this.artistList.findAll().sort(Comparator.comparing(Artist::getStageName));
 //		return endString.equals("") ? "[WARNING] Artist List is Empty\n" : endString;
 	}
 	
 	@Override
 	public void sortAlbumsByReleaseDate() throws NullPointerException
 	{
-		if (this.albumList.findAll() == null) {
+		if (this.albumList == null) {
 			throw new NullPointerException("[ERROR] Album List is NULL");
 		}
 		this.albumList.findAll().sort(Comparator.comparing(Album::getReleaseDate));
@@ -171,6 +173,7 @@ public class UserController implements IUserController
 	@Override
 	public String showFavourites()
 	{
+		if (this.myFavourites == null) throw new NullPointerException("[ERROR] Favourites List is NULL");
 		String endString = "";
 		for (Song song : this.myFavourites)
 			endString += song.toString();
@@ -178,7 +181,7 @@ public class UserController implements IUserController
 	}
 	
 	@Override
-	public boolean buyTicket(Concert concert)
+	public boolean buyTicket(Concert concert, Integer count)
 	{
 		Concert con = this.concertList.findByID(concert.getName());
 		if (con.getTicketsSold() < con.getCapacity()) {
@@ -200,43 +203,57 @@ public class UserController implements IUserController
 	}
 	
 	
-	private int generateRandom(int begin, int end)
+	private int generateRandom(int end)
 	{
-		return begin + (int) (Math.random() * ((end - begin) + 1));
+		return (int) (Math.random() * ((end) + 1));
+	}
+	
+	private List<Integer> generateUnequalRandom(int end)
+	{
+		Integer r1 = generateRandom(end);
+		Integer r2 = generateRandom(end);
+		Integer r3 = generateRandom(end);
+		while (r1.equals(r2) || r1.equals(r3) || r2.equals(r3)) {
+			r1 = generateRandom(end);
+			r2 = generateRandom(end);
+			r3 = generateRandom(end);
+		}
+		return new ArrayList<>(Arrays.asList(r1, r2, r3));
 	}
 	
 	@Override
 	public String showRecommended()
 	{
+		//todo myFavourites can have less than 3 songs.
+		int max;
 		String endString = "";
-		if (!myFavourites.isEmpty()) {
-			int min = 0, max = myFavourites.size() - 1;
-			int random1 = generateRandom(min, max);
-			int random2 = generateRandom(min, max);
-			int random3 = generateRandom(min, max);
-			if (myFavourites.get(random1).getRelatedSongs().get(random2).getSinger() != null)
-				endString += myFavourites.get(random1).getRelatedSongs().get(random2).getName() + " by " + myFavourites.get(random1).getRelatedSongs().get(random2).getSinger().getStage_name();
-			else
-				endString += myFavourites.get(random1).getRelatedSongs().get(random2).getName() + " by " + myFavourites.get(random1).getRelatedSongs().get(random2).getBand_singers().getName();
-			if (myFavourites.get(random2).getRelatedSongs().get(random3).getSinger() != null)
-				endString += myFavourites.get(random2).getRelatedSongs().get(random3).getName() + " by " + myFavourites.get(random2).getRelatedSongs().get(random3).getSinger().getStage_name();
-			else
-				endString += myFavourites.get(random2).getRelatedSongs().get(random3).getName() + " by " + myFavourites.get(random2).getRelatedSongs().get(random3).getBand_singers().getName();
-			if (myFavourites.get(random3).getRelatedSongs().get(random1).getSinger() != null)
-				endString += myFavourites.get(random3).getRelatedSongs().get(random1).getName() + " by " + myFavourites.get(random3).getRelatedSongs().get(random1).getSinger().getStage_name();
-			else
-				endString += myFavourites.get(random3).getRelatedSongs().get(random1).getName() + " by " + myFavourites.get(random3).getRelatedSongs().get(random1).getBand_singers().getName();
-			
+		Song s1, s2, s3;
+		List<Integer> randoms;
+		
+		if (!this.myFavourites.isEmpty()) {
+			max = this.myFavourites.size() - 1;
+			randoms = generateUnequalRandom(max);
+			s1 = this.myFavourites.get(randoms.get(0)).getRelatedSongs().get(randoms.get(1));
+			s2 = this.myFavourites.get(randoms.get(1)).getRelatedSongs().get(randoms.get(2));
+			s3 = this.myFavourites.get(randoms.get(2)).getRelatedSongs().get(randoms.get(0));
 		} else {
-			int min = 0, max = songList.findAll().size() - 1;
-			int random1 = generateRandom(min, max);
-			int random2 = generateRandom(min, max);
-			int random3 = generateRandom(min, max);
+			max = songList.findAll().size() - 1;
 			List<Song> songs = songList.findAll();
-			endString += songs.get(random1).getName() + " by " + songs.get(random1).getSinger().getStage_name();
-			endString += songs.get(random2).getName() + " by " + songs.get(random2).getSinger().getStage_name();
-			endString += songs.get(random3).getName() + " by " + songs.get(random3).getSinger().getStage_name();
+			randoms = generateUnequalRandom(max);
+			s1 = songs.get(randoms.get(0));
+			s2 = songs.get(randoms.get(1));
+			s3 = songs.get(randoms.get(2));
 		}
+		
+		endString += s1.getName() + " by ";
+		endString += s1.getSinger() != null ? s1.getSinger().getStageName() : s1.getBandSingers().getName();
+		endString += "; ";
+		endString += s2.getName() + " by ";
+		endString += s2.getSinger() != null ? s2.getSinger().getStageName() : s2.getBandSingers().getName();
+		endString += "; ";
+		endString += s3.getName() + " by ";
+		endString += s3.getSinger() != null ? s3.getSinger().getStageName() : s3.getBandSingers().getName();
+		
 		return endString;
 	}
 	
