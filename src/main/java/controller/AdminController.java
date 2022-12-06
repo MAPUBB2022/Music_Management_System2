@@ -239,6 +239,8 @@ AdminController implements IAdminController
 	@Override
 	public void addSong(Song song)
 	{
+		//TODO implementation
+		//related songs - empty
 		try {
 			if(this.songList.findAll().contains(song))
 				this.songList.add(song);
