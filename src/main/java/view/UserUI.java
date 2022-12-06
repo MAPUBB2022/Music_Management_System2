@@ -17,19 +17,19 @@ public class UserUI
 
     public UserUI(Integer saveType, boolean isAdmin) throws ParseException, RuntimeException
     {
-        this.isAdmin = isAdmin;
-        if (saveType == 1) {
-            AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
-            ArtistsInMemoryRepository artistsInMemoryRepository = new ArtistsInMemoryRepository();
-            ConcertsInMemoryRepository concertsInMemoryRepository = new ConcertsInMemoryRepository();
-            SongsInMemoryRepository songsInMemoryRepository = new SongsInMemoryRepository();
-            UserInMemoryRepository userInMemoryRepository = new UserInMemoryRepository();
-            if (isAdmin) System.out.println("Not yet implemented!");
-            else
-                this.controller = new UserController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository, songsInMemoryRepository, userInMemoryRepository);
-        } else
-            //TODO add file and db controllers
-            throw new RuntimeException("Not implemented yet!");
+//        this.isAdmin = isAdmin;
+//        if (saveType == 1) {
+//            AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
+//            ArtistsInMemoryRepository artistsInMemoryRepository = new ArtistsInMemoryRepository();
+//            ConcertsInMemoryRepository concertsInMemoryRepository = new ConcertsInMemoryRepository();
+//            SongsInMemoryRepository songsInMemoryRepository = new SongsInMemoryRepository();
+//            UserInMemoryRepository userInMemoryRepository = new UserInMemoryRepository();
+//            if (isAdmin) System.out.println("Not yet implemented!");
+//            else
+//                this.controller = new UserController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository, songsInMemoryRepository, userInMemoryRepository);
+//        } else
+//            //TODO add file and db controllers
+//            throw new RuntimeException("Not implemented yet!");
     }
 
     public void switchMenu()
