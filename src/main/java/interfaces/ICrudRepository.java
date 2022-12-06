@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ICrudRepository<ID, E>
 {
-	void add(E entity);
+	boolean add(E entity);
 	
-	void remove(E entity);
+	boolean remove(E entity);
 	
 	E update(ID id, E entity);
 

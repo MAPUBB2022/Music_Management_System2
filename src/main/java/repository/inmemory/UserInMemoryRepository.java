@@ -72,7 +72,9 @@ public class UserInMemoryRepository implements UserRepository
 	@Override
 	public List<User> findAll()
 	{
-		return this.userList;
+		if (!userList.isEmpty())
+			return this.userList;
+		return null;
 	}
 	
 	@Override

@@ -69,6 +69,8 @@ public class BandsInMemoryRepository implements ICrudRepository<String, Band>
 	@Override
 	public List<Band> findAll()
 	{
-		return this.bandList;
+		if (!bandList.isEmpty())
+			return bandList;
+		return null;
 	}
 }

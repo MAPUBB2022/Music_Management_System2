@@ -40,52 +40,52 @@ public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 	}
 	
 	@Override
-	public void add(Album entity) throws Error
+	public boolean add(Album entity)
 	{
 		if(findByID(entity.getTitle()) == null) {
 			this.inMemoryAlbums.add(entity);
-			return;
+			return true;
 		}
-		throw new Error("[Error] Album already exists!");
+		return false;
 	}
 	
 	@Override
-	public void remove(Album entity) throws Error
+	public boolean remove(Album entity) throws Error
 	{
 		if(findByID(entity.getTitle()) != null){
 			this.inMemoryAlbums.remove(entity);
-			return;
+			return true;
 		}
-		throw new Error("[Error] Album doesn't exists!");
+		return false;
 	}
 	
 	@Override
-	public Album update(String name, Album entity) throws Error
+	public Album update(String name, Album entity)
 	{
 		Album album = findByID(name);
 		if (album != null) {
 				this.inMemoryAlbums.set(this.inMemoryAlbums.indexOf(album), entity);
 				return album;
 		}
-		throw new Error("[Error] Album doesn't exists!");
+		return null;
 	}
 	
 	@Override
 	public Album findByID(String name) throws Error
 	{
-			for (Album album : inMemoryAlbums) {
-				if (album.getTitle().equals(name))
-					return album;
-			}
-		throw new Error("[Error] Album doesn't exists!");
+		for (Album album : inMemoryAlbums) {
+			if (album.getTitle().equals(name))
+				return album;
+		}
+		return null;
 	}
 
 	@Override
 	public List<Album> findAll() throws Error
 	{
-		if (!inMemoryAlbums.isEmpty())
+		if (!inMemoryAlbums.isEmpty()){
 			return this.inMemoryAlbums;
-		throw new Error("[Error] Album list empty!");
-
+		}
+		return null;
 	}
 }

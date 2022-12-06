@@ -74,6 +74,8 @@ public class MusicLabelsInMemoryRepository implements ICrudRepository<String, Mu
 	@Override
 	public List<MusicLabel> findAll()
 	{
-		return this.musicLabelList;
+		if (!musicLabelList.isEmpty())
+			return this.musicLabelList;
+		return null;
 	}
 }

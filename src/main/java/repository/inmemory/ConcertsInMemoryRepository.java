@@ -80,6 +80,8 @@ public class ConcertsInMemoryRepository implements ICrudRepository<String, Conce
 	@Override
 	public List<Concert> findAll()
 	{
-		return this.concertList;
+		if (!concertList.isEmpty())
+			return this.concertList;
+		return null;
 	}
 }

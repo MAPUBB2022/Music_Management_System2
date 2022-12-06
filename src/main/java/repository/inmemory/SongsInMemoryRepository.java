@@ -77,6 +77,8 @@ public class SongsInMemoryRepository implements ICrudRepository<String, Song>
 	@Override
 	public List<Song> findAll()
 	{
-		return this.songList;
+		if (!songList.isEmpty())
+			return this.songList;
+		return null;
 	}
 }
