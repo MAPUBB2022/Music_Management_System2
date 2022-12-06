@@ -14,12 +14,12 @@ public abstract class Song
 	private String rating;
 	private Date releaseDate;
 	private Artist singer;
-	private Band band_singers;
-	
+	private Band bandSingers;
 	private List<Tags> tags;
 	
 	private String lyrics;
 	
+	/** many-to-many **/
 	private List<Song> relatedSongs;
 	
 	private Integer streamCount;
@@ -30,7 +30,7 @@ public abstract class Song
 		this.rating = rating;
 		this.releaseDate = releaseDate;
 		this.singer = artist;
-		this.band_singers = null;
+		this.bandSingers = null;
 		this.tags = new ArrayList<>();
 		this.lyrics = "";
 		this.relatedSongs = new ArrayList<>();
@@ -42,7 +42,7 @@ public abstract class Song
 		this.name = name;
 		this.rating = rating;
 		this.releaseDate = releaseDate;
-		this.band_singers = bandSingers;
+		this.bandSingers = bandSingers;
 		this.singer = null;
 		this.tags = new ArrayList<>();
 		this.lyrics = "";
@@ -92,12 +92,12 @@ public abstract class Song
 	
 	public Band getBandSingers()
 	{
-		return band_singers;
+		return bandSingers;
 	}
 	
 	public void setBandSingers(Band band_singers)
 	{
-		this.band_singers = band_singers;
+		this.bandSingers = band_singers;
 	}
 	
 	public List<Tags> getTags()
@@ -151,7 +151,7 @@ public abstract class Song
 		related += relatedSongs.toString();
 		StringBuilder endString = new StringBuilder(name + " by ");
 		if (this.singer != null) endString.append(this.singer.getStageName());
-		else endString.append(this.band_singers.getName());
+		else endString.append(this.bandSingers.getName());
 		endString.append("\nRating: ").append(rating).append("\nTags: ").append(tags).append("\nRelease Date: ").append(releaseDate).append("\nStream Count: ").append(streamCount).append("\nLyrics: ").append(lyrics).append("\nRelated Songs: ").append(related);
 		return endString.append("\n").toString();
 	}

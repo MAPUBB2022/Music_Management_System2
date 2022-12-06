@@ -9,6 +9,8 @@ public class Band
 	private String name; //Unique
 	private Date formationDate;
 	private String origin;
+	
+	/** one-to-many **/
 	private List<Artist> artistList;
 	
 	public Band(String name)

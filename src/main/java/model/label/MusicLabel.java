@@ -12,8 +12,14 @@ public class MusicLabel
 	private String name;
 	private String address;
 	private Float revenue;
+	
+	/** many-to-many **/
 	private List<Artist> artistList;
+	
+	/** one-to-many **/
 	private List<Album> albumList;
+	
+	/** one-to-many **/
 	private List<Concert> upcomingEvents;
 	
 	public MusicLabel(String name, String address)

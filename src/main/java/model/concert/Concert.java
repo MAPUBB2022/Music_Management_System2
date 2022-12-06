@@ -9,6 +9,8 @@ import java.util.List;
 public class Concert implements Profitable
 {
 	private String name; //Unique
+	
+	/** many-to-many **/
 	private List<Artist> artistList;
 	private String location;
 	private Date date;

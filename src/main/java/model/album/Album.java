@@ -13,6 +13,8 @@ public class Album implements Profitable
 	private String title; //Unique
 	private Artist artist;
 	private Band band;
+	
+	/** one-to-many **/
 	private List<Song> songList;
 	private String language;
 	private Float productionCost;
