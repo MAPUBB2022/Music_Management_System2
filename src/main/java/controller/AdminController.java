@@ -39,15 +39,13 @@ AdminController implements IAdminController
 	}
 
 	@Override
-	public void addAlbum(Album album)
+	public void addAlbum(Album album) throws NullPointerException
 	{
-		try {
-			if (this.albumList.findAll().contains(album))
-				this.albumList.add(album);
-		}
-		catch(Exception error){
-			System.out.println(error.getMessage());
-		}
+		if(album==null)
+			throw new NullPointerException();
+
+		if (this.albumList.findAll().contains(album))
+			this.albumList.add(album);
 	}
 	
 	@Override
