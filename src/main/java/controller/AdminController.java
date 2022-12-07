@@ -25,7 +25,7 @@ AdminController implements IAdminController
 	private final ICrudRepository<Integer, MusicLabel> labelList;
 	private final ICrudRepository<Integer, User> userList;
 
-	public AdminController(ICrudRepository<Integer, Album> albumList, ICrudRepository<Integer, Artist> artistList,
+	public AdminController(ICrudRepository<String, Album> albumList, ICrudRepository<String, Artist> artistList,
 						   ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList,
 						   ICrudRepository<Integer, Band> bandList, ICrudRepository<Integer, MusicLabel> labelList,
 						   ICrudRepository<Integer, User> userList) {
@@ -37,6 +37,41 @@ AdminController implements IAdminController
 		this.labelList = labelList;
 		this.userList = userList;
 	}
+
+	public ICrudRepository<String, Album> getAlbumList()
+	{
+		return albumList;
+	}
+
+	public ICrudRepository<String, Artist> getArtistList()
+	{
+		return artistList;
+	}
+
+	public ICrudRepository<String, Concert> getConcertList()
+	{
+		return concertList;
+	}
+
+	public ICrudRepository<String, Song> getSongList()
+	{
+		return songList;
+	}
+	public ICrudRepository<String, Band> getBandList()
+	{
+		return bandList;
+	}
+	public ICrudRepository<String, MusicLabel> getLabelList()
+	{
+		return labelList;
+	}
+	public ICrudRepository<String, User> getUserList()
+	{
+		return userList;
+	}
+
+
+
 
 	@Override
 	public boolean addAlbum(Album album)
