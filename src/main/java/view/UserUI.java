@@ -2,12 +2,16 @@ package view;
 
 import controller.AdminController;
 import controller.UserController;
+import model.album.Album;
 import model.album.Artist;
+import model.album.Band;
 import model.concert.Concert;
+import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
 import repository.inmemory.*;
 
+import java.awt.*;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -84,59 +88,7 @@ public class UserUI
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
             switch (choice) {
-                case 1 -> {
-                    System.out.println(this.controller.showArtists());
-                }
-                case 2 -> {
-                    System.out.println(this.controller.showAlbums());
-                }
-                case 3 -> {
-                    System.out.println("\nEnter Artist Stage Name: ");
-                    Scanner artistIn = new Scanner(System.in);
-                    String stageName = artistIn.nextLine();
-                    Artist artist = this.controller.getArtistList().findByID(stageName);
-                    try {
-                        System.out.println(this.controller.showAlbumsForArtist(artist));
-                    }
-                    catch (NullPointerException e) {
-                        System.out.println(e.toString());
-                    }
-                }
-                case 4 -> {
-                    System.out.println(this.controller.showUpcomingConcerts());
-                }
-                case 5 -> {
-                    this.controller.sortAlbumsByRevenue();
-                    System.out.println(this.controller.getAlbumList().toString());
-                }
-                case 6 -> {
-                    this.controller.sortSongsByRating();
-                    System.out.println(this.controller.getSongList().toString());
-                }
-                case 7 -> {
-                    this.controller.sortSongsByReleaseDate();
-                    System.out.println(this.controller.getSongList().toString());
-                }
-                case 8 -> {
-                    this.controller.sortArtistsByName();
-                    System.out.println(this.controller.getArtistList().toString());
-                }
-                case 9 -> {
-                    this.controller.sortAlbumsByReleaseDate();
-                    System.out.println(this.controller.getAlbumList().toString());
-                }
-                case 10 -> {
-                    System.out.println("\nEnter Song Name to be added: ");
-                    Scanner songIn = new Scanner(System.in);
-                    String songName = songIn.nextLine();
-                    try {
-                        Song song = this.controller.getSongList().findByID(songName);
-                        this.controller.addFavourite(song);
-                    }
-                    catch (NullPointerException exception) {
-                        System.out.println("Unavailable Song Name\n");
-                    }
-                }
+                /*
                 case 11 -> {
                     System.out.println("\nEnter Song Name to be removed: ");
                     Scanner songIn = new Scanner(System.in);
@@ -149,76 +101,160 @@ public class UserUI
                         System.out.println("Unavailable Song Name\n");
                     }
                 }
-                case 12 -> {
-                    System.out.println(this.controller.showFavourites());
+                */
+                case 1 -> {
+                    System.out.println("\nEnter Album Name to be added: ");
+                    Scanner albumIn = new Scanner(System.in);
+                    String albumName = albumIn.nextLine();
+                    try {
+                        Album album = this.controllerAdmin.getAlbumList().findByID(albumName);
+                        this.controllerAdmin.addAlbum(album);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Album Name\n");
+                    }                }
+                case 2 -> {
+
                 }
-                case 13 -> {
-                    System.out.println(this.controller.getConcertList().toString());
-                    System.out.println("\nEnter Concert Name: ");
+                case 3 -> {
+
+                }
+                case 4 -> {
+                    System.out.println("\nEnter Artist Name to be added: ");
+                    Scanner artistIn = new Scanner(System.in);
+                    String artistName = artistIn.nextLine();
+                    try {
+                        Artist artist = this.controllerAdmin.getArtistList().findByID(artistName);
+                        this.controllerAdmin.addArtist(artist);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Artist Name\n");
+                    }
+                }
+                case 5 -> {
+                    //todo
+                }
+
+                case 7 -> {
+                    System.out.println("\nEnter Band Name to be added: ");
+                    Scanner bandIn = new Scanner(System.in);
+                    String bandName = bandIn.nextLine();
+                    try {
+                        Band band = this.controllerAdmin.getBandList().findByID(bandName);
+                        this.controllerAdmin.addBand(band);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Band Name\n");
+                    }
+                }
+                case 8 -> {
+                    //todo
+                }
+                case 9 -> {
+                    //todo
+                }
+                case 10 -> {
+                    System.out.println("\nEnter Concert Name to be added: ");
                     Scanner concertIn = new Scanner(System.in);
                     String concertName = concertIn.nextLine();
-                    Concert concert = this.controller.getConcertList().findByID(concertName);
                     try {
-                        this.controller.buyTicket(concert, 1);
+                        Concert concert = this.controllerAdmin.getConcertList().findByID(concertName);
+                        this.controllerAdmin.addConcert(concert);
                     }
-                    catch (NullPointerException e) {
-                        System.out.println(e.toString());
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Concert Name\n");
+                    }
+                }
+                case 11 -> {
+                    //todo
+                }
+                case 12 -> {
+                    //todo
+                }
+                case 13 -> {
+                    System.out.println("\nEnter Label Name to be added: ");
+                    Scanner labelIn = new Scanner(System.in);
+                    String labelName = labelIn.nextLine();
+                    try {
+                        MusicLabel label = this.controllerAdmin.getLabelList().findByID(labelName);
+                        this.controllerAdmin.addMusicLabel(label);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Label Name\n");
                     }
                 }
                 case 14 -> {
-                    System.out.println(this.controller.showTickets());
+                    //todo
                 }
                 case 15 -> {
-                    System.out.println(this.controller.showRecommended());
+                    //todo
                 }
                 case 16 -> {
-                    Scanner scanner = new Scanner(System.in);
-                    System.out.println("\nEnter Username: ");
-                    String username = scanner.nextLine();
-                    System.out.println("\nEnter Password: ");
-                    String password = scanner.nextLine();
-                    this.controller.addUser(new User(username, password));
+                    System.out.println("\nEnter Song Name to be added: ");
+                    Scanner songIn = new Scanner(System.in);
+                    String songName = songIn.nextLine();
+                    try {
+                        Song song = this.controllerAdmin.getSongList().findByID(songName);
+                        this.controllerAdmin.addSong(song);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Song Name\n");
+                    }
                 }
                 case 17 -> {
-                    System.out.println(this.controller.showTickets());
+                    //todo
+
                 }
                 case 18 -> {
-                    System.out.println(this.controller.showRecommended());
+                    //todo
+
                 }
                 case 19 -> {
-                    System.out.println(this.controller.showTickets());
+                    System.out.println("\nEnter User Name to be added: ");
+                    Scanner userIn = new Scanner(System.in);
+                    String userName = userIn.nextLine();
+                    try {
+                        User user = this.controllerAdmin.getUserList().findByID(userName);
+                        this.controllerAdmin.addUser(user);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable User Name\n");
+                    }
                 }
                 case 20 -> {
-                    System.out.println(this.controller.showRecommended());
-                }
+                    //todo
 
-//                22. Sort Albums by Revenue
-//                23. Sort Songs by Rating
-//                24. Sort Songs by Release Date
-//                25. Sort Artists by Name
-//                26. Sort Albums by Release Date
-//                27. Sort Albums by Production Cost
+                }
 
                 case 21 -> {
-                    System.out.println(this.controller.showTickets());
+                    //todo
+
                 }
+
+                //all done below
                 case 22 -> {
                     this.controllerAdmin.sortAlbumsByRevenue();
-                    System.out.println(this.controllerAdmin.getSongList().toString());                }
+                    System.out.println(this.controllerAdmin.getAlbumList().toString());
+                }
                 case 23 -> {
-                    System.out.println(this.controller.showTickets());
+                    this.controllerAdmin.sortSongsByRating();
+                    System.out.println(this.controllerAdmin.getSongList().toString());
                 }
                 case 24 -> {
-                    System.out.println(this.controller.showRecommended());
+                    this.controllerAdmin.sortSongsByReleaseDate();
+                    System.out.println(this.controllerAdmin.getSongList().toString());
                 }
                 case 25 -> {
-                    System.out.println(this.controller.showTickets());
+                    this.controllerAdmin.sortArtistsByName();
+                    System.out.println(this.controllerAdmin.getArtistList().toString());
                 }
                 case 26 -> {
-                    System.out.println(this.controller.showRecommended());
+                    this.controllerAdmin.sortAlbumsByReleaseDate();
+                    System.out.println(this.controllerAdmin.getAlbumList().toString());
                 }
                 case 27 -> {
-                    System.out.println(this.controller.showTickets());
+                    this.controllerAdmin.sortAlbumsByProductionCost();
+                    System.out.println(this.controllerAdmin.getAlbumList().toString());
                 }
                 case 28 -> {
                     System.out.println(this.controllerAdmin.showConcerts());
