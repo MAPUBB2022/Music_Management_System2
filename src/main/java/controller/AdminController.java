@@ -12,23 +12,21 @@ import model.users.User;
 
 import java.util.Comparator;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-public class
-AdminController implements IAdminController
+public class AdminController implements IAdminController
 {
-	private final ICrudRepository<Integer, Album> albumList;
-	private final ICrudRepository<Integer, Artist> artistList;
+	private final ICrudRepository<String, Album> albumList;
+	private final ICrudRepository<String, Artist> artistList;
 	private final ICrudRepository<String, Concert> concertList;
-	private final ICrudRepository<Integer, Song> songList;
-	private final ICrudRepository<Integer, Band> bandList;
-	private final ICrudRepository<Integer, MusicLabel> labelList;
-	private final ICrudRepository<Integer, User> userList;
+	private final ICrudRepository<String, Song> songList;
+	private final ICrudRepository<String, Band> bandList;
+	private final ICrudRepository<String, MusicLabel> labelList;
+	private final ICrudRepository<String, User> userList;
 
 	public AdminController(ICrudRepository<String, Album> albumList, ICrudRepository<String, Artist> artistList,
-						   ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList,
-						   ICrudRepository<Integer, Band> bandList, ICrudRepository<Integer, MusicLabel> labelList,
-						   ICrudRepository<Integer, User> userList) {
+						   ICrudRepository<String, Concert> concertList, ICrudRepository<String, Song> songList,
+						   ICrudRepository<String, Band> bandList, ICrudRepository<String, MusicLabel> labelList,
+						   ICrudRepository<String, User> userList) {
 		this.albumList = albumList;
 		this.artistList = artistList;
 		this.concertList = concertList;
@@ -71,8 +69,6 @@ AdminController implements IAdminController
 	}
 
 
-
-
 	@Override
 	public boolean addAlbum(Album album)
 	{
@@ -90,19 +86,19 @@ AdminController implements IAdminController
 		this.albumList.remove(album);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifyAlbum(Album album)
 	{
 		for (Album albums : albumList.findAll()) {
 			if (albums.equals(album)) {
-				albumList.update(albumList.findAll().indexOf(albums), album);
+				albumList.update(String.valueOf(albumList.findAll().indexOf(albums)), album);
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addArtist(Artist artist)
 	{
@@ -111,7 +107,7 @@ AdminController implements IAdminController
 		this.artistList.add(artist);
 		return true;
 	}
-	
+
 	@Override
 	public boolean deleteArtist(Artist artist)
 	{
@@ -120,19 +116,19 @@ AdminController implements IAdminController
 		this.artistList.remove(artist);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifyArtist(Artist artist)
 	{
 		for (Artist artists : artistList.findAll()) {
 			if (artist.equals(artists)) {
-				artistList.update(artistList.findAll().indexOf(artists), artist);
+				artistList.update(String.valueOf(artistList.findAll().indexOf(artists)), artist);
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addBand(Band band)
 	{
@@ -141,7 +137,7 @@ AdminController implements IAdminController
 		this.bandList.add(band);
 		return true;
 	}
-	
+
 	@Override
 	public boolean deleteBand(Band band)
 	{
@@ -150,18 +146,18 @@ AdminController implements IAdminController
 		this.bandList.remove(band);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifyBand(Band band)
 	{
 		for (Band bands : bandList.findAll()) {
 			if (bands.equals(band)) {
-				bandList.update(bandList.findAll().indexOf(bands), band);
+				bandList.update(String.valueOf(bandList.findAll().indexOf(bands)), band);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addConcert(Concert concert)
 	{
@@ -170,7 +166,7 @@ AdminController implements IAdminController
 		this.concertList.add(concert);
 		return true;
 	}
-	
+
 	@Override
 	public boolean deleteConcert(Concert concert)
 	{
@@ -179,7 +175,7 @@ AdminController implements IAdminController
 		this.concertList.remove(concert);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifyConcert(Concert concert) {
 		for (Concert concerts : concertList.findAll()) {
@@ -190,7 +186,7 @@ AdminController implements IAdminController
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addMusicLabel(MusicLabel musicLabel)
 	{
@@ -199,7 +195,7 @@ AdminController implements IAdminController
 		this.labelList.add(musicLabel);
 		return true;
 	}
-	
+
 	@Override
 	public boolean deleteMusicLabel(MusicLabel musicLabel)
 	{
@@ -208,19 +204,19 @@ AdminController implements IAdminController
 		this.labelList.remove(musicLabel);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifyMusicLabel(MusicLabel musicLabel)
 	{
 		for (MusicLabel labels : labelList.findAll()) {
 			if (labels.equals(musicLabel)) {
-				labelList.update(labelList.findAll().indexOf(labels), musicLabel);
+				labelList.update(String.valueOf(labelList.findAll().indexOf(labels)), musicLabel);
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addSong(Song song)
 	{
@@ -230,7 +226,7 @@ AdminController implements IAdminController
 		this.songList.add(song);
 		return true;
 	}
-	
+
 	@Override
 	public boolean deleteSong(Song song)
 	{
@@ -239,19 +235,19 @@ AdminController implements IAdminController
 		this.songList.remove(song);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifySong(Song song)
 	{
 		for (Song songs : songList.findAll()) {
 			if (song.equals(songs)) {
-				songList.update(songList.findAll().indexOf(songs), song);
+				songList.update(String.valueOf(songList.findAll().indexOf(songs)), song);
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addUser(User user)
 	{
@@ -260,7 +256,7 @@ AdminController implements IAdminController
 		this.userList.add(user);
 		return true;
 	}
-	
+
 	@Override
 	public boolean deleteUser(User user)
 	{
@@ -269,13 +265,13 @@ AdminController implements IAdminController
 		this.userList.remove(user);
 		return true;
 	}
-	
+
 	@Override
 	public boolean modifyUser(User user)
 	{
 		for (User users : userList.findAll()) {
 			if (users.equals(user)) {
-				userList.update(userList.findAll().indexOf(users), user);
+				userList.update(String.valueOf(userList.findAll().indexOf(users)), user);
 				return true;
 			}
 		}
@@ -357,7 +353,7 @@ AdminController implements IAdminController
 			endString.append(artist.toString());
 		return endString.toString().equals("") ? "[WARNING] Artist List is Empty\n" : endString.toString();
 	}
-	
+
 	@Override
 	public String showAlbums() throws NullPointerException
 	{
@@ -367,7 +363,7 @@ AdminController implements IAdminController
 			endString.append(album.toString());
 		return endString.toString().equals("") ? "[WARNING] Album List is Empty\n" : endString.toString();
 	}
-	
+
 	@Override
 	public String showUpcomingConcerts() throws NullPointerException
 	{
