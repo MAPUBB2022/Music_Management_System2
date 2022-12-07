@@ -10,47 +10,47 @@ import model.users.User;
 
 public interface IAdminController extends IController
 {
-	void addAlbum(Album album);
+	boolean addAlbum(Album album);
 	
-	void deleteAlbum(Album album);
+	boolean deleteAlbum(Album album);
 	
-	void modifyAlbum(Album album);
+	boolean modifyAlbum(Album album);
 	
-	void addArtist(Artist artist);
+	boolean addArtist(Artist artist);
 	
-	void deleteArtist(Artist artist);
+	boolean deleteArtist(Artist artist);
 	
-	void modifyArtist(Artist artist);
+	boolean modifyArtist(Artist artist);
 	
-	void addBand(Band band);
-	
-	void deleteBand(Band band);
-	
-	void modifyBand(Band band);
-	
-	void addConcert(Concert concert);
-	
-	void deleteConcert(Concert concert);
-	
-	void modifyConcert(Concert concert);
-	
-	void addMusicLabel(MusicLabel musicLabel);
-	
-	void deleteMusicLabel(MusicLabel musicLabel);
-	
-	void modifyMusicLabel(MusicLabel musicLabel);
-	
-	void addSong(Song song);
-	
-	void deleteSong(Song song);
-	
-	void modifySong(Song song);
+	boolean addBand(Band band);
+
+	boolean deleteBand(Band band);
+
+	boolean modifyBand(Band band);
+
+	boolean addConcert(Concert concert);
+
+	boolean deleteConcert(Concert concert);
+
+	boolean modifyConcert(Concert concert);
+
+	boolean addMusicLabel(MusicLabel musicLabel);
+
+	boolean deleteMusicLabel(MusicLabel musicLabel);
+
+	boolean modifyMusicLabel(MusicLabel musicLabel);
+
+	boolean addSong(Song song);
+
+	boolean deleteSong(Song song);
+
+	boolean modifySong(Song song);
 	
 	boolean addUser(User user);
-	
-	void deleteUser(User user);
-	
-	void modifyUser(User user);
+
+	boolean deleteUser(User user);
+
+	boolean modifyUser(User user);
 	
 	String showConcerts();
 	
