@@ -9,9 +9,7 @@ import model.concert.Concert;
 import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
-import repository.inmemory.*;
 
-import java.awt.*;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -87,21 +85,8 @@ public class UserUI
             System.out.println("#Menu: ");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
+
             switch (choice) {
-                /*
-                case 11 -> {
-                    System.out.println("\nEnter Song Name to be removed: ");
-                    Scanner songIn = new Scanner(System.in);
-                    String songName = songIn.nextLine();
-                    try {
-                        Song song = this.controller.getSongList().findByID(songName);
-                        this.controller.removeFavourite(song);
-                    }
-                    catch (NullPointerException e) {
-                        System.out.println("Unavailable Song Name\n");
-                    }
-                }
-                */
                 case 1 -> {
                     System.out.println("\nEnter Album Name to be added: ");
                     Scanner albumIn = new Scanner(System.in);
@@ -112,13 +97,35 @@ public class UserUI
                     }
                     catch (NullPointerException exception) {
                         System.out.println("Unavailable Album Name\n");
-                    }                }
+                    }
+                }
+
                 case 2 -> {
-
+                    System.out.println("\nEnter Album Name to be added: ");
+                    Scanner albumIn = new Scanner(System.in);
+                    String albumName = albumIn.nextLine();
+                    try {
+                        Album album = this.controllerAdmin.getAlbumList().findByID(albumName);
+                        this.controllerAdmin.deleteAlbum(album);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Album Name\n");
+                    }
                 }
+
                 case 3 -> {
-
+                    System.out.println("\nEnter Album Name to be modified: ");
+                    Scanner albumIn = new Scanner(System.in);
+                    String albumName = albumIn.nextLine();
+                    try {
+                        Album album = this.controllerAdmin.getAlbumList().findByID(albumName);
+                        this.controllerAdmin.modifyAlbum(album);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Album Name\n");
+                    }
                 }
+
                 case 4 -> {
                     System.out.println("\nEnter Artist Name to be added: ");
                     Scanner artistIn = new Scanner(System.in);
@@ -131,8 +138,31 @@ public class UserUI
                         System.out.println("Unavailable Artist Name\n");
                     }
                 }
+
                 case 5 -> {
-                    //todo
+                    System.out.println("\nEnter Artist Name to be removed: ");
+                    Scanner artistIn = new Scanner(System.in);
+                    String artistName = artistIn.nextLine();
+                    try {
+                        Artist artist = this.controllerAdmin.getArtistList().findByID(artistName);
+                        this.controllerAdmin.deleteArtist(artist);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Artist Name\n");
+                    }
+                }
+
+                case 6 -> {
+                    System.out.println("\nEnter Artist Name to be modified: ");
+                    Scanner artistIn = new Scanner(System.in);
+                    String artistName = artistIn.nextLine();
+                    try {
+                        Artist artist = this.controllerAdmin.getArtistList().findByID(artistName);
+                        this.controllerAdmin.modifyArtist(artist);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Artist Name\n");
+                    }
                 }
 
                 case 7 -> {
@@ -147,12 +177,33 @@ public class UserUI
                         System.out.println("Unavailable Band Name\n");
                     }
                 }
+
                 case 8 -> {
-                    //todo
+                    System.out.println("\nEnter Band Name to be removed: ");
+                    Scanner bandIn = new Scanner(System.in);
+                    String bandName = bandIn.nextLine();
+                    try {
+                        Band band = this.controllerAdmin.getBandList().findByID(bandName);
+                        this.controllerAdmin.deleteBand(band);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Band Name\n");
+                    }
                 }
+
                 case 9 -> {
-                    //todo
+                    System.out.println("\nEnter Band Name to be modified: ");
+                    Scanner bandIn = new Scanner(System.in);
+                    String bandName = bandIn.nextLine();
+                    try {
+                        Band band = this.controllerAdmin.getBandList().findByID(bandName);
+                        this.controllerAdmin.modifyBand(band);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Band Name\n");
+                    }
                 }
+
                 case 10 -> {
                     System.out.println("\nEnter Concert Name to be added: ");
                     Scanner concertIn = new Scanner(System.in);
@@ -165,12 +216,33 @@ public class UserUI
                         System.out.println("Unavailable Concert Name\n");
                     }
                 }
+
                 case 11 -> {
-                    //todo
+                    System.out.println("\nEnter Concert Name to be removed: ");
+                    Scanner concertIn = new Scanner(System.in);
+                    String concertName = concertIn.nextLine();
+                    try {
+                        Concert concert = this.controllerAdmin.getConcertList().findByID(concertName);
+                        this.controllerAdmin.deleteConcert(concert);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Concert Name\n");
+                    }
                 }
+
                 case 12 -> {
-                    //todo
+                    System.out.println("\nEnter Concert Name to be modified: ");
+                    Scanner concertIn = new Scanner(System.in);
+                    String concertName = concertIn.nextLine();
+                    try {
+                        Concert concert = this.controllerAdmin.getConcertList().findByID(concertName);
+                        this.controllerAdmin.modifyConcert(concert);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Concert Name\n");
+                    }
                 }
+
                 case 13 -> {
                     System.out.println("\nEnter Label Name to be added: ");
                     Scanner labelIn = new Scanner(System.in);
@@ -183,12 +255,33 @@ public class UserUI
                         System.out.println("Unavailable Label Name\n");
                     }
                 }
+
                 case 14 -> {
-                    //todo
+                    System.out.println("\nEnter Label Name to be removed: ");
+                    Scanner labelIn = new Scanner(System.in);
+                    String labelName = labelIn.nextLine();
+                    try {
+                        MusicLabel label = this.controllerAdmin.getLabelList().findByID(labelName);
+                        this.controllerAdmin.deleteMusicLabel(label);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Label Name\n");
+                    }
                 }
+
                 case 15 -> {
-                    //todo
+                    System.out.println("\nEnter Label Name to be modified: ");
+                    Scanner labelIn = new Scanner(System.in);
+                    String labelName = labelIn.nextLine();
+                    try {
+                        MusicLabel label = this.controllerAdmin.getLabelList().findByID(labelName);
+                        this.controllerAdmin.modifyMusicLabel(label);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Label Name\n");
+                    }
                 }
+
                 case 16 -> {
                     System.out.println("\nEnter Song Name to be added: ");
                     Scanner songIn = new Scanner(System.in);
@@ -201,37 +294,74 @@ public class UserUI
                         System.out.println("Unavailable Song Name\n");
                     }
                 }
+
                 case 17 -> {
-                    //todo
-
+                    System.out.println("\nEnter Song Name to be removed: ");
+                    Scanner songIn = new Scanner(System.in);
+                    String songName = songIn.nextLine();
+                    try {
+                        Song song = this.controllerAdmin.getSongList().findByID(songName);
+                        this.controllerAdmin.deleteSong(song);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("Unavailable Song Name\n");
+                    }
                 }
+
                 case 18 -> {
-                    //todo
-
+                    System.out.println("\nEnter Song Name to be modified: ");
+                    Scanner songIn = new Scanner(System.in);
+                    String songName = songIn.nextLine();
+                    try {
+                        Song song = this.controllerAdmin.getSongList().findByID(songName);
+                        this.controllerAdmin.modifySong(song);
+                    }
+                    catch (NullPointerException e) {
+                        System.out.println("Unavailable Song Name\n");
+                    }
                 }
+
                 case 19 -> {
-                    System.out.println("\nEnter User Name to be added: ");
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("\nEnter Username: ");
+                    String userName = scanner.nextLine();
+                    System.out.println("\nEnter Password: ");
+                    String password = scanner.nextLine();
+                    try {
+                        User user = this.controllerAdmin.getUserList().findByID(userName);
+                        this.controllerAdmin.addUser(new User(userName, password));
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable username\n");
+                    }
+                }
+
+                case 20 -> {
+                    System.out.println("\nEnter Username to be removed: ");
                     Scanner userIn = new Scanner(System.in);
                     String userName = userIn.nextLine();
                     try {
                         User user = this.controllerAdmin.getUserList().findByID(userName);
-                        this.controllerAdmin.addUser(user);
+                        this.controllerAdmin.deleteUser(user);
                     }
                     catch (NullPointerException exception) {
-                        System.out.println("Unavailable User Name\n");
+                        System.out.println("Unavailable Username\n");
                     }
-                }
-                case 20 -> {
-                    //todo
-
                 }
 
                 case 21 -> {
-                    //todo
-
+                    System.out.println("\nEnter Username to be modified: ");
+                    Scanner userIn = new Scanner(System.in);
+                    String userName = userIn.nextLine();
+                    try {
+                        User user = this.controllerAdmin.getUserList().findByID(userName);
+                        this.controllerAdmin.modifyUser(user);
+                    }
+                    catch (NullPointerException exception) {
+                        System.out.println("Unavailable Username\n");
+                    }
                 }
 
-                //all done below
                 case 22 -> {
                     this.controllerAdmin.sortAlbumsByRevenue();
                     System.out.println(this.controllerAdmin.getAlbumList().toString());
@@ -278,46 +408,6 @@ public class UserUI
 
     private void userMenu()
     {
-        boolean exit = false;
-        while (!exit) {
-            System.out.println("""
-					\t--- Music Song Management ---
-					
-					1. Show List of Artists
-					2. Show available Albums
-					3. Show Albums for Artist
-					4. Show Upcoming Events
-					5. Sort Albums by Revenue
-					6. Sort Songs by Rating
-					7. Sort Songs by Release Date
-					8. Sort Artists by Name (Stage Name)
-					9. Sort Albums by Release Date
-					10. Add Song to Favourites
-					11. Remove Song from Favourites
-					12. Show Favourites
-					13. Buy Ticket for Concert
-					14. Show my Tickets
-					15. Show Recommended
-					16. Add New User
-					17. Exit
-					""");
-            System.out.println("#Menu: ");
-            Scanner input = new Scanner(System.in);
-            int choice = input.nextInt();
-            switch (choice) {
-                case 16 -> {
-                    Scanner scanner = new Scanner(System.in);
-                    System.out.println("\nEnter Username: ");
-                    String username = scanner.nextLine();
-                    System.out.println("\nEnter Password: ");
-                    String password = scanner.nextLine();
-                    this.controller.addUser(new User(username, password));
-                }
-                case 17 -> {
-                    exit = true;
-                }
-                default -> System.out.println("Invalid Input!\n");
-            }
-        }
+        //todo implementation
     }
 }
