@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-// modify return type of methods: String to bool
 public class
 AdminController implements IAdminController
 {

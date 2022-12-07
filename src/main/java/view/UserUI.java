@@ -1,5 +1,6 @@
 package view;
 
+import controller.AdminController;
 import controller.UserController;
 import model.album.Artist;
 import model.concert.Concert;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 public class UserUI
 {
     UserController controller;
+    AdminController controllerAdmin;
     boolean isAdmin;
 
     public UserUI(Integer saveType, boolean isAdmin) throws ParseException, RuntimeException
@@ -74,9 +76,9 @@ public class UserUI
 					26. Sort Albums by Release Date
 					27. Sort Albums by Production Cost
 					28. Show Concerts
-					29. showArtists
-					30. showAlbums
-					31. showUpcomingConcerts
+					29. Show Artists
+					30. Show Albums
+					31. Show Upcoming Concerts
 					""");
             System.out.println("#Menu: ");
             Scanner input = new Scanner(System.in);
@@ -178,6 +180,59 @@ public class UserUI
                     this.controller.addUser(new User(username, password));
                 }
                 case 17 -> {
+                    System.out.println(this.controller.showTickets());
+                }
+                case 18 -> {
+                    System.out.println(this.controller.showRecommended());
+                }
+                case 19 -> {
+                    System.out.println(this.controller.showTickets());
+                }
+                case 20 -> {
+                    System.out.println(this.controller.showRecommended());
+                }
+
+//                22. Sort Albums by Revenue
+//                23. Sort Songs by Rating
+//                24. Sort Songs by Release Date
+//                25. Sort Artists by Name
+//                26. Sort Albums by Release Date
+//                27. Sort Albums by Production Cost
+
+                case 21 -> {
+                    System.out.println(this.controller.showTickets());
+                }
+                case 22 -> {
+                    this.controllerAdmin.sortAlbumsByRevenue();
+                    System.out.println(this.controllerAdmin.getSongList().toString());                }
+                case 23 -> {
+                    System.out.println(this.controller.showTickets());
+                }
+                case 24 -> {
+                    System.out.println(this.controller.showRecommended());
+                }
+                case 25 -> {
+                    System.out.println(this.controller.showTickets());
+                }
+                case 26 -> {
+                    System.out.println(this.controller.showRecommended());
+                }
+                case 27 -> {
+                    System.out.println(this.controller.showTickets());
+                }
+                case 28 -> {
+                    System.out.println(this.controllerAdmin.showConcerts());
+                }
+                case 29 -> {
+                    System.out.println(this.controllerAdmin.showArtists());
+                }
+                case 30 -> {
+                    System.out.println(this.controllerAdmin.showAlbums());
+                }
+                case 31 -> {
+                    System.out.println(this.controllerAdmin.showUpcomingConcerts());
+                }
+                case 32 -> {
                     exit = true;
                 }
                 default -> System.out.println("Invalid Input!\n");
