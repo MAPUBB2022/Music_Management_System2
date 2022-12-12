@@ -51,7 +51,19 @@ public class UserJdbcRepository implements UserRepository
     }
 
     @Override
-    public boolean remove(User entity) {
+    public boolean remove(User entity) throws SQLException {
+        if(findByID(entity.getUsername()) != null){
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement delete = connection.createStatement();
+
+            String delete_string_fancy = "delete * from Users where Users.username = "+entity.getUsername();
+
+            PreparedStatement delete_fancy = connection.prepareStatement(delete_string_fancy);
+
+            return true;
+        }
         return false;
     }
 

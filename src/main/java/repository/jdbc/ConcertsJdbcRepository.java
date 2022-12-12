@@ -68,7 +68,19 @@ public class ConcertsJdbcRepository implements ICrudRepository<String, Concert> 
     }
 
     @Override
-    public boolean remove(Concert entity) {
+    public boolean remove(Concert entity) throws SQLException {
+        if(findByID(entity.getName()) != null){
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement delete = connection.createStatement();
+
+            String delete_string_fancy = "delete * from Concerts where Concerts.name = "+entity.getName();
+
+            PreparedStatement delete_fancy = connection.prepareStatement(delete_string_fancy);
+
+            return true;
+        }
         return false;
     }
 
