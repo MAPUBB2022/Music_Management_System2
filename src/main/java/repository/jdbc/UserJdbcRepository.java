@@ -3,9 +3,7 @@ package repository.jdbc;
 import interfaces.UserRepository;
 import model.users.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class UserJdbcRepository implements UserRepository
@@ -34,6 +32,25 @@ public class UserJdbcRepository implements UserRepository
     }
 
     @Override
+    public boolean add(User entity) throws SQLException {
+        if(findByID(entity.getUsername()) == null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement insert = connection.createStatement();
+
+            String insert_string_fancy = "insert into Users(username, password) values (?, ?)";
+
+            PreparedStatement insert_fancy = connection.prepareStatement(insert_string_fancy);
+            insert_fancy.setString(1, entity.getUsername());
+            insert_fancy.setString(2, entity.getPassword());
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean remove(User entity) {
         return false;
     }
@@ -42,11 +59,6 @@ public class UserJdbcRepository implements UserRepository
     public User update(String s, User newEntity)
     {
         return newEntity;
-    }
-
-    @Override
-    public boolean add(User entity) {
-        return false;
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class Song
 {
 	private String name;
-	private String rating;
+	private float rating;
 	private Date releaseDate;
 	private Artist singer;
 	private Band band_singers;
@@ -24,7 +24,7 @@ public abstract class Song
 	
 	private Integer streamCount;
 	
-	public Song(String name, String rating, Date releaseDate, Artist artist)
+	public Song(String name, float rating, Date releaseDate, Artist artist)
 	{
 		this.name = name;
 		this.rating = rating;
@@ -37,7 +37,7 @@ public abstract class Song
 		this.streamCount = 0;
 	}
 	
-	public Song(String name, String rating, Date releaseDate, Band band_singers)
+	public Song(String name, float rating, Date releaseDate, Band band_singers)
 	{
 		this.name = name;
 		this.rating = rating;
@@ -60,12 +60,12 @@ public abstract class Song
 		this.name = name;
 	}
 	
-	public String getRating()
+	public float getRating()
 	{
 		return rating;
 	}
 	
-	public void setRating(String rating)
+	public void setRating(float rating)
 	{
 		this.rating = rating;
 	}

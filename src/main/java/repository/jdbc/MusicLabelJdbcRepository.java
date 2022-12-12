@@ -10,9 +10,7 @@ import model.song.Song;
 import model.users.User;
 import repository.inmemory.AlbumsInMemoryRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 
@@ -28,13 +26,10 @@ public class MusicLabelJdbcRepository implements ICrudRepository<String, MusicLa
     {
         Connection con = JDBCConnection.getInstance();
         try {
-            PreparedStatement statement = con.prepareStatement("insert into MusicLabels(name, address, revenue, artistList, albumList, upcomingEvents) values (?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = con.prepareStatement("insert into MusicLabels(name, address, revenue) values (?, ?, ?)");
             statement.setString(1, "ion");
             statement.setString(2, "1234");
             statement.setString(3, "1234");
-            statement.setString(4, "1234");
-            statement.setString(5, "1234");
-            statement.setString(6, "1234");
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -44,7 +39,21 @@ public class MusicLabelJdbcRepository implements ICrudRepository<String, MusicLa
     }
 
     @Override
-    public boolean add(MusicLabel entity) {
+    public boolean add(MusicLabel entity) throws SQLException {
+        if(findByID(entity.getName()) == null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement insert = connection.createStatement();
+
+            String insert_string_fancy = "insert into MusicLabels(name, address, revenue) values (?, ?, ?)";
+
+            PreparedStatement insert_fancy = connection.prepareStatement(insert_string_fancy);
+            insert_fancy.setString(1, entity.getName());
+            insert_fancy.setString(2, entity.getAddress());
+            insert_fancy.setFloat(3, entity.getRevenue());
+            return true;
+        }
         return false;
     }
 

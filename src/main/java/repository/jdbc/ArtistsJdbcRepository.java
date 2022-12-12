@@ -8,9 +8,7 @@ import model.song.Song;
 import model.users.User;
 import repository.inmemory.AlbumsInMemoryRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +37,21 @@ public class ArtistsJdbcRepository implements ICrudRepository<String, Artist> {
     }
 
     @Override
-    public boolean add(Artist entity) {
+    public boolean add(Artist entity) throws SQLException {
+        if(findByID(entity.getName()) == null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement insert = connection.createStatement();
+
+            String insert_string_fancy = ("insert into Artists(name, stage_name, salary) values (?, ?, ?)");
+
+            PreparedStatement insert_fancy = connection.prepareStatement(insert_string_fancy);
+            insert_fancy.setString(1, entity.getName());
+            insert_fancy.setString(2, entity.getStage_name());
+            insert_fancy.setFloat(3, entity.getSalary());
+            return true;
+        }
         return false;
     }
 

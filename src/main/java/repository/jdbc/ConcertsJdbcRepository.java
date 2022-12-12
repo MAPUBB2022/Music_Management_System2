@@ -9,9 +9,7 @@ import model.song.Song;
 import model.users.User;
 import repository.inmemory.AlbumsInMemoryRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +43,27 @@ public class ConcertsJdbcRepository implements ICrudRepository<String, Concert> 
     }
 
     @Override
-    public boolean add(Concert entity) {
+    public boolean add(Concert entity) throws SQLException {
+        if(findByID(entity.getName()) == null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement insert = connection.createStatement();
+
+            String insert_string_fancy = ("insert into Concerts(name, artistList, location, date, capacity, ticketPrice," +
+                    " ticketsSold, rentCosts) values (?, ?, ?, ?, ?, ?, ?, ?)");
+
+            PreparedStatement insert_fancy = connection.prepareStatement(insert_string_fancy);
+            insert_fancy.setString(1, entity.getName());
+            insert_fancy.setObject(2, entity.getArtistList());
+            insert_fancy.setString(3, entity.getLocation());
+            insert_fancy.setObject(4, entity.getDate());
+            insert_fancy.setInt(5, entity.getCapacity());
+            insert_fancy.setFloat(6, entity.getTicketPrice());
+            insert_fancy.setInt(7, entity.getTicketsSold());
+            insert_fancy.setFloat(8, entity.getRentCosts());
+            return true;
+        }
         return false;
     }
 
