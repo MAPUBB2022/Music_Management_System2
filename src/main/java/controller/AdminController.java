@@ -10,6 +10,7 @@ import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
 
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -70,8 +71,7 @@ public class AdminController implements IAdminController
 
 
 	@Override
-	public boolean addAlbum(Album album)
-	{
+	public boolean addAlbum(Album album) throws SQLException {
 		if (this.albumList.findAll().contains(album))
 			return false;
 		this.albumList.add(album);
@@ -79,8 +79,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteAlbum(Album album)
-	{
+	public boolean deleteAlbum(Album album) throws SQLException {
 		if (!this.albumList.findAll().contains(album))
 			return false;
 		this.albumList.remove(album);
@@ -88,8 +87,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifyAlbum(Album album)
-	{
+	public boolean modifyAlbum(Album album) throws SQLException {
 		for (Album albums : albumList.findAll()) {
 			if (albums.equals(album)) {
 				albumList.update(String.valueOf(albumList.findAll().indexOf(albums)), album);
@@ -100,8 +98,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean addArtist(Artist artist)
-	{
+	public boolean addArtist(Artist artist) throws SQLException {
 		if (this.artistList.findAll().contains(artist))
 			return false;
 		this.artistList.add(artist);
@@ -109,8 +106,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteArtist(Artist artist)
-	{
+	public boolean deleteArtist(Artist artist) throws SQLException {
 		if (!this.artistList.findAll().contains(artist))
 			return false;
 		this.artistList.remove(artist);
@@ -118,8 +114,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifyArtist(Artist artist)
-	{
+	public boolean modifyArtist(Artist artist) throws SQLException {
 		for (Artist artists : artistList.findAll()) {
 			if (artist.equals(artists)) {
 				artistList.update(String.valueOf(artistList.findAll().indexOf(artists)), artist);
@@ -130,8 +125,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean addBand(Band band)
-	{
+	public boolean addBand(Band band) throws SQLException {
 		if (this.bandList.findAll().contains(band))
 			return false;
 		this.bandList.add(band);
@@ -139,8 +133,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteBand(Band band)
-	{
+	public boolean deleteBand(Band band) throws SQLException {
 		if (!this.bandList.findAll().contains(band))
 			return false;
 		this.bandList.remove(band);
@@ -148,8 +141,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifyBand(Band band)
-	{
+	public boolean modifyBand(Band band) throws SQLException {
 		for (Band bands : bandList.findAll()) {
 			if (bands.equals(band)) {
 				bandList.update(String.valueOf(bandList.findAll().indexOf(bands)), band);
@@ -159,8 +151,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean addConcert(Concert concert)
-	{
+	public boolean addConcert(Concert concert) throws SQLException {
 		if (this.concertList.findAll().contains(concert))
 			return false;
 		this.concertList.add(concert);
@@ -168,8 +159,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteConcert(Concert concert)
-	{
+	public boolean deleteConcert(Concert concert) throws SQLException {
 		if (!this.concertList.findAll().contains(concert))
 			return false;
 		this.concertList.remove(concert);
@@ -177,7 +167,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifyConcert(Concert concert) {
+	public boolean modifyConcert(Concert concert) throws SQLException {
 		for (Concert concerts : concertList.findAll()) {
 			if (concerts.equals(concert)) {
 				concertList.update(String.valueOf(concertList.findAll().indexOf(concerts)), concert);
@@ -188,8 +178,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean addMusicLabel(MusicLabel musicLabel)
-	{
+	public boolean addMusicLabel(MusicLabel musicLabel) throws SQLException {
 		if (this.labelList.findAll().contains(musicLabel))
 			return false;
 		this.labelList.add(musicLabel);
@@ -197,8 +186,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteMusicLabel(MusicLabel musicLabel)
-	{
+	public boolean deleteMusicLabel(MusicLabel musicLabel) throws SQLException {
 		if (!this.labelList.findAll().contains(musicLabel))
 			return false;
 		this.labelList.remove(musicLabel);
@@ -206,8 +194,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifyMusicLabel(MusicLabel musicLabel)
-	{
+	public boolean modifyMusicLabel(MusicLabel musicLabel) throws SQLException {
 		for (MusicLabel labels : labelList.findAll()) {
 			if (labels.equals(musicLabel)) {
 				labelList.update(String.valueOf(labelList.findAll().indexOf(labels)), musicLabel);
@@ -218,8 +205,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean addSong(Song song)
-	{
+	public boolean addSong(Song song) throws SQLException {
 		//TODO implementation -> related songs - empty
 		if (this.songList.findAll().contains(song))
 			return false;
@@ -228,8 +214,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteSong(Song song)
-	{
+	public boolean deleteSong(Song song) throws SQLException {
 		if (!this.songList.findAll().contains(song))
 			return false;
 		this.songList.remove(song);
@@ -237,8 +222,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifySong(Song song)
-	{
+	public boolean modifySong(Song song) throws SQLException {
 		for (Song songs : songList.findAll()) {
 			if (song.equals(songs)) {
 				songList.update(String.valueOf(songList.findAll().indexOf(songs)), song);
@@ -249,8 +233,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean addUser(User user)
-	{
+	public boolean addUser(User user) throws SQLException {
 		if(this.userList.findAll().contains(user))
 			return false;
 		this.userList.add(user);
@@ -258,8 +241,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean deleteUser(User user)
-	{
+	public boolean deleteUser(User user) throws SQLException {
 		if (!this.userList.findAll().contains(user))
 			return false;
 		this.userList.remove(user);
@@ -267,8 +249,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public boolean modifyUser(User user)
-	{
+	public boolean modifyUser(User user) throws SQLException {
 		for (User users : userList.findAll()) {
 			if (users.equals(user)) {
 				userList.update(String.valueOf(userList.findAll().indexOf(users)), user);
@@ -279,8 +260,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public void sortAlbumsByRevenue() throws NullPointerException
-	{
+	public void sortAlbumsByRevenue() throws NullPointerException, SQLException {
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
 		}
@@ -289,8 +269,7 @@ public class AdminController implements IAdminController
 
 	@SuppressWarnings("DuplicatedCode")
 	@Override
-	public void sortSongsByRating() throws NullPointerException
-	{
+	public void sortSongsByRating() throws NullPointerException, SQLException {
 		if (this.songList.findAll() == null) {
 			throw new NullPointerException();
 		}
@@ -299,8 +278,7 @@ public class AdminController implements IAdminController
 
 	@SuppressWarnings("DuplicatedCode")
 	@Override
-	public void sortSongsByReleaseDate() throws NullPointerException
-	{
+	public void sortSongsByReleaseDate() throws NullPointerException, SQLException {
 		if (this.songList.findAll() == null) {
 			throw new NullPointerException();
 		}
@@ -308,8 +286,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public void sortArtistsByName() throws NullPointerException
-	{
+	public void sortArtistsByName() throws NullPointerException, SQLException {
 		if (this.artistList.findAll() == null) {
 			throw new NullPointerException();
 		}
@@ -317,8 +294,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public void sortAlbumsByReleaseDate() throws NullPointerException
-	{
+	public void sortAlbumsByReleaseDate() throws NullPointerException, SQLException {
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
 		}
@@ -326,8 +302,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public void sortAlbumsByProductionCost() throws NullPointerException
-	{
+	public void sortAlbumsByProductionCost() throws NullPointerException, SQLException {
 		if (this.albumList.findAll() == null) {
 			throw new NullPointerException();
 		}
@@ -335,8 +310,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public String showConcerts() throws NullPointerException
-	{
+	public String showConcerts() throws NullPointerException, SQLException {
 		if (this.concertList == null) throw new NullPointerException();
 		StringBuilder endString = new StringBuilder();
 		for (Concert concert : this.concertList.findAll())
@@ -345,8 +319,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public String showArtists() throws NullPointerException
-	{
+	public String showArtists() throws NullPointerException, SQLException {
 		if (this.artistList == null) throw new NullPointerException();
 		StringBuilder endString = new StringBuilder();
 		for (Artist artist : this.artistList.findAll())
@@ -355,8 +328,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public String showAlbums() throws NullPointerException
-	{
+	public String showAlbums() throws NullPointerException, SQLException {
 		if (this.albumList == null) throw new NullPointerException();
 		StringBuilder endString = new StringBuilder();
 		for (Album album : this.albumList.findAll())
@@ -365,8 +337,7 @@ public class AdminController implements IAdminController
 	}
 
 	@Override
-	public String showUpcomingConcerts() throws NullPointerException
-	{
+	public String showUpcomingConcerts() throws NullPointerException, SQLException {
 		if (this.concertList.findAll() == null) {
 			throw new NullPointerException();
 		}

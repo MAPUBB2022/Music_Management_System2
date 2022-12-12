@@ -8,51 +8,53 @@ import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
 
+import java.sql.SQLException;
+
 public interface IAdminController extends IController
 {
-	boolean addAlbum(Album album);
+	boolean addAlbum(Album album) throws SQLException;
 	
-	boolean deleteAlbum(Album album);
+	boolean deleteAlbum(Album album) throws SQLException;
 	
-	boolean modifyAlbum(Album album);
+	boolean modifyAlbum(Album album) throws SQLException;
 	
-	boolean addArtist(Artist artist);
+	boolean addArtist(Artist artist) throws SQLException;
 	
-	boolean deleteArtist(Artist artist);
+	boolean deleteArtist(Artist artist) throws SQLException;
 	
-	boolean modifyArtist(Artist artist);
+	boolean modifyArtist(Artist artist) throws SQLException;
 	
-	boolean addBand(Band band);
+	boolean addBand(Band band) throws SQLException;
 
-	boolean deleteBand(Band band);
+	boolean deleteBand(Band band) throws SQLException;
 
-	boolean modifyBand(Band band);
+	boolean modifyBand(Band band) throws SQLException;
 
-	boolean addConcert(Concert concert);
+	boolean addConcert(Concert concert) throws SQLException;
 
-	boolean deleteConcert(Concert concert);
+	boolean deleteConcert(Concert concert) throws SQLException;
 
-	boolean modifyConcert(Concert concert);
+	boolean modifyConcert(Concert concert) throws SQLException;
 
-	boolean addMusicLabel(MusicLabel musicLabel);
+	boolean addMusicLabel(MusicLabel musicLabel) throws SQLException;
 
-	boolean deleteMusicLabel(MusicLabel musicLabel);
+	boolean deleteMusicLabel(MusicLabel musicLabel) throws SQLException;
 
-	boolean modifyMusicLabel(MusicLabel musicLabel);
+	boolean modifyMusicLabel(MusicLabel musicLabel) throws SQLException;
 
-	boolean addSong(Song song);
+	boolean addSong(Song song) throws SQLException;
 
-	boolean deleteSong(Song song);
+	boolean deleteSong(Song song) throws SQLException;
 
-	boolean modifySong(Song song);
+	boolean modifySong(Song song) throws SQLException;
 	
-	boolean addUser(User user);
+	boolean addUser(User user) throws SQLException;
 
-	boolean deleteUser(User user);
+	boolean deleteUser(User user) throws SQLException;
 
-	boolean modifyUser(User user);
+	boolean modifyUser(User user) throws SQLException;
 	
-	String showConcerts();
+	String showConcerts() throws SQLException;
 	
-	void sortAlbumsByProductionCost();
+	void sortAlbumsByProductionCost() throws SQLException;
 }

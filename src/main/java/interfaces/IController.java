@@ -2,23 +2,25 @@ package interfaces;
 
 import model.users.User;
 
+import java.sql.SQLException;
+
 public interface IController
 {
-	String showArtists();
+	String showArtists() throws SQLException;
 	
-	String showAlbums();
+	String showAlbums() throws SQLException;
 	
-	String showUpcomingConcerts();
+	String showUpcomingConcerts() throws SQLException;
 	
-	void sortAlbumsByRevenue();
+	void sortAlbumsByRevenue() throws SQLException;
 
-	void sortSongsByRating();
+	void sortSongsByRating() throws SQLException;
 
-	void sortSongsByReleaseDate();
+	void sortSongsByReleaseDate() throws SQLException;
 
-	void sortArtistsByName();
+	void sortArtistsByName() throws SQLException;
 
-	void sortAlbumsByReleaseDate();
+	void sortAlbumsByReleaseDate() throws SQLException;
 
-	boolean addUser(User user);
+	boolean addUser(User user) throws SQLException;
 }

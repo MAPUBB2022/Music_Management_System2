@@ -10,6 +10,7 @@ import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -36,15 +37,14 @@ public class UserUI
 //            throw new RuntimeException("Not implemented yet!");
     }
 
-    public void switchMenu()
-    {
+    public void switchMenu() throws SQLException {
         if (isAdmin)
             adminMenu();
         else
             userMenu();
     }
 
-    private void adminMenu() {
+    private void adminMenu() throws SQLException {
         boolean exit = false;
         while (!exit) {
             System.out.println("""
@@ -97,6 +97,8 @@ public class UserUI
                     }
                     catch (NullPointerException exception) {
                         System.out.println("Unavailable Album Name\n");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
                 }
 
@@ -108,7 +110,7 @@ public class UserUI
                         Album album = this.controllerAdmin.getAlbumList().findByID(albumName);
                         this.controllerAdmin.deleteAlbum(album);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Album Name\n");
                     }
                 }
@@ -123,6 +125,8 @@ public class UserUI
                     }
                     catch (NullPointerException exception) {
                         System.out.println("Unavailable Album Name\n");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
                 }
 
@@ -134,7 +138,7 @@ public class UserUI
                         Artist artist = this.controllerAdmin.getArtistList().findByID(artistName);
                         this.controllerAdmin.addArtist(artist);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Artist Name\n");
                     }
                 }
@@ -147,7 +151,7 @@ public class UserUI
                         Artist artist = this.controllerAdmin.getArtistList().findByID(artistName);
                         this.controllerAdmin.deleteArtist(artist);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Artist Name\n");
                     }
                 }
@@ -160,7 +164,7 @@ public class UserUI
                         Artist artist = this.controllerAdmin.getArtistList().findByID(artistName);
                         this.controllerAdmin.modifyArtist(artist);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Artist Name\n");
                     }
                 }
@@ -173,7 +177,7 @@ public class UserUI
                         Band band = this.controllerAdmin.getBandList().findByID(bandName);
                         this.controllerAdmin.addBand(band);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Band Name\n");
                     }
                 }
@@ -186,7 +190,7 @@ public class UserUI
                         Band band = this.controllerAdmin.getBandList().findByID(bandName);
                         this.controllerAdmin.deleteBand(band);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Band Name\n");
                     }
                 }
@@ -199,7 +203,7 @@ public class UserUI
                         Band band = this.controllerAdmin.getBandList().findByID(bandName);
                         this.controllerAdmin.modifyBand(band);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Band Name\n");
                     }
                 }
@@ -212,7 +216,7 @@ public class UserUI
                         Concert concert = this.controllerAdmin.getConcertList().findByID(concertName);
                         this.controllerAdmin.addConcert(concert);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Concert Name\n");
                     }
                 }
@@ -225,7 +229,7 @@ public class UserUI
                         Concert concert = this.controllerAdmin.getConcertList().findByID(concertName);
                         this.controllerAdmin.deleteConcert(concert);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Concert Name\n");
                     }
                 }
@@ -240,6 +244,8 @@ public class UserUI
                     }
                     catch (NullPointerException exception) {
                         System.out.println("Unavailable Concert Name\n");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
                 }
 
@@ -251,7 +257,7 @@ public class UserUI
                         MusicLabel label = this.controllerAdmin.getLabelList().findByID(labelName);
                         this.controllerAdmin.addMusicLabel(label);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Label Name\n");
                     }
                 }
@@ -264,7 +270,7 @@ public class UserUI
                         MusicLabel label = this.controllerAdmin.getLabelList().findByID(labelName);
                         this.controllerAdmin.deleteMusicLabel(label);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Label Name\n");
                     }
                 }
@@ -277,7 +283,7 @@ public class UserUI
                         MusicLabel label = this.controllerAdmin.getLabelList().findByID(labelName);
                         this.controllerAdmin.modifyMusicLabel(label);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Label Name\n");
                     }
                 }
@@ -290,7 +296,7 @@ public class UserUI
                         Song song = this.controllerAdmin.getSongList().findByID(songName);
                         this.controllerAdmin.addSong(song);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Song Name\n");
                     }
                 }
@@ -303,7 +309,7 @@ public class UserUI
                         Song song = this.controllerAdmin.getSongList().findByID(songName);
                         this.controllerAdmin.deleteSong(song);
                     }
-                    catch (NullPointerException e) {
+                    catch (NullPointerException | SQLException e) {
                         System.out.println("Unavailable Song Name\n");
                     }
                 }
@@ -316,7 +322,7 @@ public class UserUI
                         Song song = this.controllerAdmin.getSongList().findByID(songName);
                         this.controllerAdmin.modifySong(song);
                     }
-                    catch (NullPointerException e) {
+                    catch (NullPointerException | SQLException e) {
                         System.out.println("Unavailable Song Name\n");
                     }
                 }
@@ -331,7 +337,7 @@ public class UserUI
                         User user = this.controllerAdmin.getUserList().findByID(userName);
                         this.controllerAdmin.addUser(new User(userName, password));
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable username\n");
                     }
                 }
@@ -344,7 +350,7 @@ public class UserUI
                         User user = this.controllerAdmin.getUserList().findByID(userName);
                         this.controllerAdmin.deleteUser(user);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Username\n");
                     }
                 }
@@ -357,7 +363,7 @@ public class UserUI
                         User user = this.controllerAdmin.getUserList().findByID(userName);
                         this.controllerAdmin.modifyUser(user);
                     }
-                    catch (NullPointerException exception) {
+                    catch (NullPointerException | SQLException exception) {
                         System.out.println("Unavailable Username\n");
                     }
                 }
