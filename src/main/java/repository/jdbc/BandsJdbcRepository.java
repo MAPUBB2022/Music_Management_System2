@@ -74,7 +74,22 @@ public class BandsJdbcRepository implements ICrudRepository<String, Band> {
     }
 
     @Override
-    public Band update(String s, Band entity) {
+    public Band update(String name, Band entity) throws SQLException {
+        Band band = findByID(name);
+        if (band != null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement update = connection.createStatement();
+
+            String update_string_fancy = "update Bands set name = " + entity.getName() +
+                    ", formationDate = " + entity.getFormationDate() +
+                    ", origin = " + entity.getOrigin() +
+                    " where Bands.name = " + entity.getName();
+            PreparedStatement update_fancy = connection.prepareStatement(update_string_fancy);
+
+            return band;
+        }
         return null;
     }
 

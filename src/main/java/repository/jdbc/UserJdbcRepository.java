@@ -1,6 +1,7 @@
 package repository.jdbc;
 
 import interfaces.UserRepository;
+import model.concert.Concert;
 import model.users.User;
 
 import java.sql.*;
@@ -37,8 +38,6 @@ public class UserJdbcRepository implements UserRepository
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
 
-            Statement insert = connection.createStatement();
-
             String insert_string_fancy = "insert into Users(username, password) values (?, ?)";
 
             PreparedStatement insert_fancy = connection.prepareStatement(insert_string_fancy);
@@ -56,8 +55,6 @@ public class UserJdbcRepository implements UserRepository
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
 
-            Statement delete = connection.createStatement();
-
             String delete_string_fancy = "delete * from Users where Users.username = "+entity.getUsername();
 
             PreparedStatement delete_fancy = connection.prepareStatement(delete_string_fancy);
@@ -68,9 +65,20 @@ public class UserJdbcRepository implements UserRepository
     }
 
     @Override
-    public User update(String s, User newEntity)
-    {
-        return newEntity;
+    public User update(String name, User newEntity) throws SQLException {
+        User user = findByID(name);
+        if (user != null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            String update_string_fancy = "update User set username = " + newEntity.getUsername() +
+                    ", password = " + newEntity.getPassword() +
+                    " where User.username = " + newEntity.getUsername();
+            PreparedStatement update_fancy = connection.prepareStatement(update_string_fancy);
+
+            return user;
+        }
+        return null;
     }
 
     @Override

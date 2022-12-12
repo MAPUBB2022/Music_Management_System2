@@ -49,8 +49,6 @@ public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
 
-            Statement insert = connection.createStatement();
-
             String insert_string_fancy = "insert into Albums(title, artist, band, songList," +
                     " language, productionCost, releaseDate, copiesSold, discPrice) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -75,8 +73,6 @@ public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
 
-            Statement delete = connection.createStatement();
-
             String delete_string_fancy = "delete * from Albums where Albums.title = "+entity.getTitle();
 
             PreparedStatement delete_fancy = connection.prepareStatement(delete_string_fancy);
@@ -92,8 +88,6 @@ public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
         if (album != null) {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
-
-            Statement update = connection.createStatement();
 
             String update_string_fancy = "update Albums set title = " + entity.getTitle() +
                     ", artist = " + entity.getArtist() +
@@ -116,8 +110,6 @@ public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
     public Album findByID(String name) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                 "MAP_project", "1234");
-
-        Statement find = connection.createStatement();
 
         String find_string_fancy = "select * from Albums where Albums.title = " + name;
 

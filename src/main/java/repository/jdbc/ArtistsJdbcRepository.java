@@ -73,7 +73,22 @@ public class ArtistsJdbcRepository implements ICrudRepository<String, Artist> {
     }
 
     @Override
-    public Artist update(String s, Artist entity) {
+    public Artist update(String name, Artist entity) throws SQLException {
+        Artist artist = findByID(name);
+        if (artist != null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            Statement update = connection.createStatement();
+
+            String update_string_fancy = "update Artists set name = " + entity.getName() +
+                    ", stage_name = " + entity.getStage_name() +
+                    ", salary = " + entity.getSalary() +
+                    " where Artists.name = " + entity.getName();
+            PreparedStatement update_fancy = connection.prepareStatement(update_string_fancy);
+
+            return artist;
+        }
         return null;
     }
 

@@ -75,7 +75,20 @@ public class MusicLabelJdbcRepository implements ICrudRepository<String, MusicLa
     }
 
     @Override
-    public MusicLabel update(String s, MusicLabel entity) {
+    public MusicLabel update(String name, MusicLabel entity) throws SQLException {
+        MusicLabel label = findByID(name);
+        if (label != null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            String update_string_fancy = "update MusicLabels set name = " + entity.getName() +
+                    ", address = " + entity.getAddress() +
+                    ", revenue = " + entity.getRevenue() +
+                    " where MusicLabels.name = " + entity.getName();
+
+            PreparedStatement update_fancy = connection.prepareStatement(update_string_fancy);
+            return label;
+        }
         return null;
     }
 

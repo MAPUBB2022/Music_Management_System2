@@ -48,8 +48,6 @@ public class ConcertsJdbcRepository implements ICrudRepository<String, Concert> 
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
 
-            Statement insert = connection.createStatement();
-
             String insert_string_fancy = ("insert into Concerts(name, artistList, location, date, capacity, ticketPrice," +
                     " ticketsSold, rentCosts) values (?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -73,8 +71,6 @@ public class ConcertsJdbcRepository implements ICrudRepository<String, Concert> 
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
                     "MAP_project", "1234");
 
-            Statement delete = connection.createStatement();
-
             String delete_string_fancy = "delete * from Concerts where Concerts.name = "+entity.getName();
 
             PreparedStatement delete_fancy = connection.prepareStatement(delete_string_fancy);
@@ -85,7 +81,25 @@ public class ConcertsJdbcRepository implements ICrudRepository<String, Concert> 
     }
 
     @Override
-    public Concert update(String s, Concert entity) {
+    public Concert update(String name, Concert entity) throws SQLException {
+        Concert concert = findByID(name);
+        if (concert != null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            String update_string_fancy = "update Concerts set name = " + entity.getName() +
+                    ", artistList = " + entity.getArtistList() +
+                    ", location = " + entity.getLocation() +
+                    ", date = " + entity.getDate() +
+                    ", capacity = " + entity.getCapacity() +
+                    ", ticketPrice = " + entity.getTicketPrice() +
+                    ", ticketsSold = " + entity.getTicketsSold() +
+                    ", rentCosts = " + entity.getRentCosts() +
+                    " where Concerts.name = " + entity.getName();
+            PreparedStatement update_fancy = connection.prepareStatement(update_string_fancy);
+
+            return concert;
+        }
         return null;
     }
 

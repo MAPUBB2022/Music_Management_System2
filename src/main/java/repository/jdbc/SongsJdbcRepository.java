@@ -77,7 +77,21 @@ public class SongsJdbcRepository implements ICrudRepository<String, Song> {
     }
 
     @Override
-    public Song update(String s, Song entity) {
+    public Song update(String name, Song entity) throws SQLException {
+        Song song = findByID(name);
+        if (song != null) {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP",
+                    "MAP_project", "1234");
+
+            String update_string_fancy = "update Songs set name = " + entity.getName() +
+                    ", rating = " + entity.getRating() +
+                    ", releaseDate = " + entity.getReleaseDate() +
+                    ", singer = " + entity.getSinger() +
+                    " where Songs.name = " + entity.getName();
+            PreparedStatement update_fancy = connection.prepareStatement(update_string_fancy);
+
+            return song;
+        }
         return null;
     }
 
