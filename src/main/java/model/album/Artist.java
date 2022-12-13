@@ -5,6 +5,8 @@ public class Artist
 	private String name;
 	private String stage_name;
 	private Float salary;
+
+	public Artist(){}
 	
 	public Artist(String stage_name)
 	{

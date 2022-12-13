@@ -10,7 +10,8 @@ public class Band
 	private Date formationDate;
 	private String origin;
 	private List<Artist> artistList;
-	
+
+	public Band(){}
 	public Band(String name)
 	{
 		this.name = name;

@@ -15,7 +15,7 @@ public class MusicLabel
 	private List<Artist> artistList;
 	private List<Album> albumList;
 	private List<Concert> upcomingEvents;
-	
+	public MusicLabel(){}
 	public MusicLabel(String name, String address)
 	{
 		this.name = name;

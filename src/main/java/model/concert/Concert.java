@@ -16,7 +16,8 @@ public class Concert implements Profitable
 	private Float ticketPrice;
 	private Integer ticketsSold;
 	private Float rentCosts;
-	
+
+	public Concert(){}
 	public Concert(String name, List<Artist> artistList, String location, Date date, Integer capacity)
 	{
 		this.name = name;

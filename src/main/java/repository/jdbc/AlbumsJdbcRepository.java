@@ -112,7 +112,6 @@ public class AlbumsJdbcRepository implements ICrudRepository<String, Album> {
                 "MAP_project", "1234");
 
         String find_string_fancy = "select * from Albums where Albums.title = " + name;
-
        //todo -> return album if found
 
         PreparedStatement find_fancy = connection.prepareStatement(find_string_fancy);

@@ -4,13 +4,15 @@ import java.util.Date;
 
 public class Ticket
 {
-    private final String concertName;
-    private final String concertLocation;
-    private final Date concertDate;
-    private final Date purchaseDate;
-    private final Float ticketPrice;
+    private String concertName;
+    private String concertLocation;
+    private Date concertDate;
+    private Date purchaseDate;
+    private Float ticketPrice;
 
     private Integer ticketCount;
+
+    public Ticket(){}
 
     public Ticket(String concertName, String concertLocation, Date concertDate, Date purchaseDate, Float ticketPrice)
     {

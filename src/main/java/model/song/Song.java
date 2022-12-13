@@ -23,7 +23,9 @@ public abstract class Song
 	private List<Song> relatedSongs;
 	
 	private Integer streamCount;
-	
+
+	public Song(){}
+
 	public Song(String name, float rating, Date releaseDate, Artist artist)
 	{
 		this.name = name;

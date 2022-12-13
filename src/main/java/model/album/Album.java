@@ -19,6 +19,8 @@ public class Album implements Profitable
 	private Date releaseDate;
 	private Integer copiesSold;
 	private Float discPrice;
+
+	public Album(){}
 	
 	public Album(String title, Artist artist)
 	{
