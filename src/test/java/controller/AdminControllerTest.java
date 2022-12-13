@@ -6,6 +6,7 @@ import model.album.Band;
 import model.concert.Concert;
 import model.label.MusicLabel;
 import model.song.Pop;
+import model.song.Rap;
 import model.song.Rock;
 import model.song.Song;
 import model.users.User;
@@ -73,8 +74,8 @@ class AdminControllerTest {
     void modifyAlbum() {
         Band band = new Band("Nightwish");
         Album a = new Album("Century Child", band);
-        albums.update(a.getTitle(), a);
-        Assertions.assertEquals(albums.findByID(a.getTitle()), a); // checks if entity on index 0 has been updated correctly
+        Album b = albums.update("Child", a);
+        Assertions.assertNotEquals(a, b);
     }
 
     @Test
@@ -101,8 +102,8 @@ class AdminControllerTest {
     @Test
     void modifyArtist() {
         Artist artist = new Artist("Jackson");
-        artists.update(artist.getStage_name(), artist);
-        Assertions.assertEquals(artists.findByID(artist.getStage_name()), artist); // checks if entity on index 0 has been updated correctly
+        Artist artist2 = artists.update("John", artist);
+        Assertions.assertNotEquals(artist, artist2);
     }
 
     @Test
@@ -128,8 +129,8 @@ class AdminControllerTest {
     @Test
     void modifyBand() {
         Band band = new Band("The Rolling Stones");
-        bands.update(band.getName(), band);
-        Assertions.assertEquals(bands.findByID(band.getName()), band); // checks if entity on index 0 has been updated correctly
+        Band band2 = bands.update("John", band);
+        Assertions.assertNotEquals(band, band2);
     }
 
     @Test
@@ -160,10 +161,10 @@ class AdminControllerTest {
     void modifyConcert() throws ParseException {
         Artist artist = new Artist("Robbie Williams");
         List<Artist> concertArtists = new ArrayList<>(List.of(artist));
-        Concert concert = new Concert("Better man",concertArtists,"London, England",new SimpleDateFormat("dd.MM.yyyy").parse("20.12.2022"), 6000);
-        concerts.update(concert.getName(), concert);
-
-        Assertions.assertEquals(concerts.findByID(concert.getName()), concert); // checks if entity on index 0 has been updated correctly
+        Concert concert = new Concert("Better man",concertArtists,"London, England",
+                new SimpleDateFormat("dd.MM.yyyy").parse("20.12.2022"), 6000);
+        Concert concert2 = concerts.update("BM", concert);
+        Assertions.assertNotEquals(concert, concert2);
     }
 
     @Test
@@ -186,9 +187,9 @@ class AdminControllerTest {
     @Test
     void modifyMusicLabel() {
         MusicLabel m = new MusicLabel("In The Lab", "Manchester, England");
-        musicLabels.update(m.getName(), m);
+        MusicLabel m2 = musicLabels.update("In My Mind", m);
 
-        Assertions.assertEquals(musicLabels.findByID(m.getName()), m); // checks if entity on index 0 has been updated correctly
+        Assertions.assertNotEquals(m, m2);
     }
 
     @Test
@@ -211,10 +212,9 @@ class AdminControllerTest {
 
     @Test
     void modifySong() throws ParseException {
-        Pop p = new Pop("Lose Yourself", 5f, new SimpleDateFormat("dd.MM.yyyy").parse("01.02.2002"), new Band("Eminem"));
-        songs.update(p.getName(), p);
-
-        Assertions.assertEquals(songs.findByID(p.getName()), p); // checks if entity on index 0 has been updated correctly
+        Rap p1 = (Rap) songs.findAll().get(0);
+        Rap p2 = (Rap) songs.update("Not Afraid", p1);
+        Assertions.assertNotEquals(p1.getName(), p2.getName());
     }
 
     @Test
