@@ -73,7 +73,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param album is an object of type Album
 	 * @return the function returns false if the received album is already present in the list of albums named albumList
-	 * or true otherwise
+	 * or adds the album to the albumList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -87,7 +87,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param album is an object of type Album
 	 * @return the function returns false if the received album is not present in the list of albums named albumList
-	 * or true otherwise
+	 * or removes the album from the albumList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -101,7 +101,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param album is an object of type Album
 	 * @return the function returns false if the received album is already present in the list of albums named albumList
-	 * or true otherwise
+	 * or modifies the album from the albumList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -118,7 +118,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param artist is an object of type Artist
 	 * @return the function returns false if the received artist is already present in the list of artists named artistList
-	 * or true otherwise
+	 * or adds the artist to the artistList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -132,7 +132,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param artist is an object of type Artist
 	 * @return the function returns false if the received artist is not present in the list of artists named artistList
-	 * or true otherwise
+	 * or removes the artist to the artistList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param artist is an object of type Artist
 	 * @return the function returns false if the received artist is already present in the list of artists named artistList
-	 * or true otherwise
+	 * or modifies the artist from the artistList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -163,7 +163,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param band is an object of type Band
 	 * @return the function returns false if the received band is already present in the list of bands named bandList
-	 * or true otherwise
+	 * or adds the band to the bandList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -177,7 +177,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param band is an object of type Band
 	 * @return the function returns false if the received band is not present in the list of bands named bandList
-	 * or true otherwise
+	 * or removes the band from the bandList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -191,7 +191,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param band is an object of type Band
 	 * @return the function returns false if the received band is already present in the list of bands named bandList
-	 * or true otherwise
+	 * or modifies the band from the bandList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -207,7 +207,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param concert is an object of type Concert
 	 * @return the function returns false if the received album is already present in the list of concerts named concertList
-	 * or true otherwise
+	 * or adds the concert to the concertList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -221,7 +221,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param concert is an object of type Concert
 	 * @return the function returns false if the received album is not present in the list of concerts named concertList
-	 * or true otherwise
+	 * or removes the concert from the concertList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -235,7 +235,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param concert is an object of type Concert
 	 * @return the function returns false if the received album is already present in the list of concerts named concertList
-	 * or true otherwise
+	 * or modifies the concert from the concertList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -252,7 +252,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param musicLabel is an object of type MusicLabel
 	 * @return the function returns false if the received label is already present in the list of labels named labelList
-	 * or true otherwise
+	 * or adds the musicLabel to the labelList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -266,7 +266,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param musicLabel is an object of type MusicLabel
 	 * @return the function returns false if the received label is not present in the list of labels named labelList
-	 * or true otherwise
+	 * or removes the musicLabel from the labelList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -280,7 +280,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param musicLabel is an object of type MusicLabel
 	 * @return the function returns false if the received label is already present in the list of labels named labelList
-	 * or true otherwise
+	 * or modifies the musicLabel from the labelList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -297,7 +297,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param song is an object of type Song
 	 * @return the function returns false if the received song is already present in the list of songs named songList
-	 * or true otherwise
+	 * or adds the song to the songList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -312,7 +312,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param song is an object of type Song
 	 * @return the function returns false if the received song is not present in the list of songs named songList
-	 * or true otherwise
+	 * or removes the song from the songList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -326,7 +326,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param song is an object of type Song
 	 * @return the function returns false if the received song is already present in the list of songs named songList
-	 * or true otherwise
+	 * or modifies the song in the songList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -343,7 +343,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param user is an object of type User
 	 * @return the function returns false if the received user is already present in the list of users named userList
-	 * or true otherwise
+	 * or adds the user to the userList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -357,7 +357,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param user is an object of type User
 	 * @return the function returns false if the received user is not present in the list of users named userList
-	 * or true otherwise
+	 * or removes the user from the userList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
@@ -371,7 +371,7 @@ public class AdminController implements IAdminController
 	/**
 	 * @param user is an object of type User
 	 * @return the function returns false if the received user is already present in the list of users named userList
-	 * or true otherwise
+	 * or modifies the user in the userList and returns true otherwise
 	 * @throws SQLException that provides information on a database access error or other errors.
 	 */
 	@Override
