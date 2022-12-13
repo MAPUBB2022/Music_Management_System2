@@ -1,5 +1,7 @@
 package model.concert;
 
+import model.users.User;
+
 import java.util.Date;
 
 public class Ticket
@@ -12,9 +14,11 @@ public class Ticket
 
     private Integer ticketCount;
 
+    private User user;
+
     public Ticket(){}
 
-    public Ticket(String concertName, String concertLocation, Date concertDate, Date purchaseDate, Float ticketPrice)
+    public Ticket(String concertName, String concertLocation, Date concertDate, Date purchaseDate, Float ticketPrice, User user)
     {
         this.concertName = concertName;
         this.concertLocation = concertLocation;
@@ -22,6 +26,55 @@ public class Ticket
         this.purchaseDate = purchaseDate;
         this.ticketPrice = ticketPrice;
         this.ticketCount = 0;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getConcertName() {
+        return concertName;
+    }
+
+    public void setConcertName(String concertName) {
+        this.concertName = concertName;
+    }
+
+    public String getConcertLocation() {
+        return concertLocation;
+    }
+
+    public void setConcertLocation(String concertLocation) {
+        this.concertLocation = concertLocation;
+    }
+
+    public Date getConcertDate() {
+        return concertDate;
+    }
+
+    public void setConcertDate(Date concertDate) {
+        this.concertDate = concertDate;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Float getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(Float ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
     public Integer getTicketCount()

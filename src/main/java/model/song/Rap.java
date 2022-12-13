@@ -7,13 +7,13 @@ import java.util.Date;
 
 public class Rap extends Song
 {
-	public Rap(String name, String rating, Date releaseDate, Artist artist)
+	public Rap(String name, float rating, Date releaseDate, Artist artist)
 	{
-		super(name, Float.parseFloat(rating), releaseDate, artist);
+		super(name, rating, releaseDate, artist);
 	}
 	
-	public Rap(String name, String rating, Date releaseDate, Band band_singers)
+	public Rap(String name, float rating, Date releaseDate, Band band_singers)
 	{
-		super(name, Float.parseFloat(rating), releaseDate, band_singers);
+		super(name, rating, releaseDate, band_singers);
 	}
 }

@@ -24,13 +24,13 @@ public class SongsInMemoryRepository implements ICrudRepository<String, Song>
 	
 	private List<Song> populateSongs() throws ParseException
 	{
-		Rap s1 = new Rap("Mercy", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("06.06.2012"), new Artist("Kanye West"));
-		Rap s2 = new Rap("Not Afraid", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("11.09.2010"), new Artist("Eminem"));
-		Pop s3 = new Pop("Don't Worry", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("27.07.2017"), new Artist("Madcon"));
-		Pop s4 = new Pop("Raisa", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("01.07.2008"), new Band("Fly Project"));
-		Classical s5 = new Classical("Für Elise", "Top", new SimpleDateFormat("dd.MM.yyyy").parse("27.04.1810"), new Artist("Ludwig van Beethoven"));
-		Rock s6 = new Rock("Immigrant Song", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("01.02.1972"), new Band("Led Zeppelin"));
-		Rock s7 = new Rock("War Pigs", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("01.10.2014"), new Band("Black Sabbath"));
+		Rap s1 = new Rap("Mercy", 6f, new SimpleDateFormat("dd.MM.yyyy").parse("06.06.2012"), new Artist("Kanye West"));
+		Rap s2 = new Rap("Not Afraid", 7f, new SimpleDateFormat("dd.MM.yyyy").parse("11.09.2010"), new Artist("Eminem"));
+		Pop s3 = new Pop("Don't Worry", 8f, new SimpleDateFormat("dd.MM.yyyy").parse("27.07.2017"), new Artist("Madcon"));
+		Pop s4 = new Pop("Raisa", 9f, new SimpleDateFormat("dd.MM.yyyy").parse("01.07.2008"), new Band("Fly Project"));
+		Classical s5 = new Classical("Für Elise", 9f, new SimpleDateFormat("dd.MM.yyyy").parse("27.04.1810"), new Artist("Ludwig van Beethoven"));
+		Rock s6 = new Rock("Immigrant Song", 5.4f, new SimpleDateFormat("dd.MM.yyyy").parse("01.02.1972"), new Band("Led Zeppelin"));
+		Rock s7 = new Rock("War Pigs", 3.2f, new SimpleDateFormat("dd.MM.yyyy").parse("01.10.2014"), new Band("Black Sabbath"));
 		return new ArrayList<>(Arrays.asList(s1, s2, s3, s4, s5, s6, s7));
 	}
 	

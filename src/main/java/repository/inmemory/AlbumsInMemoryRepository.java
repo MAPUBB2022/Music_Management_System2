@@ -26,15 +26,15 @@ public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 	{
 		Band band = new Band("Black Sabbath");
 		Album a1 = new Album("Paranoid", band);
-		a1.addSong(new Rock("War Pigs", "", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
-		a1.addSong(new Rock("Paranoid", "", new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
-		a1.addSong(new Rock("Iron Man", "", new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
+		a1.addSong(new Rock("War Pigs", 0f, new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
+		a1.addSong(new Rock("Paranoid", 0f, new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
+		a1.addSong(new Rock("Iron Man", 0f, new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
 		
 		Artist artist = new Artist("Eminem");
 		Album a2 = new Album("The Eminem Show", artist);
-		a2.addSong(new Rap("Without Me", "", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), artist));
-		a2.addSong(new Rap("Sing For The Moment", "", new SimpleDateFormat("dd.MM.yyyy").parse("03.07.2012"), artist));
-		a2.addSong(new Rap("Till I Collapse", "", new SimpleDateFormat("dd.MM.yyyy").parse("09.08.2012"), artist));
+		a2.addSong(new Rap("Without Me", 6f, new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), artist));
+		a2.addSong(new Rap("Sing For The Moment", 7f, new SimpleDateFormat("dd.MM.yyyy").parse("03.07.2012"), artist));
+		a2.addSong(new Rap("Till I Collapse", 7f, new SimpleDateFormat("dd.MM.yyyy").parse("09.08.2012"), artist));
 		
 		return new ArrayList<>(Arrays.asList(a1, a2));
 	}

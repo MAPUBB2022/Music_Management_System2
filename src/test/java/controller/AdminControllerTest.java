@@ -1,25 +1,24 @@
-package test;
+package controller;
 
 import model.album.Album;
 import model.album.Artist;
 import model.album.Band;
 import model.concert.Concert;
 import model.label.MusicLabel;
-import model.song.Rap;
+import model.song.Pop;
 import model.song.Rock;
+import model.song.Song;
 import model.users.User;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import repository.inmemory.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import model.song.*;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
 
 class AdminControllerTest {
@@ -44,24 +43,22 @@ class AdminControllerTest {
 
     @Test
     void addAlbum() throws ParseException {
-        Band band = new Band("Nightwish");
+        Band band = bands.findByID("Black Sabbath");
         Album a1 = new Album("Imaginaerum", band);
-        a1.addSong(new Rock("Storytime", "", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
-        a1.addSong(new Rock("I Want My Tears Back", "", new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
-        a1.addSong(new Rock("Rest Calm", "", new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
+        a1.addSong(new Rock("Storytime", 10f, new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
+        a1.addSong(new Rock("I Want My Tears Back", 10f, new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
+        a1.addSong(new Rock("Rest Calm", 9f, new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
 
 
         Album a2 = new Album("Endless Forms Most Beautiful", band);
-        a2.addSong(new Rock("Élan", "", new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
-        a2.addSong(new Rock("My Walden", "", new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
-        a2.addSong(new Rock("Endless Forms Most Beautiful", "", new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
+        a2.addSong(new Rock("Élan", 9f, new SimpleDateFormat("dd.MM.yyyy").parse("01.06.2012"), band));
+        a2.addSong(new Rock("My Walden", 9f, new SimpleDateFormat("dd.MM.yyyy").parse("02.06.2013"), band));
+        a2.addSong(new Rock("Endless Forms Most Beautiful", 9f, new SimpleDateFormat("dd.MM.yyyy").parse("04.06.2015"), band));
 
-        albums.add(a1);
-        albums.add(a2);
 
         // checks whether the added entities are in the list
-        Assertions.assertTrue(albums.findAll().contains(a1));
-        Assertions.assertTrue(albums.findAll().contains(a2));
+        Assertions.assertTrue(albums.add(a1));
+        Assertions.assertTrue(albums.add(a2));
     }
 
     @Test
@@ -69,15 +66,15 @@ class AdminControllerTest {
         Album a = albums.findAll().get(0);
         albums.remove(a);
         Assertions.assertFalse(albums.findAll().contains(a)); // checks if album has been removed from the list
-        Assertions.assertNotEquals(albums.findByID(0), a); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(albums.findByID(a.getTitle()), a); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test
     void modifyAlbum() {
         Band band = new Band("Nightwish");
         Album a = new Album("Century Child", band);
-        albums.update(0, a);
-        Assertions.assertEquals(albums.findByID(0), a); // checks if entity on index 0 has been updated correctly
+        albums.update(a.getTitle(), a);
+        Assertions.assertEquals(albums.findByID(a.getTitle()), a); // checks if entity on index 0 has been updated correctly
     }
 
     @Test
@@ -98,14 +95,14 @@ class AdminControllerTest {
         Artist a = artists.findAll().get(0);
         artists.remove(a);
         Assertions.assertFalse(artists.findAll().contains(a)); // checks if artist has been removed from the list
-        Assertions.assertNotEquals(artists.findByID(0), a); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(artists.findByID(a.getStage_name()), a); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test
     void modifyArtist() {
         Artist artist = new Artist("Jackson");
-        artists.update(0, artist);
-        Assertions.assertEquals(artists.findByID(0), artist); // checks if entity on index 0 has been updated correctly
+        artists.update(artist.getStage_name(), artist);
+        Assertions.assertEquals(artists.findByID(artist.getStage_name()), artist); // checks if entity on index 0 has been updated correctly
     }
 
     @Test
@@ -125,14 +122,14 @@ class AdminControllerTest {
         Band b = bands.findAll().get(0);
         bands.remove(b);
         Assertions.assertFalse(bands.findAll().contains(b)); // checks if band has been removed from the list
-        Assertions.assertNotEquals(bands.findByID(0), b); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(bands.findByID(b.getName()), b); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test
     void modifyBand() {
         Band band = new Band("The Rolling Stones");
-        bands.update(0, band);
-        Assertions.assertEquals(bands.findByID(0), band); // checks if entity on index 0 has been updated correctly
+        bands.update(band.getName(), band);
+        Assertions.assertEquals(bands.findByID(band.getName()), band); // checks if entity on index 0 has been updated correctly
     }
 
     @Test
@@ -156,7 +153,7 @@ class AdminControllerTest {
         concerts.remove(c);
 
         Assertions.assertFalse(concerts.findAll().contains(c)); // checks if concert has been removed from the list
-        Assertions.assertNotEquals(concerts.findByID(0), c); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(concerts.findByID(c.getName()), c); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test
@@ -164,9 +161,9 @@ class AdminControllerTest {
         Artist artist = new Artist("Robbie Williams");
         List<Artist> concertArtists = new ArrayList<>(List.of(artist));
         Concert concert = new Concert("Better man",concertArtists,"London, England",new SimpleDateFormat("dd.MM.yyyy").parse("20.12.2022"), 6000);
-        concerts.update(0, concert);
+        concerts.update(concert.getName(), concert);
 
-        Assertions.assertEquals(concerts.findByID(0), concert); // checks if entity on index 0 has been updated correctly
+        Assertions.assertEquals(concerts.findByID(concert.getName()), concert); // checks if entity on index 0 has been updated correctly
     }
 
     @Test
@@ -183,20 +180,20 @@ class AdminControllerTest {
         musicLabels.remove(m);
 
         Assertions.assertFalse(musicLabels.findAll().contains(m)); // checks if label has been removed from the list
-        Assertions.assertNotEquals(musicLabels.findByID(0), m); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(musicLabels.findByID(m.getName()), m); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test
     void modifyMusicLabel() {
         MusicLabel m = new MusicLabel("In The Lab", "Manchester, England");
-        musicLabels.update(0, m);
+        musicLabels.update(m.getName(), m);
 
-        Assertions.assertEquals(musicLabels.findByID(0), m); // checks if entity on index 0 has been updated correctly
+        Assertions.assertEquals(musicLabels.findByID(m.getName()), m); // checks if entity on index 0 has been updated correctly
     }
 
     @Test
     void addSong() throws ParseException {
-        Rock r = new Rock("Bless the Child", "Excellent", new SimpleDateFormat("dd.MM.yyyy").parse("01.02.1972"), new Band("Nightwish"));
+        Rock r = new Rock("Bless the Child", 10f, new SimpleDateFormat("dd.MM.yyyy").parse("01.02.1972"), new Band("Nightwish"));
         songs.add(r);
 
         Assertions.assertTrue(songs.findAll().contains(r)); // checks whether the added entity is in the list
@@ -209,15 +206,15 @@ class AdminControllerTest {
         songs.remove(s);
 
         Assertions.assertFalse(songs.findAll().contains(s)); // checks if song has been removed from the list
-        Assertions.assertNotEquals(songs.findByID(0), s); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(songs.findByID(s.getName()), s); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test
     void modifySong() throws ParseException {
-        Pop p = new Pop("Lose Yourself", "Good", new SimpleDateFormat("dd.MM.yyyy").parse("01.02.2002"), new Band("Eminem"));
-        songs.update(0, p);
+        Pop p = new Pop("Lose Yourself", 5f, new SimpleDateFormat("dd.MM.yyyy").parse("01.02.2002"), new Band("Eminem"));
+        songs.update(p.getName(), p);
 
-        Assertions.assertEquals(songs.findByID(0), p); // checks if entity on index 0 has been updated correctly
+        Assertions.assertEquals(songs.findByID(p.getName()), p); // checks if entity on index 0 has been updated correctly
     }
 
     @Test

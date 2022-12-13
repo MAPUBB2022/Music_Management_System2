@@ -7,13 +7,13 @@ import java.util.Date;
 
 public class Rock extends Song
 {
-	public Rock(String name, String rating, Date releaseDate, Artist artist)
-	{
-		super(name, Float.parseFloat(rating), releaseDate, artist);
+	public Rock() {}
+
+	public Rock(String name, float rating, Date releaseDate, Artist artist) {
+		super(name, rating, releaseDate, artist);
 	}
-	
-	public Rock(String name, String rating, Date releaseDate, Band band_singers)
-	{
-		super(name, Float.parseFloat(rating), releaseDate, band_singers);
+
+	public Rock(String name, float rating, Date releaseDate, Band band_singers) {
+		super(name, rating, releaseDate, band_singers);
 	}
 }
