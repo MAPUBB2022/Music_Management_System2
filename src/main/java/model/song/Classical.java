@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class Classical extends Song
 {
+	public Classical(){};
+
 	public Classical(String name, float rating, Date releaseDate, Artist artist)
 	{
 		super(name, rating, releaseDate, artist);

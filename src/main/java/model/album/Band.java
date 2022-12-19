@@ -11,7 +11,7 @@ public class Band
 	private String origin;
 	private List<Artist> artistList;
 
-	public Band(){}
+	public Band(){};
 	public Band(String name)
 	{
 		this.name = name;

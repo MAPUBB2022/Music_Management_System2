@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class Rap extends Song
 {
+	public Rap(){};
+
 	public Rap(String name, float rating, Date releaseDate, Artist artist)
 	{
 		super(name, rating, releaseDate, artist);
