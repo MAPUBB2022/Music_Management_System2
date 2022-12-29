@@ -1,6 +1,7 @@
 import model.album.Album;
 import model.album.Artist;
 import repository.inmemory.AlbumsInMemoryRepository;
+import view.UserUI;
 
 import java.text.ParseException;
 
@@ -10,9 +11,11 @@ public class Main
 	{
 		System.out.println("Hello world!");
 		AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
-		albumsInMemoryRepository.add(new Album("ceva", new Artist("bob")));
+//		albumsInMemoryRepository.add(new Album("ceva", new Artist("bob")));
 		for (Album album : albumsInMemoryRepository.findAll())
 			System.out.println(album.toString());
 //		System.out.println(albumsInMemoryRepository.findAll().toString());
+
+		UserUI ui = new UserUI();
 	}
 }
