@@ -1,6 +1,7 @@
 package controller;
 
 import interfaces.IAdminController;
+import interfaces.ICrudRepository;
 import model.album.Album;
 import model.album.Artist;
 import model.album.Band;
@@ -9,198 +10,408 @@ import model.label.MusicLabel;
 import model.song.Song;
 import model.users.User;
 
-public class AdminController implements IAdminController
+import java.util.Comparator;
+import java.util.Date;
+
+// modify return type of methods: String to bool
+public class
+AdminController implements IAdminController
 {
-	
+	private final ICrudRepository<Integer, Album> albumList;
+	private final ICrudRepository<Integer, Artist> artistList;
+	private final ICrudRepository<String, Concert> concertList;
+	private final ICrudRepository<Integer, Song> songList;
+	private final ICrudRepository<Integer, Band> bandList;
+	private final ICrudRepository<Integer, MusicLabel> labelList;
+	private final ICrudRepository<Integer, User> userList;
+
+	public AdminController(ICrudRepository<Integer, Album> albumList, ICrudRepository<Integer, Artist> artistList,
+						   ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList,
+						   ICrudRepository<Integer, Band> bandList, ICrudRepository<Integer, MusicLabel> labelList,
+						   ICrudRepository<Integer, User> userList) {
+		this.albumList = albumList;
+		this.artistList = artistList;
+		this.concertList = concertList;
+		this.songList = songList;
+		this.bandList = bandList;
+		this.labelList = labelList;
+		this.userList = userList;
+	}
+
 	@Override
-	public boolean addAlbum(Album album)
+	public void addAlbum(Album album)
 	{
-		return false;
+		try {
+			if (this.albumList.findAll().contains(album))
+				this.albumList.add(album);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean deleteAlbum(Album album)
+	public void deleteAlbum(Album album)
 	{
-		return false;
+		try {
+			if (!this.albumList.findAll().contains(album))
+				this.albumList.remove(album);
+
+		}
+		catch(Exception error) {
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public Album modifyAlbum(Album album)
+	public void modifyAlbum(Album album)
 	{
-		return null;
+			try {
+				for (Album albums : albumList.findAll()) {
+					if (albums.equals(album)) {
+						albumList.update(albumList.findAll().indexOf(albums), album);
+						break;
+					}
+				}
+			}
+			catch(Exception error){
+				System.out.println(error.getMessage());
+			}
+
 	}
 	
 	@Override
-	public boolean addArtist(Artist artist)
+	public void addArtist(Artist artist)
 	{
-		return false;
+		try {
+			if(this.artistList.findAll().contains(artist))
+				this.artistList.add(artist);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean deleteArtist(Artist artist)
+	public void deleteArtist(Artist artist)
 	{
-		return false;
+		try {
+			if (!this.artistList.findAll().contains(artist))
+				this.artistList.remove(artist);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public Artist modifyArtist(Artist artist)
+	public void modifyArtist(Artist artist)
 	{
-		return null;
+		try {
+			for (Artist artists : artistList.findAll()) {
+				if (artist.equals(artists)) {
+					artistList.update(artistList.findAll().indexOf(artists), artist);
+					break;
+				}
+			}
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
+
 	}
 	
 	@Override
-	public boolean addBand(Band band)
+	public void addBand(Band band)
 	{
-		return false;
+		try {
+			if(this.bandList.findAll().contains(band))
+				this.bandList.add(band);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean deleteBand(Band band)
+	public void deleteBand(Band band)
 	{
-		return false;
+		try {
+			if (!this.bandList.findAll().contains(band))
+				this.bandList.remove(band);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public Band modifyBand(Band band)
+	public void modifyBand(Band band)
 	{
-		return null;
+		try {
+			for (Band bands : bandList.findAll()) {
+				if (bands.equals(band)) {
+					bandList.update(bandList.findAll().indexOf(bands), band);
+				}
+			}
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean addConcert(Concert concert)
+	public void addConcert(Concert concert)
 	{
-		return false;
+		try {
+			if(this.concertList.findAll().contains(concert))
+				this.concertList.add(concert);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean deleteConcert(Concert concert)
+	public void deleteConcert(Concert concert)
 	{
-		return false;
+		try {
+			if (!this.concertList.findAll().contains(concert))
+				this.concertList.remove(concert);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public Concert modifyConcert(Concert concert)
+	public void modifyConcert(Concert concert)
 	{
-		return null;
+		try {
+			for (Concert concerts : concertList.findAll()) {
+				if (concerts.equals(concert)) {
+					concertList.update(String.valueOf(concertList.findAll().indexOf(concerts)), concert);
+				}
+			}
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean addMusicLabel(MusicLabel musicLabel)
+	public void addMusicLabel(MusicLabel musicLabel)
 	{
-		return false;
+		try {
+			if(this.labelList.findAll().contains(musicLabel))
+				this.labelList.add(musicLabel);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean deleteMusicLabel(MusicLabel musicLabel)
+	public void deleteMusicLabel(MusicLabel musicLabel)
 	{
-		return false;
+		try {
+			if(!this.labelList.findAll().contains(musicLabel))
+				this.labelList.remove(musicLabel);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public MusicLabel modifyMusicLabel(MusicLabel musicLabel)
+	public void modifyMusicLabel(MusicLabel musicLabel)
 	{
-		return null;
+		try {
+			for (MusicLabel labels : labelList.findAll()) {
+				if (labels.equals(musicLabel)) {
+					labelList.update(labelList.findAll().indexOf(labels), musicLabel);
+				}
+			}
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean addSong(Song song)
+	public void addSong(Song song)
 	{
-		return false;
+		try {
+			if(this.songList.findAll().contains(song))
+				this.songList.add(song);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public boolean deleteSong(Song song)
+	public void deleteSong(Song song)
 	{
-		return false;
+		try {
+			if (!this.songList.findAll().contains(song))
+				this.songList.remove(song);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
-	public Song modifySong(Song song)
+	public void modifySong(Song song)
 	{
-		return null;
-	}
-	
-	@Override
-	public boolean deleteUser(User user)
-	{
-		return false;
-	}
-	
-	@Override
-	public User modifyUser(User user)
-	{
-		return null;
-	}
-	
-	@Override
-	public String showConcerts()
-	{
-		return null;
-	}
-	
-	@Override
-	public void sortAlbumsByProductionCost()
-	{
-	
-	}
-	
-	@Override
-	public String showArtists()
-	{
-		return null;
-	}
-	
-	@Override
-	public String showAlbums()
-	{
-		return null;
-	}
-	
-	@Override
-	public String showAlbumsForArtist(Artist artist)
-	{
-		return null;
-	}
-	
-	@Override
-	public String showUpcomingConcerts()
-	{
-		return null;
-	}
-	
-	@Override
-	public void sortAlbumsByRevenue()
-	{
-	
-	}
-	
-	@Override
-	public void sortSongsByRating()
-	{
-	
-	}
-	
-	@Override
-	public void sortSongsByReleaseDate()
-	{
-	
-	}
-	
-	@Override
-	public void sortArtistsByName()
-	{
-	
-	}
-	
-	@Override
-	public void sortAlbumsByReleaseDate()
-	{
-	
+		try {
+			for (Song songs : songList.findAll()) {
+				if (song.equals(songs)) {
+					songList.update(songList.findAll().indexOf(songs), song);
+				}
+			}
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
 	}
 	
 	@Override
 	public boolean addUser(User user)
 	{
-		return false;
+		if(this.userList.findAll().contains(user))
+			return false;
+		this.userList.add(user);
+		return true;
 	}
+	
+	@Override
+	public void deleteUser(User user)
+	{
+		try {
+			if (!this.userList.findAll().contains(user))
+				this.userList.remove(user);
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
+	}
+	
+	@Override
+	public void modifyUser(User user)
+	{
+		try {
+			for (User users : userList.findAll()) {
+				if (users.equals(user)) {
+					userList.update(userList.findAll().indexOf(users), user);
+				}
+			}
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+		}
+	}
+
+	@Override
+	public void sortAlbumsByRevenue() throws NullPointerException
+	{
+		if (this.albumList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		this.albumList.findAll().sort((album1, album2) -> (int) (album1.calculateProfit() - album2.calculateProfit()));
+	}
+
+	@SuppressWarnings("DuplicatedCode")
+	@Override
+	public void sortSongsByRating() throws NullPointerException
+	{
+		if (this.songList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		this.songList.findAll().sort(Comparator.comparing(Song::getRating));
+	}
+
+	@SuppressWarnings("DuplicatedCode")
+	@Override
+	public void sortSongsByReleaseDate() throws NullPointerException
+	{
+		if (this.songList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		this.songList.findAll().sort(Comparator.comparing(Song::getReleaseDate));
+	}
+
+	@Override
+	public void sortArtistsByName() throws NullPointerException
+	{
+		if (this.artistList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		this.artistList.findAll().sort(Comparator.comparing(Artist::getStage_name));
+	}
+
+	@Override
+	public void sortAlbumsByReleaseDate() throws NullPointerException
+	{
+		if (this.albumList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		this.albumList.findAll().sort(Comparator.comparing(Album::getReleaseDate));
+	}
+
+	@Override
+	public void sortAlbumsByProductionCost() throws NullPointerException
+	{
+		if (this.albumList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		this.albumList.findAll().sort(Comparator.comparing(Album::getProductionCost));
+	}
+
+	@Override
+	public String showConcerts() throws NullPointerException
+	{
+		if (this.concertList == null) throw new NullPointerException();
+		StringBuilder endString = new StringBuilder();
+		for (Concert concert : this.concertList.findAll())
+			endString.append(concert.toString());
+		return endString.toString().equals("") ? "[WARNING] Concert List is Empty\n" : endString.toString();
+	}
+
+	@Override
+	public String showArtists() throws NullPointerException
+	{
+		if (this.artistList == null) throw new NullPointerException();
+		StringBuilder endString = new StringBuilder();
+		for (Artist artist : this.artistList.findAll())
+			endString.append(artist.toString());
+		return endString.toString().equals("") ? "[WARNING] Artist List is Empty\n" : endString.toString();
+	}
+	
+	@Override
+	public String showAlbums() throws NullPointerException
+	{
+		if (this.albumList == null) throw new NullPointerException();
+		StringBuilder endString = new StringBuilder();
+		for (Album album : this.albumList.findAll())
+			endString.append(album.toString());
+		return endString.toString().equals("") ? "[WARNING] Album List is Empty\n" : endString.toString();
+	}
+	
+	@Override
+	public String showUpcomingConcerts() throws NullPointerException
+	{
+		if (this.concertList.findAll() == null) {
+			throw new NullPointerException();
+		}
+		StringBuilder endString = new StringBuilder();
+		Date today = new Date();
+		for (Concert concert : this.concertList.findAll()) {
+			if (concert.getDate().after(today)) endString.append(concert.toString());
+		}
+		return endString.toString().equals("") ? "[WARNING] No Upcoming Concert exist\n" : endString.toString();
+	}
+
+
 }
