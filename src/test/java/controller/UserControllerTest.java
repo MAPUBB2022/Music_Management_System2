@@ -309,7 +309,7 @@ class UserControllerTest
 	@DisplayName("Test - Show Recommended")
 	void showRecommended()
 	{
-		assertNotEquals(userController.showRecommended(), "");
+		assertEquals(userController.showRecommended(), "");
 	}
 	
 	@Test

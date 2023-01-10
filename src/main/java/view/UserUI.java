@@ -31,7 +31,6 @@ public class UserUI
 				TicketsInMemoryRepository ticketsInMemoryRepository = new TicketsInMemoryRepository(this.user);
 				UserFavouritesInMemoryRepository userFavouritesInMemoryRepository = new UserFavouritesInMemoryRepository(this.user);
 				if (user.isAdmin()) {
-					System.out.println("Not yet implemented!");
 					BandsInMemoryRepository bandsInMemoryRepository = new BandsInMemoryRepository();
 					MusicLabelsInMemoryRepository musicLabelsInMemoryRepository = new MusicLabelsInMemoryRepository();
 					this.adminController = new AdminController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository,songsInMemoryRepository,bandsInMemoryRepository,musicLabelsInMemoryRepository,userInMemoryRepository);
@@ -50,7 +49,6 @@ public class UserUI
 				JdbcTicketsRepository ticketsRepository = new JdbcTicketsRepository(this.user);
 				JdbcUserFavouritesRepository userFavouritesRepository = new JdbcUserFavouritesRepository(this.user);
 				if (user.isAdmin()) {
-					System.out.println("Not yet implemented!");
 					JdbcBandsRepository bandsRepository = new JdbcBandsRepository();
 					JdbcMusicLabelsRepository musicLabelsRepository = new JdbcMusicLabelsRepository();
 					this.adminController = new AdminController(albumsRepository, artistsRepository, concertsRepository,songsRepository,bandsRepository,musicLabelsRepository,userRepository);
