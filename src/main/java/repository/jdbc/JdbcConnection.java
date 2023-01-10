@@ -6,31 +6,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class JDBCConnection
+public class JdbcConnection
 {
-    private static Connection instance;
-
-    private static Connection getNewConnection()
+    private static Connection connectionInstance;
+    
+    private static Connection getConnection()
     {
-        Connection con = null;
+        Connection connection = null;
         try {
             DriverManager.registerDriver(new SQLServerDriver());
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP", "MAP_project", "1234");
+            connection = DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;database=MAP_Labor;encrypt=true;trustServerCertificate=true", "guest", "1234");
         }
         catch (SQLException e) {
-            System.out.println("Error getting connection " + e);
+            System.out.println("[ERROR] Database Connection unestablished\n");
         }
-        return con;
+        return connection;
     }
-
-    public static Connection getInstance()
+    
+    public static Connection getConnectionInstance()
     {
         try {
-            if (instance == null || instance.isClosed()) instance = getNewConnection();
+            if (connectionInstance == null || connectionInstance.isClosed()) connectionInstance = getConnection();
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return instance;
+        return connectionInstance;
     }
 }
