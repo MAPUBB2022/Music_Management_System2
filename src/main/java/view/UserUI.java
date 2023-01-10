@@ -25,9 +25,7 @@ public class UserUI {
     boolean isAdmin;
 
     public UserUI() {
-    }
-
-    ;
+    };
 
     public UserUI(Integer saveType, boolean isAdmin) throws ParseException, RuntimeException {
 //        this.isAdmin = isAdmin;
