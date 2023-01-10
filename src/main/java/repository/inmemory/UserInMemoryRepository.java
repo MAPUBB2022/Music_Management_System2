@@ -2,6 +2,7 @@ package repository.inmemory;
 
 
 import interfaces.UserRepository;
+import model.song.Song;
 import model.users.User;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class UserInMemoryRepository implements UserRepository
 	{
 		User u1 = new User("jk", "secret");
 		User u2 = new User("bob", "dob");
-		User u3 = new User("john", "sn0w");
+		User u3 = new User("john", "wIck");
 		User u4 = new User("mary", "queenofscots1542");
 		User u5 = new User("admin", "password");
 		u1.setAdminStatus(true);
@@ -83,5 +84,15 @@ public class UserInMemoryRepository implements UserRepository
 				return user;
 			}
 		return null;
+	}
+	
+	@Override
+	public String toString()
+	{
+		if (this.userList == null) return "";
+		StringBuilder endString = new StringBuilder();
+		for (User user : this.userList)
+			endString.append(user.toString()).append("\n");
+		return endString.toString();
 	}
 }

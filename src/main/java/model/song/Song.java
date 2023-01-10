@@ -8,43 +8,43 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public abstract class Song
+public class Song
 {
 	private String name; //Unique
-	private String rating;
+	private Float rating;
 	private Date releaseDate;
 	private Artist singer;
 	private Band bandSingers;
-	private List<Tags> tags;
-	
 	private String lyrics;
 	
-	/** many-to-many **/
+	/**
+	 * many-to-many
+	 **/
 	private List<Song> relatedSongs;
 	
 	private Integer streamCount;
 	
-	public Song(String name, String rating, Date releaseDate, Artist artist)
+	public Song() {}
+	
+	public Song(String name, Float rating, Date releaseDate, Artist artist)
 	{
 		this.name = name;
 		this.rating = rating;
 		this.releaseDate = releaseDate;
 		this.singer = artist;
 		this.bandSingers = null;
-		this.tags = new ArrayList<>();
 		this.lyrics = "";
 		this.relatedSongs = new ArrayList<>();
 		this.streamCount = 0;
 	}
 	
-	public Song(String name, String rating, Date releaseDate, Band bandSingers)
+	public Song(String name, Float rating, Date releaseDate, Band bandSingers)
 	{
 		this.name = name;
 		this.rating = rating;
 		this.releaseDate = releaseDate;
 		this.bandSingers = bandSingers;
 		this.singer = null;
-		this.tags = new ArrayList<>();
 		this.lyrics = "";
 		this.relatedSongs = new ArrayList<>();
 		this.streamCount = 0;
@@ -60,12 +60,12 @@ public abstract class Song
 		this.name = name;
 	}
 	
-	public String getRating()
+	public Float getRating()
 	{
 		return rating;
 	}
 	
-	public void setRating(String rating)
+	public void setRating(Float rating)
 	{
 		this.rating = rating;
 	}
@@ -98,16 +98,6 @@ public abstract class Song
 	public void setBandSingers(Band band_singers)
 	{
 		this.bandSingers = band_singers;
-	}
-	
-	public List<Tags> getTags()
-	{
-		return tags;
-	}
-	
-	public void setTags(List<Tags> tags)
-	{
-		this.tags = tags;
 	}
 	
 	public String getLyrics()
@@ -143,16 +133,16 @@ public abstract class Song
 	@Override
 	public String toString()
 	{
-		String tags = "";
 		String related = "";
-		for (Tags tag : this.tags)
-			//noinspection StringConcatenationInLoop
-			tags += tag + " ";
-		related += relatedSongs.toString();
+		if (this.relatedSongs != null) {
+			for (Song song : this.relatedSongs)
+				//noinspection StringConcatenationInLoop
+				related += song.name + "; ";
+		}
 		StringBuilder endString = new StringBuilder(name + " by ");
 		if (this.singer != null) endString.append(this.singer.getStageName());
 		else endString.append(this.bandSingers.getName());
-		endString.append("\nRating: ").append(rating).append("\nTags: ").append(tags).append("\nRelease Date: ").append(releaseDate).append("\nStream Count: ").append(streamCount).append("\nLyrics: ").append(lyrics).append("\nRelated Songs: ").append(related);
+		endString.append("\nRating: ").append(rating).append("\nRelease Date: ").append(releaseDate).append("\nStream Count: ").append(streamCount).append("\nLyrics: ").append(lyrics).append("\nRelated Songs: ").append(related);
 		return endString.append("\n").toString();
 	}
 }

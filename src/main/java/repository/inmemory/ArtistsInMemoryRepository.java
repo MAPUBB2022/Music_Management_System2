@@ -185,6 +185,8 @@ public class ArtistsInMemoryRepository implements ICrudRepository<String, Artist
 	@Override
 	public String toString()
 	{
+		if (this.artistList == null)
+			return "";
 		StringBuilder endString = new StringBuilder();
 		for (Artist artist : this.artistList)
 			endString.append(artist.toString()).append("\n");

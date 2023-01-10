@@ -6,6 +6,8 @@ public class Artist
 	private String stageName; //Unique
 	private Float salary;
 	
+	public Artist() {}
+	
 	public Artist(String stageName)
 	{
 		this.stageName = stageName;

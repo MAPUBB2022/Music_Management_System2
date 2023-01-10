@@ -8,6 +8,8 @@ public class User
 	
 	private boolean isAdmin;
 	
+	public User() {}
+	
 	public User(String username, String password)
 	{
 		this.username = username;
@@ -23,6 +25,16 @@ public class User
 	public String getPassword()
 	{
 		return password;
+	}
+	
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+	
+	public void setPassword(String password)
+	{
+		this.password = password;
 	}
 	
 	public boolean isAdmin()

@@ -1,43 +1,67 @@
 package view;
 
+import controller.AdminController;
 import controller.UserController;
 import model.album.Artist;
 import model.concert.Concert;
 import model.song.Song;
 import model.users.User;
 import repository.inmemory.*;
+import repository.jdbc.*;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class UserUI
 {
-	UserController controller;
-	boolean isAdmin;
+	AdminController adminController;
+	UserController userController;
+	User user;
 	
-	public UserUI(Integer saveType, boolean isAdmin) throws ParseException, RuntimeException
+	public UserUI(Integer saveType, User user) throws ParseException, RuntimeException
 	{
-		this.isAdmin = isAdmin;
-		if (saveType == 1) {
-			AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
-			ArtistsInMemoryRepository artistsInMemoryRepository = new ArtistsInMemoryRepository();
-			ConcertsInMemoryRepository concertsInMemoryRepository = new ConcertsInMemoryRepository();
-			SongsInMemoryRepository songsInMemoryRepository = new SongsInMemoryRepository();
-			UserInMemoryRepository userInMemoryRepository = new UserInMemoryRepository();
-			if (isAdmin) System.out.println("Not yet implemented!");
-			else
-				this.controller = new UserController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository, songsInMemoryRepository, userInMemoryRepository);
-		} else
-			//TODO add file and db controllers
-			throw new RuntimeException("Not implemented yet!");
+		this.user = user;
+		switch (saveType) {
+			case 1 -> {
+				AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
+				ArtistsInMemoryRepository artistsInMemoryRepository = new ArtistsInMemoryRepository();
+				ConcertsInMemoryRepository concertsInMemoryRepository = new ConcertsInMemoryRepository();
+				SongsInMemoryRepository songsInMemoryRepository = new SongsInMemoryRepository();
+				UserInMemoryRepository userInMemoryRepository = new UserInMemoryRepository();
+				TicketsInMemoryRepository ticketsInMemoryRepository = new TicketsInMemoryRepository(this.user);
+				UserFavouritesInMemoryRepository userFavouritesInMemoryRepository = new UserFavouritesInMemoryRepository(this.user);
+				if (user.isAdmin()) {
+					System.out.println("Not yet implemented!");
+					BandsInMemoryRepository bandsInMemoryRepository = new BandsInMemoryRepository();
+					MusicLabelsInMemoryRepository musicLabelsInMemoryRepository = new MusicLabelsInMemoryRepository();
+				} else
+					this.userController = new UserController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository, songsInMemoryRepository, userInMemoryRepository, ticketsInMemoryRepository, userFavouritesInMemoryRepository);
+			}
+			case 2 -> {//TODO add file and db controllers
+				throw new RuntimeException("Not implemented yet!");
+			}
+			case 3 -> {
+				JdbcAlbumsRepository albumsRepository = new JdbcAlbumsRepository();
+				JdbcArtistsRepository artistsRepository = new JdbcArtistsRepository();
+				JdbcConcertsRepository concertsRepository = new JdbcConcertsRepository();
+				JdbcSongsRepository songsRepository = new JdbcSongsRepository();
+				JdbcUserRepository userRepository = new JdbcUserRepository();
+				JdbcTicketsRepository ticketsRepository = new JdbcTicketsRepository(this.user);
+				JdbcUserFavouritesRepository userFavouritesRepository = new JdbcUserFavouritesRepository(this.user);
+				if (user.isAdmin()) {
+					System.out.println("Not yet implemented!");
+					JdbcBandsRepository bandsRepository = new JdbcBandsRepository();
+					JdbcMusicLabelsRepository musicLabelsRepository = new JdbcMusicLabelsRepository();
+				} else
+					this.userController = new UserController(albumsRepository, artistsRepository, concertsRepository, songsRepository, userRepository, ticketsRepository, userFavouritesRepository);
+			}
+		}
 	}
 	
 	public void switchMenu()
 	{
-		if (isAdmin)
-			adminMenu();
-		else
-			userMenu();
+		if (user.isAdmin()) adminMenu();
+		else userMenu();
 	}
 	
 	private void adminMenu() {}
@@ -50,7 +74,7 @@ public class UserUI
 					\t--- Music Song Management ---
 					
 					1. Show List of Artists
-					2. Show available Albums
+					2. Show Available Albums
 					3. Show Albums for Artist
 					4. Show Upcoming Events
 					5. Sort Albums by Revenue
@@ -72,53 +96,53 @@ public class UserUI
 			int choice = input.nextInt();
 			switch (choice) {
 				case 1 -> {
-					System.out.println(this.controller.showArtists());
+					System.out.println(this.userController.showArtists());
 				}
 				case 2 -> {
-					System.out.println(this.controller.showAlbums());
+					System.out.println(this.userController.showAlbums());
 				}
 				case 3 -> {
 					System.out.println("\nEnter Artist Stage Name: ");
 					Scanner artistIn = new Scanner(System.in);
 					String stageName = artistIn.nextLine();
-					Artist artist = this.controller.getArtistList().findByID(stageName);
+					Artist artist = this.userController.getArtistList().findByID(stageName);
 					try {
-						System.out.println(this.controller.showAlbumsForArtist(artist));
+						System.out.println(this.userController.showAlbumsForArtist(artist));
 					}
 					catch (NullPointerException e) {
-						System.out.println(e.toString());
+						System.out.println(e.getMessage());
 					}
 				}
 				case 4 -> {
-					System.out.println(this.controller.showUpcomingConcerts());
+					System.out.println(this.userController.showUpcomingConcerts());
 				}
 				case 5 -> {
-					this.controller.sortAlbumsByRevenue();
-					System.out.println(this.controller.getAlbumList().toString());
+					this.userController.sortAlbumsByRevenue();
+					System.out.println(this.userController.getAlbumList().toString());
 				}
 				case 6 -> {
-					this.controller.sortSongsByRating();
-					System.out.println(this.controller.getSongList().toString());
+					this.userController.sortSongsByRating();
+					System.out.println(this.userController.getSongList().toString());
 				}
 				case 7 -> {
-					this.controller.sortSongsByReleaseDate();
-					System.out.println(this.controller.getSongList().toString());
+					this.userController.sortSongsByReleaseDate();
+					System.out.println(this.userController.getSongList().toString());
 				}
 				case 8 -> {
-					this.controller.sortArtistsByName();
-					System.out.println(this.controller.getArtistList().toString());
+					this.userController.sortArtistsByName();
+					System.out.println(this.userController.getArtistList().toString());
 				}
 				case 9 -> {
-					this.controller.sortAlbumsByReleaseDate();
-					System.out.println(this.controller.getAlbumList().toString());
+					this.userController.sortAlbumsByReleaseDate();
+					System.out.println(this.userController.getAlbumList().toString());
 				}
 				case 10 -> {
 					System.out.println("\nEnter Song Name to be added: ");
 					Scanner songIn = new Scanner(System.in);
 					String songName = songIn.nextLine();
 					try {
-						Song song = this.controller.getSongList().findByID(songName);
-						this.controller.addFavourite(song);
+						Song song = this.userController.getSongList().findByID(songName);
+						this.userController.addFavourite(song);
 					}
 					catch (NullPointerException exception) {
 						System.out.println("Unavailable Song Name\n");
@@ -129,34 +153,36 @@ public class UserUI
 					Scanner songIn = new Scanner(System.in);
 					String songName = songIn.nextLine();
 					try {
-						Song song = this.controller.getSongList().findByID(songName);
-						this.controller.removeFavourite(song);
+						Song song = this.userController.getSongList().findByID(songName);
+						this.userController.removeFavourite(song);
 					}
 					catch (NullPointerException e) {
 						System.out.println("Unavailable Song Name\n");
 					}
 				}
 				case 12 -> {
-					System.out.println(this.controller.showFavourites());
+					System.out.println(this.userController.showFavourites());
 				}
 				case 13 -> {
-					System.out.println(this.controller.getConcertList().toString());
+					System.out.println(this.userController.getConcertList().toString());
 					System.out.println("\nEnter Concert Name: ");
-					Scanner concertIn = new Scanner(System.in);
-					String concertName = concertIn.nextLine();
-					Concert concert = this.controller.getConcertList().findByID(concertName);
+					Scanner scannerIn = new Scanner(System.in);
+					String concertName = scannerIn.nextLine();
+					System.out.println("\nEnter Number of Tickets to be Purchased: ");
+					int ticketCount = Integer.parseInt(scannerIn.next());
+					Concert concert = this.userController.getConcertList().findByID(concertName);
 					try {
-						this.controller.buyTicket(concert, 1);
+						this.userController.buyTicket(concert, ticketCount, user);
 					}
 					catch (NullPointerException e) {
-						System.out.println(e.toString());
+						System.out.println(e.getMessage());
 					}
 				}
 				case 14 -> {
-					System.out.println(this.controller.showTickets());
+					System.out.println(this.userController.showTickets());
 				}
 				case 15 -> {
-					System.out.println(this.controller.showRecommended());
+					System.out.println(this.userController.showRecommended());
 				}
 				case 16 -> {
 					Scanner scanner = new Scanner(System.in);
@@ -164,7 +190,7 @@ public class UserUI
 					String username = scanner.nextLine();
 					System.out.println("\nEnter Password: ");
 					String password = scanner.nextLine();
-					this.controller.addUser(new User(username, password));
+					this.userController.addUser(new User(username, password));
 				}
 				case 17 -> {
 					exit = true;

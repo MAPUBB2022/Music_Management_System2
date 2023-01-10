@@ -2,10 +2,6 @@ package repository.inmemory;
 
 import interfaces.ICrudRepository;
 import model.album.Album;
-import model.album.Artist;
-import model.album.Band;
-import model.song.Rap;
-import model.song.Rock;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -99,6 +95,8 @@ public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 	@Override
 	public String toString()
 	{
+		if (this.inMemoryAlbums == null)
+			return "";
 		StringBuilder endString = new StringBuilder();
 		for (Album album : this.inMemoryAlbums)
 			endString.append(album.toString()).append("\n");

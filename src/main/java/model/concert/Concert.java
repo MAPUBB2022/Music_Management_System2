@@ -10,7 +10,9 @@ public class Concert implements Profitable
 {
 	private String name; //Unique
 	
-	/** many-to-many **/
+	/**
+	 * many-to-many
+	 **/
 	private List<Artist> artistList;
 	private String location;
 	private Date date;
@@ -18,6 +20,8 @@ public class Concert implements Profitable
 	private Float ticketPrice;
 	private Integer ticketsSold;
 	private Float rentCosts;
+	
+	public Concert() {}
 	
 	public Concert(String name, List<Artist> artistList, String location, Date date, Integer capacity)
 	{

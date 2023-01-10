@@ -14,13 +14,17 @@ public class Album implements Profitable
 	private Artist artist;
 	private Band band;
 	
-	/** one-to-many **/
+	/**
+	 * many-to-many
+	 **/
 	private List<Song> songList;
 	private String language;
 	private Float productionCost;
 	private Date releaseDate;
 	private Integer copiesSold;
 	private Float discPrice;
+	
+	public Album() {}
 	
 	public Album(String title, Artist artist)
 	{
