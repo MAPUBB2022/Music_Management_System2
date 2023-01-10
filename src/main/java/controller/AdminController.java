@@ -15,13 +15,13 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class AdminController implements IAdminController {
-    private ICrudRepository<String, Album> albumList;
-    private ICrudRepository<String, Artist> artistList;
-    private ICrudRepository<String, Concert> concertList;
-    private ICrudRepository<String, Song> songList;
-    private ICrudRepository<String, Band> bandList;
-    private ICrudRepository<String, MusicLabel> labelList;
-    private ICrudRepository<String, User> userList;
+    private final ICrudRepository<String, Album> albumList;
+    private final ICrudRepository<String, Artist> artistList;
+    private final ICrudRepository<String, Concert> concertList;
+    private final ICrudRepository<String, Song> songList;
+    private final ICrudRepository<String, Band> bandList;
+    private final ICrudRepository<String, MusicLabel> labelList;
+    private final ICrudRepository<String, User> userList;
 
     public AdminController(ICrudRepository<String, Album> albumList, ICrudRepository<String, Artist> artistList,
                            ICrudRepository<String, Concert> concertList, ICrudRepository<String, Song> songList,
@@ -35,8 +35,6 @@ public class AdminController implements IAdminController {
         this.labelList = labelList;
         this.userList = userList;
     }
-
-    public AdminController() {};
 
 
     public ICrudRepository<String, Album> getAlbumList() {

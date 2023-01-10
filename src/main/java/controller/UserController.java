@@ -56,10 +56,10 @@ public class UserController implements IUserController
 		return songList;
 	}
 	
-	public ICrudRepository<String, User> getUserList()
-	{
-		return userList;
-	}
+//	public ICrudRepository<String, User> getUserList()
+//	{
+//		return userList;
+//	}
 	
 	public IUserFieldIdentifiers<Song> getMyFavourites()
 	{
