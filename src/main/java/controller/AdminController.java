@@ -16,15 +16,15 @@ import java.util.Date;
 // modify return type of methods: String to bool
 public class AdminController implements IAdminController
 {
-	private final ICrudRepository<Integer, Album> albumList;
-	private final ICrudRepository<Integer, Artist> artistList;
+	private final ICrudRepository<String, Album> albumList;
+	private final ICrudRepository<String, Artist> artistList;
 	private final ICrudRepository<String, Concert> concertList;
-	private final ICrudRepository<Integer, Song> songList;
-	private final ICrudRepository<Integer, Band> bandList;
-	private final ICrudRepository<Integer, MusicLabel> labelList;
-	private final ICrudRepository<Integer, User> userList;
+	private final ICrudRepository<String, Song> songList;
+	private final ICrudRepository<String, Band> bandList;
+	private final ICrudRepository<String, MusicLabel> labelList;
+	private final ICrudRepository<String, User> userList;
 	
-	public AdminController(ICrudRepository<Integer, Album> albumList, ICrudRepository<Integer, Artist> artistList, ICrudRepository<String, Concert> concertList, ICrudRepository<Integer, Song> songList, ICrudRepository<Integer, Band> bandList, ICrudRepository<Integer, MusicLabel> labelList, ICrudRepository<Integer, User> userList)
+	public AdminController(ICrudRepository<String, Album> albumList, ICrudRepository<String, Artist> artistList, ICrudRepository<String, Concert> concertList, ICrudRepository<String, Song> songList, ICrudRepository<String, Band> bandList, ICrudRepository<String, MusicLabel> labelList, ICrudRepository<String, User> userList)
 	{
 		this.albumList = albumList;
 		this.artistList = artistList;
@@ -71,7 +71,7 @@ public class AdminController implements IAdminController
 		try {
 			for (Album albums : albumList.findAll()) {
 				if (albums.equals(album)) {
-					albumList.update(albumList.findAll().indexOf(albums), album);
+					albumList.update(String.valueOf(albumList.findAll().indexOf(albums)), album);
 					return albums;
 				}
 			}
@@ -118,7 +118,7 @@ public class AdminController implements IAdminController
 		try {
 			for (Artist artists : artistList.findAll()) {
 				if (artist.equals(artists)) {
-					artistList.update(artistList.findAll().indexOf(artists), artist);
+					artistList.update(String.valueOf(artistList.findAll().indexOf(artists)), artist);
 					return artists;
 				}
 			}
@@ -165,7 +165,7 @@ public class AdminController implements IAdminController
 		try {
 			for (Band bands : bandList.findAll()) {
 				if (bands.equals(band)) {
-					bandList.update(bandList.findAll().indexOf(bands), band);
+					bandList.update(String.valueOf(bandList.findAll().indexOf(bands)), band);
 					return bands;
 				}
 			}
@@ -259,7 +259,7 @@ public class AdminController implements IAdminController
 		try {
 			for (MusicLabel labels : labelList.findAll()) {
 				if (labels.equals(musicLabel)) {
-					labelList.update(labelList.findAll().indexOf(labels), musicLabel);
+					labelList.update(String.valueOf(labelList.findAll().indexOf(labels)), musicLabel);
 					return labels;
 				}
 			}
@@ -306,7 +306,7 @@ public class AdminController implements IAdminController
 		try {
 			for (Song songs : songList.findAll()) {
 				if (song.equals(songs)) {
-					songList.update(songList.findAll().indexOf(songs), song);
+					songList.update(String.valueOf(songList.findAll().indexOf(songs)), song);
 					return songs;
 				}
 			}
@@ -346,7 +346,7 @@ public class AdminController implements IAdminController
 		try {
 			for (User users : userList.findAll()) {
 				if (users.equals(user)) {
-					userList.update(userList.findAll().indexOf(users), user);
+					userList.update(String.valueOf(userList.findAll().indexOf(users)), user);
 					return users;
 				}
 			}

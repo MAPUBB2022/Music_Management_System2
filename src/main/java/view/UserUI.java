@@ -34,6 +34,7 @@ public class UserUI
 					System.out.println("Not yet implemented!");
 					BandsInMemoryRepository bandsInMemoryRepository = new BandsInMemoryRepository();
 					MusicLabelsInMemoryRepository musicLabelsInMemoryRepository = new MusicLabelsInMemoryRepository();
+					this.adminController = new AdminController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository,songsInMemoryRepository,bandsInMemoryRepository,musicLabelsInMemoryRepository,userInMemoryRepository);
 				} else
 					this.userController = new UserController(albumsInMemoryRepository, artistsInMemoryRepository, concertsInMemoryRepository, songsInMemoryRepository, userInMemoryRepository, ticketsInMemoryRepository, userFavouritesInMemoryRepository);
 			}
@@ -52,6 +53,7 @@ public class UserUI
 					System.out.println("Not yet implemented!");
 					JdbcBandsRepository bandsRepository = new JdbcBandsRepository();
 					JdbcMusicLabelsRepository musicLabelsRepository = new JdbcMusicLabelsRepository();
+					this.adminController = new AdminController(albumsRepository, artistsRepository, concertsRepository,songsRepository,bandsRepository,musicLabelsRepository,userRepository);
 				} else
 					this.userController = new UserController(albumsRepository, artistsRepository, concertsRepository, songsRepository, userRepository, ticketsRepository, userFavouritesRepository);
 			}
