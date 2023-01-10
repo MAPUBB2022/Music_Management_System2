@@ -96,7 +96,7 @@ class AdminControllerTest {
         Artist a = artists.findAll().get(0);
         artists.remove(a);
         Assertions.assertFalse(artists.findAll().contains(a)); // checks if artist has been removed from the list
-        Assertions.assertNotEquals(artists.findByID(a.getStage_name()), a); // checks if the deleted object doesn't exist on its former position
+        Assertions.assertNotEquals(artists.findByID(a.getStageName()), a); // checks if the deleted object doesn't exist on its former position
     }
 
     @Test

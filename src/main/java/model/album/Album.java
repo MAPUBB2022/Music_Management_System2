@@ -26,8 +26,6 @@ public class Album implements Profitable
 
 	public Album(){}
 	
-	public Album() {}
-	
 	public Album(String title, Artist artist)
 	{
 		this.title = title;

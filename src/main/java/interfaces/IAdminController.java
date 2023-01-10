@@ -48,7 +48,7 @@ public interface IAdminController extends IController
 
 	boolean modifySong(Song song) throws SQLException;
 	
-	boolean addUser(User user) throws SQLException;
+	boolean addUser(User user);
 
 	boolean deleteUser(User user) throws SQLException;
 

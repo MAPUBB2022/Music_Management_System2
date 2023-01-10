@@ -4,6 +4,7 @@ import repository.inmemory.UserInMemoryRepository;
 import repository.jdbc.JdbcUserRepository;
 import view.UserUI;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -52,6 +53,11 @@ public class Main
 		}
 
 		UserUI ui = new UserUI(saveMethod, user);
-		ui.switchMenu();
+		try {
+			ui.switchMenu();
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

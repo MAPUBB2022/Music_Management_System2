@@ -345,7 +345,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException that provides information on a database access error or other errors.
      */
     @Override
-    public boolean addUser(User user) throws SQLException {
+    public boolean addUser(User user) {
         if (this.userList.findAll().contains(user))
             return false;
         this.userList.add(user);
@@ -359,7 +359,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException that provides information on a database access error or other errors.
      */
     @Override
-    public boolean deleteUser(User user) throws SQLException {
+    public boolean deleteUser(User user){
         if (!this.userList.findAll().contains(user))
             return false;
         this.userList.remove(user);
@@ -373,7 +373,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException that provides information on a database access error or other errors.
      */
     @Override
-    public boolean modifyUser(User user) throws SQLException {
+    public boolean modifyUser(User user){
         for (User users : userList.findAll()) {
             if (users.equals(user)) {
                 userList.update(String.valueOf(userList.findAll().indexOf(users)), user);
@@ -390,7 +390,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public void sortAlbumsByRevenue() throws NullPointerException, SQLException {
+    public void sortAlbumsByRevenue() throws NullPointerException {
         if (this.albumList.findAll() == null) {
             throw new NullPointerException();
         }
@@ -404,7 +404,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public void sortSongsByRating() throws NullPointerException, SQLException {
+    public void sortSongsByRating() throws NullPointerException{
         if (this.songList.findAll() == null) {
             throw new NullPointerException();
         }
@@ -418,7 +418,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public void sortSongsByReleaseDate() throws NullPointerException, SQLException {
+    public void sortSongsByReleaseDate() throws NullPointerException {
         if (this.songList.findAll() == null) {
             throw new NullPointerException();
         }
@@ -429,14 +429,14 @@ public class AdminController implements IAdminController {
      * Sorts artists by name if artistList is not empty or throws exception otherwise
      *
      * @throws NullPointerException thrown when an application attempts to use null in a case where an object is required
-     * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public void sortArtistsByName() throws NullPointerException, SQLException {
+    public void sortArtistsByName() throws NullPointerException
+    {
         if (this.artistList.findAll() == null) {
             throw new NullPointerException();
         }
-        this.artistList.findAll().sort(Comparator.comparing(Artist::getStage_name));
+        this.artistList.findAll().sort(Comparator.comparing(Artist::getStageName));
     }
 
     /**
@@ -446,7 +446,7 @@ public class AdminController implements IAdminController {
      * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public void sortAlbumsByReleaseDate() throws NullPointerException, SQLException {
+    public void sortAlbumsByReleaseDate() throws NullPointerException {
         if (this.albumList.findAll() == null) {
             throw new NullPointerException();
         }
@@ -457,10 +457,10 @@ public class AdminController implements IAdminController {
      * Sorts albums by production cost if albumList is not empty or throws exception otherwise
      *
      * @throws NullPointerException thrown when an application attempts to use null in a case where an object is required
-     * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public void sortAlbumsByProductionCost() throws NullPointerException, SQLException {
+    public void sortAlbumsByProductionCost() throws NullPointerException
+    {
         if (this.albumList.findAll() == null) {
             throw new NullPointerException();
         }
@@ -470,10 +470,10 @@ public class AdminController implements IAdminController {
     /**
      * @return returns the list of concerts if the list is not empty or warning message otherwise
      * @throws NullPointerException thrown when an application attempts to use null in a case where an object is required
-     * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public String showConcerts() throws NullPointerException, SQLException {
+    public String showConcerts() throws NullPointerException
+    {
         if (this.concertList == null) throw new NullPointerException();
         StringBuilder endString = new StringBuilder();
         for (Concert concert : this.concertList.findAll())
@@ -484,10 +484,10 @@ public class AdminController implements IAdminController {
     /**
      * @return returns the list of artists if the list is not empty or warning message otherwise
      * @throws NullPointerException thrown when an application attempts to use null in a case where an object is required
-     * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public String showArtists() throws NullPointerException, SQLException {
+    public String showArtists() throws NullPointerException
+    {
         if (this.artistList == null) throw new NullPointerException();
         StringBuilder endString = new StringBuilder();
         for (Artist artist : this.artistList.findAll())
@@ -498,24 +498,30 @@ public class AdminController implements IAdminController {
     /**
      * @return returns the list of albums if the list is not empty or warning message otherwise
      * @throws NullPointerException thrown when an application attempts to use null in a case where an object is required
-     * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public String showAlbums() throws NullPointerException, SQLException {
+    public String showAlbums() throws NullPointerException
+    {
         if (this.albumList == null) throw new NullPointerException();
         StringBuilder endString = new StringBuilder();
         for (Album album : this.albumList.findAll())
             endString.append(album.toString());
         return endString.toString().equals("") ? "[WARNING] Album List is Empty\n" : endString.toString();
     }
-
+    
+    @Override
+    public String showAlbumsForArtist(Artist artist)
+    {
+        return null;
+    }
+    
     /**
      * @return returns the list of upcoming concerts if the list is not empty or warning message otherwise
      * @throws NullPointerException thrown when an application attempts to use null in a case where an object is required
-     * @throws SQLException         an exception that provides information on a database access error or other errors.
      */
     @Override
-    public String showUpcomingConcerts() throws NullPointerException, SQLException {
+    public String showUpcomingConcerts() throws NullPointerException
+    {
         if (this.concertList.findAll() == null) {
             throw new NullPointerException();
         }
