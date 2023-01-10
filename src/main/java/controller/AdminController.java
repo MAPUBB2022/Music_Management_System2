@@ -527,5 +527,4 @@ public class AdminController implements IAdminController {
         return endString.toString().equals("") ? "[WARNING] No Upcoming Concert exist\n" : endString.toString();
     }
 
-
 }
