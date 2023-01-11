@@ -1,7 +1,6 @@
 package repository.jdbc;
 
 import interfaces.UserRepository;
-import model.song.Song;
 import model.users.User;
 
 import java.sql.*;

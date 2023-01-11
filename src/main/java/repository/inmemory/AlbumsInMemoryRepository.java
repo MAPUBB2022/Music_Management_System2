@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AlbumsInMemoryRepository implements ICrudRepository<String, Album>
 {
-	private List<Album> inMemoryAlbums;
+	private final List<Album> inMemoryAlbums;
 	
 	public AlbumsInMemoryRepository() throws ParseException
 	{

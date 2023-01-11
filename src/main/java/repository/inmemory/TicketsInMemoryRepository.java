@@ -1,6 +1,5 @@
 package repository.inmemory;
 
-import interfaces.ICrudRepository;
 import interfaces.IUserFieldIdentifiers;
 import model.concert.Concert;
 import model.concert.Ticket;

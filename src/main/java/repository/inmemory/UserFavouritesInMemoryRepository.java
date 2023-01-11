@@ -62,6 +62,7 @@ public class UserFavouritesInMemoryRepository implements IUserFieldIdentifiers<S
 	public List<Song> findAllForUser()
 	{
 		return this.songs;
+//		return this.songs.isEmpty() ? null : this.songs;
 	}
 	
 	@Override

@@ -1,8 +1,6 @@
 package repository.inmemory;
 
 import interfaces.ICrudRepository;
-import model.album.Artist;
-import model.album.Band;
 import model.song.*;
 
 import java.text.ParseException;
@@ -13,7 +11,7 @@ import java.util.List;
 
 public class SongsInMemoryRepository implements ICrudRepository<String, Song>
 {
-	private List<Song> songList;
+	private final List<Song> songList;
 	
 	public SongsInMemoryRepository() throws ParseException
 	{

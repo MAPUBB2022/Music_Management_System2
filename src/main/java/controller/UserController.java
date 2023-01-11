@@ -56,11 +56,6 @@ public class UserController implements IUserController
 		return songList;
 	}
 	
-	public ICrudRepository<String, User> getUserList()
-	{
-		return userList;
-	}
-	
 	public IUserFieldIdentifiers<Song> getMyFavourites()
 	{
 		return myFavourites;
@@ -173,7 +168,8 @@ public class UserController implements IUserController
 	{
 		if (song == null) throw new NullPointerException("[ERROR] NULL-Pointer provided as Function Argument");
 		if (this.myFavourites == null) throw new FavouritesListException("[ERROR] List of Favourites is NULL");
-		if (this.myFavourites.findAllForUser() != null && this.myFavourites.findAllForUser().contains(song)) return false; //"[ERROR] Song already contained in List\n";
+		if (this.myFavourites.findAllForUser() != null && this.myFavourites.findAllForUser().contains(song))
+			return false; //"[ERROR] Song already contained in List\n";
 		this.myFavourites.add(song);
 		return true; //"[] Song added\n";
 	}
@@ -260,27 +256,18 @@ public class UserController implements IUserController
 	@Override
 	public String showRecommended()
 	{
-		//todo myFavourites can have less than 3 songs.
-		int max, count = 3;
+		int count = 3;
 		String endString = "";
 		Song s1, s2, s3;
 		List<Integer> randoms;
-		List<Song> songs = this.myFavourites.findAllForUser();
+		List<Song> userFavourites = this.myFavourites.findAllForUser();
 		
-//		if (!songs.isEmpty()) {
-//			max = songs.size() - 1;
-//			randoms = generateUnequalRandom(max);
-//			s1 = songs.get(randoms.get(0)).getRelatedSongs().get(0);
-//			s2 = songs.get(randoms.get(1)).getRelatedSongs().get(0);
-//			s3 = songs.get(randoms.get(2)).getRelatedSongs().get(0);
-		
-		if (songs == null){
-			List<Song> songs2 = songList.findAll();
-			max = songs2.size() - 1;
-			randoms = generateUnequalRandom(max);
-			s1 = songs2.get(randoms.get(0));
-			s2 = songs2.get(randoms.get(1));
-			s3 = songs2.get(randoms.get(2));
+		if (userFavourites == null || userFavourites.isEmpty()) {
+			List<Song> songListAll = songList.findAll();
+			randoms = generateUnequalRandom(songListAll.size() - 1);
+			s1 = songListAll.get(randoms.get(0));
+			s2 = songListAll.get(randoms.get(1));
+			s3 = songListAll.get(randoms.get(2));
 			
 			endString += "1. " + s1.getName() + " by ";
 			endString += s1.getSinger() != null ? s1.getSinger().getStageName() : s1.getBandSingers().getName();
@@ -294,7 +281,18 @@ public class UserController implements IUserController
 			
 			return endString;
 		}
-		return "";
+		
+		for (Song song : userFavourites) {
+			if (song.getRelatedSongs() != null) {
+				for (Song s : song.getRelatedSongs()) {
+					if (count == 0) break;
+					endString += (3 - count + 1) + ". " + s.getName() + " by " + (s.getSinger() != null ? s.getSinger().getStageName() : s.getBandSingers().getName()) + "\n";
+					count--;
+				}
+			}
+		}
+		
+		return endString;
 	}
 	
 	@Override

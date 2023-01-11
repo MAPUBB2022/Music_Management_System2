@@ -10,5 +10,5 @@ public interface Profitable
 	 *
 	 * @return Calculated Profit, as a Float to cover even cases of Division or Floating-Point Multiplication.
 	 */
-	public float calculateProfit();
+	float calculateProfit();
 }

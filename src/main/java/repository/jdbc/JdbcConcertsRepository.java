@@ -1,7 +1,6 @@
 package repository.jdbc;
 
 import interfaces.ICrudRepository;
-import model.album.Album;
 import model.album.Artist;
 import model.concert.Concert;
 

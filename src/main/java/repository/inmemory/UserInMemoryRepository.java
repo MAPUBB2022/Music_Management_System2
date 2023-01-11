@@ -2,7 +2,6 @@ package repository.inmemory;
 
 
 import interfaces.UserRepository;
-import model.song.Song;
 import model.users.User;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class UserInMemoryRepository implements UserRepository
 {
-	private List<User> userList;
+	private final List<User> userList;
 	
 	public UserInMemoryRepository()
 	{

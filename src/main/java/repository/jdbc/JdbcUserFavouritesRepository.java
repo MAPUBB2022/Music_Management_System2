@@ -1,12 +1,9 @@
 package repository.jdbc;
 
-import interfaces.ICrudRepository;
 import interfaces.IUserFieldIdentifiers;
-import model.concert.Ticket;
 import model.song.Song;
 import model.users.User;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

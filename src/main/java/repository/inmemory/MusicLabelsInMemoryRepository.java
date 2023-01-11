@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MusicLabelsInMemoryRepository implements ICrudRepository<String, MusicLabel>
 {
-	private List<MusicLabel> musicLabelList;
+	private final List<MusicLabel> musicLabelList;
 	
 	public MusicLabelsInMemoryRepository()
 	{

@@ -1,8 +1,6 @@
 package repository.jdbc;
 
-import interfaces.ICrudRepository;
 import interfaces.IUserFieldIdentifiers;
-import model.album.Album;
 import model.concert.Concert;
 import model.concert.Ticket;
 import model.users.User;
@@ -10,8 +8,8 @@ import model.users.User;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 public class JdbcTicketsRepository implements IUserFieldIdentifiers<Ticket>
 {

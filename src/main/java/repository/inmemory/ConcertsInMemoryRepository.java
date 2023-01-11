@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ConcertsInMemoryRepository implements ICrudRepository<String, Concert>
 {
-	private List<Concert> concertList;
+	private final List<Concert> concertList;
 	
 	public ConcertsInMemoryRepository() throws ParseException
 	{

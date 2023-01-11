@@ -1,14 +1,12 @@
 package repository.jdbc;
 
 import interfaces.ICrudRepository;
-import model.album.Album;
 import model.song.Song;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: 09-Jan-23 Song-RelatedSong Table! test->test2; test2->test
 public class JdbcSongsRepository implements ICrudRepository<String, Song>
 {
 	private final Connection connection;

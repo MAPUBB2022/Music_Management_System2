@@ -5,7 +5,6 @@ import model.album.Album;
 import model.album.Artist;
 import model.concert.Concert;
 import model.label.MusicLabel;
-import model.song.Song;
 
 import java.sql.*;
 import java.util.ArrayList;

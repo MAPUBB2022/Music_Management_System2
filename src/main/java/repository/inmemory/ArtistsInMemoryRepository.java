@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ArtistsInMemoryRepository implements ICrudRepository<String, Artist>
 {
-	private List<Artist> artistList;
+	private final List<Artist> artistList;
 	
 	public ArtistsInMemoryRepository()
 	{
