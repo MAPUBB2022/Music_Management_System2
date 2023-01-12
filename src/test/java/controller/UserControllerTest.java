@@ -26,8 +26,6 @@ class UserControllerTest
 	private ConcertsInMemoryRepository concerts;
 	private SongsInMemoryRepository songs;
 	private UserInMemoryRepository users;
-	private TicketsInMemoryRepository myTickets;
-	private UserFavouritesInMemoryRepository userFavourites;
 	
 	@BeforeEach
 	void setUp() throws ParseException
@@ -38,8 +36,8 @@ class UserControllerTest
 		concerts = new ConcertsInMemoryRepository();
 		songs = new SongsInMemoryRepository();
 		users = new UserInMemoryRepository();
-		myTickets = new TicketsInMemoryRepository(user);
-		userFavourites = new UserFavouritesInMemoryRepository(user);
+		TicketsInMemoryRepository myTickets = new TicketsInMemoryRepository(user);
+		UserFavouritesInMemoryRepository userFavourites = new UserFavouritesInMemoryRepository(user);
 		userController = new UserController(albums, artists, concerts, songs, users, myTickets, userFavourites);
 	}
 	
@@ -138,8 +136,8 @@ class UserControllerTest
 		userController.sortAlbumsByRevenue();
 		List<Album> albumList = userController.getAlbumList().findAll();
 		float current = albumList.get(0).calculateProfit();
-		for (int index = 0; index < albumList.size(); index++) {
-			float newCurrent = albumList.get(index).calculateProfit();
+		for (Album album : albumList) {
+			float newCurrent = album.calculateProfit();
 			assert current <= newCurrent;
 			current = newCurrent;
 		}
@@ -152,8 +150,8 @@ class UserControllerTest
 		userController.sortSongsByRating();
 		List<Song> songList = userController.getSongList().findAll();
 		Float rating = songList.get(0).getRating();
-		for (int index = 0; index < songList.size(); index++) {
-			Float newRating = songList.get(index).getRating();
+		for (Song song : songList) {
+			Float newRating = song.getRating();
 			assert rating >= newRating;
 			rating = newRating;
 		}
@@ -166,8 +164,8 @@ class UserControllerTest
 		userController.sortSongsByReleaseDate();
 		List<Song> songList = userController.getSongList().findAll();
 		Date releaseDate = songList.get(0).getReleaseDate();
-		for (int index = 0; index < songList.size(); index++) {
-			Date newReleaseDate = songList.get(index).getReleaseDate();
+		for (Song song : songList) {
+			Date newReleaseDate = song.getReleaseDate();
 			assert releaseDate.compareTo(newReleaseDate) <= 0;
 			releaseDate = newReleaseDate;
 		}
@@ -180,8 +178,8 @@ class UserControllerTest
 		userController.sortArtistsByName();
 		List<Artist> artistList = userController.getArtistList().findAll();
 		String stageName = artistList.get(0).getStageName();
-		for (int index = 0; index < artistList.size(); index++) {
-			String newStageName = artistList.get(index).getStageName();
+		for (Artist artist : artistList) {
+			String newStageName = artist.getStageName();
 			assert stageName.compareTo(newStageName) <= 0;
 			stageName = newStageName;
 		}
@@ -194,8 +192,8 @@ class UserControllerTest
 		userController.sortAlbumsByReleaseDate();
 		List<Album> albumList = userController.getAlbumList().findAll();
 		Date releaseDate = albumList.get(0).getReleaseDate();
-		for (int index = 0; index < albumList.size(); index++) {
-			Date newReleaseDate = albumList.get(index).getReleaseDate();
+		for (Album album : albumList) {
+			Date newReleaseDate = album.getReleaseDate();
 			assert releaseDate.compareTo(newReleaseDate) <= 0;
 			releaseDate = newReleaseDate;
 		}
@@ -309,7 +307,7 @@ class UserControllerTest
 	@DisplayName("Test - Show Recommended")
 	void showRecommended()
 	{
-		assertEquals(userController.showRecommended(), "");
+		assertNotEquals(userController.showRecommended(), "");
 	}
 	
 	@Test

@@ -5,7 +5,6 @@ import model.album.Artist;
 import model.album.Band;
 import model.concert.Concert;
 import model.label.MusicLabel;
-import model.song.Pop;
 import model.song.Rap;
 import model.song.Rock;
 import model.song.Song;
