@@ -25,10 +25,12 @@ public class UserUI {
     boolean isAdmin;
 
     public UserUI() {
-    };
+    }
+
+    ;
 
     public UserUI(Integer saveType, boolean isAdmin) throws ParseException, RuntimeException {
-//        this.isAdmin = isAdmin;
+        this.isAdmin = isAdmin;
 //        if (saveType == 1) {
 //            AlbumsInMemoryRepository albumsInMemoryRepository = new AlbumsInMemoryRepository();
 //            ArtistsInMemoryRepository artistsInMemoryRepository = new ArtistsInMemoryRepository();
@@ -163,202 +165,56 @@ public class UserUI {
                         String type;
 
                         do {
-                            valid = false;
-                            do {
-                                //type of song
-                                System.out.println("Enter song type (Classical, Pop, Rap, Rock): ");
-                                type = inp.nextLine();
-                                if (type.equals("Classical") || type.equals("Pop") || type.equals("Rap") || type.equals("Rock"))
-                                    valid = true;
-                                else System.out.println("Invalid input! Please try again!");
-                            } while (!valid);
-
                             //name
                             System.out.println("name: ");
                             songName = inp.nextLine();
 
                             // set song
-                            switch (type) {
 
-                                case "Classical" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set song to album if it already exists in the song list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        classical.setName(songName);
+                            Song song = this.controllerAdmin.getSongList().findByID(songName);
+                            if (song != null)  //set song to album if it already exists in the song list
+                                album.addSong(song); // add input song to album
+                            else {
+                                song.setName(songName);
 
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
+                                //rating
+                                System.out.println("rating: ");
+                                float rating = inp.nextFloat();
 
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                                //release date
+                                System.out.println("release date: ");
+                                String date = inp.nextLine();
+                                Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 
 
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
+                                //language of album
+                                System.out.println("\nlanguage of album: ");
+                                String language = inp.nextLine();
+                                album.setLanguage(language);
 
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
+                                //production cost
+                                System.out.println("production cost: ");
+                                float productionCost = inp.nextFloat();
+                                album.setProductionCost(productionCost);
 
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
+                                // copies sold
+                                System.out.println("copies sold: ");
+                                int copies = inp.nextInt();
+                                album.setCopiesSold(copies);
 
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
+                                // disc price
+                                System.out.println("copies sold: ");
+                                float price = inp.nextFloat();
+                                album.setDiscPrice(price);
 
-                                        classical.setRating(rating);
-                                        classical.setReleaseDate(release);
-                                        classical.setSinger(artist);
+                                song.setRating(rating);
+                                song.setReleaseDate(release);
+                                song.setSinger(artist);
 
-                                        album.addSong(classical); // add input song to album
-                                    }
-                                }
-                                case "Pop" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set song to album if it already exists in the artist list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        pop.setName(songName);
-
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
-
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                        //language of album
-                                        System.out.println("\nlanguage of the album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
-
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
-
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
-
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
-
-                                        pop.setRating(rating);
-                                        pop.setReleaseDate(release);
-                                        pop.setSinger(artist);
-
-                                        album.addSong(pop); // add input song to album
-
-                                    }
-                                }
-                                case "Rap" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set song to album if it already exists in the song list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        rap.setName(songName);
-
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
-
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
-
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
-
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
-
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
-
-                                        rap.setRating(rating);
-                                        rap.setReleaseDate(release);
-                                        rap.setSinger(artist);
-
-                                        album.addSong(rap); // add input song to album
-                                    }
-                                }
-                                case "Rock" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set song to album if it already exists in the song list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        rock.setName(songName);
-
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
-
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
-
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
-
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
-
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
-
-                                        rock.setRating(rating);
-                                        rock.setReleaseDate(release);
-                                        rock.setSinger(artist);
-
-                                        album.addSong(rock); // add input song to album
-                                    }
-                                    nr--;
-                                }
+                                album.addSong(song); // add input song to album
                             }
+                            nr--;
+
                         } while (nr > 0);
 
                         // add new album to the list of albums (at this point, album must be valid)
@@ -444,203 +300,58 @@ public class UserUI {
                         int nr = inp.nextInt();
                         String songName = null;
                         String type;
-                        do {
-                            valid = false;
-                            do {
-                                //type of song
-                                System.out.println("Enter song type (Classical, Pop, Rap, Rock): ");
-                                type = inp.nextLine();
-                                if (type.equals("Classical") || type.equals("Pop") || type.equals("Rap") || type.equals("Rock"))
-                                    valid = true;
-                                else System.out.println("Invalid input! Please try again!");
-                            } while (!valid);
 
+                        do {
                             //name
                             System.out.println("name: ");
                             songName = inp.nextLine();
 
                             // set song
-                            switch (type) {
 
-                                case "Classical" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set artist to album if it already exists in the artist list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        classical.setName(songName);
+                            Song song = this.controllerAdmin.getSongList().findByID(songName);
+                            if (song != null)  //set song to album if it already exists in the song list
+                                album.addSong(song); // add input song to album
+                            else {
+                                song.setName(songName);
 
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
+                                //rating
+                                System.out.println("rating: ");
+                                float rating = inp.nextFloat();
 
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                                //release date
+                                System.out.println("release date: ");
+                                String date = inp.nextLine();
+                                Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 
 
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
+                                //language of album
+                                System.out.println("\nlanguage of album: ");
+                                String language = inp.nextLine();
+                                album.setLanguage(language);
 
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
+                                //production cost
+                                System.out.println("production cost: ");
+                                float productionCost = inp.nextFloat();
+                                album.setProductionCost(productionCost);
 
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
+                                // copies sold
+                                System.out.println("copies sold: ");
+                                int copies = inp.nextInt();
+                                album.setCopiesSold(copies);
 
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
+                                // disc price
+                                System.out.println("copies sold: ");
+                                float price = inp.nextFloat();
+                                album.setDiscPrice(price);
 
-                                        classical.setRating(rating);
-                                        classical.setReleaseDate(release);
-                                        classical.setSinger(artist);
+                                song.setRating(rating);
+                                song.setReleaseDate(release);
+                                song.setSinger(artist);
 
-                                        album.addSong(classical); // add input song to album
-                                    }
-                                }
-                                case "Pop" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set song to album if it already exists in the artist list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        pop.setName(songName);
-
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
-
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
-
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
-
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
-
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
-
-                                        pop.setRating(rating);
-                                        pop.setReleaseDate(release);
-                                        pop.setSinger(artist);
-
-                                        album.addSong(pop); // add input song to album
-
-                                    }
-                                }
-                                case "Rap" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set artist to album if it already exists in the artist list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        rap.setName(songName);
-
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
-
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
-
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
-
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
-
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
-
-                                        rap.setRating(rating);
-                                        rap.setReleaseDate(release);
-                                        rap.setSinger(artist);
-
-                                        album.addSong(rap); // add input song to album
-                                    }
-                                }
-                                case "Rock" -> {
-                                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                                    if (song != null)  //set artist to album if it already exists in the artist list
-                                        album.addSong(song); // add input song to album
-                                    else {
-                                        rock.setName(songName);
-
-                                        //rating
-                                        System.out.println("rating: ");
-                                        float rating = inp.nextFloat();
-
-                                        //release date
-                                        System.out.println("release date: ");
-                                        String date = inp.nextLine();
-                                        Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                        //language of album
-                                        System.out.println("\nlanguage of album: ");
-                                        String language = inp.nextLine();
-                                        album.setLanguage(language);
-
-                                        //production cost
-                                        System.out.println("production cost: ");
-                                        float productionCost = inp.nextFloat();
-                                        album.setProductionCost(productionCost);
-
-                                        // copies sold
-                                        System.out.println("copies sold: ");
-                                        int copies = inp.nextInt();
-                                        album.setCopiesSold(copies);
-
-                                        // disc price
-                                        System.out.println("copies sold: ");
-                                        float price = inp.nextFloat();
-                                        album.setDiscPrice(price);
-
-                                        rock.setRating(rating);
-                                        rock.setReleaseDate(release);
-                                        rock.setSinger(artist);
-
-                                        album.addSong(rock); // add input song to album
-                                    }
-                                    nr--;
-                                }
+                                album.addSong(song); // add input song to album
                             }
+                            nr--;
+
                         } while (nr > 0);
 
                         // add new album to the list of albums (at this point, album must be valid)
@@ -1285,204 +996,69 @@ public class UserUI {
                 }
 
                 case 16 -> {
-                    System.out.println("Enter song information:\n");
-                    String songName = "";
+                    //Song list
+                    System.out.println("Enter song list:\nThe number of songs you want to add: ");
+                    int nr = inp.nextInt();
+                    String songName = null;
                     String type;
-                    boolean valid = false;
 
                     do {
-                        //type of song
-                        System.out.println("Enter song type (Classical, Pop, Rap, Rock): ");
-                        type = inp.nextLine();
-                        if (type.equals("Classical") || type.equals("Pop") || type.equals("Rap") || type.equals("Rock"))
-                            valid = true;
-                        else System.out.println("Invalid input! Please try again!");
-                    } while (!valid);
+                        //name
+                        System.out.println("name: ");
+                        songName = inp.nextLine();
 
-                    //name
-                    System.out.println("Enter song name to be added: ");
-                    songName = inp.nextLine();
+                        // set song
 
-                    // set song
-                    switch (type) {
-                        case "Classical" -> {
-                            Song song = this.controllerAdmin.getSongList().findByID(songName);
-                            if (song != null)  //set song to album if it already exists in the song list
-                                album.addSong(song); // add input song to album
-                            else {
-                                classical.setName(songName);
+                        Song song = this.controllerAdmin.getSongList().findByID(songName);
+                        if (song != null)  //set song to album if it already exists in the song list
+                            album.addSong(song); // add input song to album
+                        else {
+                            song.setName(songName);
 
-                                //rating
-                                System.out.println("rating: ");
-                                float rating = inp.nextFloat();
+                            //rating
+                            System.out.println("rating: ");
+                            float rating = inp.nextFloat();
 
-                                //release date
-                                System.out.println("release date: ");
-                                String date = inp.nextLine();
-                                Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                            //release date
+                            System.out.println("release date: ");
+                            String date = inp.nextLine();
+                            Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 
 
-                                //language of album
-                                System.out.println("\nlanguage of album: ");
-                                String language = inp.nextLine();
-                                album.setLanguage(language);
+                            //language of album
+                            System.out.println("\nlanguage of album: ");
+                            String language = inp.nextLine();
+                            album.setLanguage(language);
 
-                                //production cost
-                                System.out.println("production cost: ");
-                                float productionCost = inp.nextFloat();
-                                album.setProductionCost(productionCost);
+                            //production cost
+                            System.out.println("production cost: ");
+                            float productionCost = inp.nextFloat();
+                            album.setProductionCost(productionCost);
 
-                                // copies sold
-                                System.out.println("copies sold: ");
-                                int copies = inp.nextInt();
-                                album.setCopiesSold(copies);
+                            // copies sold
+                            System.out.println("copies sold: ");
+                            int copies = inp.nextInt();
+                            album.setCopiesSold(copies);
 
-                                // disc price
-                                System.out.println("copies sold: ");
-                                float price = inp.nextFloat();
-                                album.setDiscPrice(price);
+                            // disc price
+                            System.out.println("copies sold: ");
+                            float price = inp.nextFloat();
+                            album.setDiscPrice(price);
 
-                                classical.setRating(rating);
-                                classical.setReleaseDate(release);
-                                classical.setSinger(artist);
+                            song.setRating(rating);
+                            song.setReleaseDate(release);
+                            song.setSinger(artist);
 
-                                this.controllerAdmin.addSong(classical); // add input song to album
-                            }
+                            album.addSong(song); // add input song to album
                         }
-                        case "Pop" -> {
-                            Song song = this.controllerAdmin.getSongList().findByID(songName);
-                            if (song != null)  //set song to album if it already exists in the artist list
-                                album.addSong(song); // add input song to album
-                            else {
-                                pop.setName(songName);
+                        nr--;
 
-                                //rating
-                                System.out.println("rating: ");
-                                float rating = inp.nextFloat();
+                    } while (nr > 0);
 
-                                //release date
-                                System.out.println("release date: ");
-                                String date = inp.nextLine();
-                                Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                    // add new album to the list of albums (at this point, album must be valid)
+                    controllerAdmin.addAlbum(album);
 
 
-                                //language of album
-                                System.out.println("\nlanguage of the album: ");
-                                String language = inp.nextLine();
-                                album.setLanguage(language);
-
-                                //production cost
-                                System.out.println("production cost: ");
-                                float productionCost = inp.nextFloat();
-                                album.setProductionCost(productionCost);
-
-                                // copies sold
-                                System.out.println("copies sold: ");
-                                int copies = inp.nextInt();
-                                album.setCopiesSold(copies);
-
-                                // disc price
-                                System.out.println("copies sold: ");
-                                float price = inp.nextFloat();
-                                album.setDiscPrice(price);
-
-                                pop.setRating(rating);
-                                pop.setReleaseDate(release);
-                                pop.setSinger(artist);
-
-                                this.controllerAdmin.addSong(pop); // add input song to album
-
-                            }
-                        }
-                        case "Rap" -> {
-                            Song song = this.controllerAdmin.getSongList().findByID(songName);
-                            if (song != null)  //set artist to album if it already exists in the artist list
-                                album.addSong(song); // add input song to album
-                            else {
-                                rap.setName(songName);
-
-                                //rating
-                                System.out.println("rating: ");
-                                float rating = inp.nextFloat();
-
-                                //release date
-                                System.out.println("release date: ");
-                                String date = inp.nextLine();
-                                Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                //language of album
-                                System.out.println("\nlanguage of album: ");
-                                String language = inp.nextLine();
-                                album.setLanguage(language);
-
-                                //production cost
-                                System.out.println("production cost: ");
-                                float productionCost = inp.nextFloat();
-                                album.setProductionCost(productionCost);
-
-                                // copies sold
-                                System.out.println("copies sold: ");
-                                int copies = inp.nextInt();
-                                album.setCopiesSold(copies);
-
-                                // disc price
-                                System.out.println("copies sold: ");
-                                float price = inp.nextFloat();
-                                album.setDiscPrice(price);
-
-                                rap.setRating(rating);
-                                rap.setReleaseDate(release);
-                                rap.setSinger(artist);
-
-                                this.controllerAdmin.addSong(rap); // add input song to album
-                            }
-                        }
-                        case "Rock" -> {
-                            Song song = this.controllerAdmin.getSongList().findByID(songName);
-                            if (song != null)  //set artist to album if it already exists in the artist list
-                                album.addSong(song); // add input song to album
-                            else {
-                                rock.setName(songName);
-
-                                //rating
-                                System.out.println("rating: ");
-                                float rating = inp.nextFloat();
-
-                                //release date
-                                System.out.println("release date: ");
-                                String date = inp.nextLine();
-                                Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-
-
-                                //language of album
-                                System.out.println("\nlanguage of album: ");
-                                String language = inp.nextLine();
-                                album.setLanguage(language);
-
-                                //production cost
-                                System.out.println("production cost: ");
-                                float productionCost = inp.nextFloat();
-                                album.setProductionCost(productionCost);
-
-                                // copies sold
-                                System.out.println("copies sold: ");
-                                int copies = inp.nextInt();
-                                album.setCopiesSold(copies);
-
-                                // disc price
-                                System.out.println("copies sold: ");
-                                float price = inp.nextFloat();
-                                album.setDiscPrice(price);
-
-                                rock.setRating(rating);
-                                rock.setReleaseDate(release);
-                                rock.setSinger(artist);
-
-                                this.controllerAdmin.addSong(rock); // add input song to album
-                            }
-                        }
-                    }
                 }
 
                 case 17 -> {
@@ -1499,174 +1075,67 @@ public class UserUI {
                 }
 
                 case 18 -> {
-                    System.out.println("Enter song information:\n");
-                    String songName = "";
+                    //Song list
+                    System.out.println("Enter song list:\nThe number of songs you want to add: ");
+                    int nr = inp.nextInt();
+                    String songName = null;
                     String type;
-                    boolean valid = false;
 
                     do {
-                        //type of song
-                        System.out.println("Enter song type (Classical, Pop, Rap, Rock): ");
-                        type = inp.nextLine();
-                        if (type.equals("Classical") || type.equals("Pop") || type.equals("Rap") || type.equals("Rock"))
-                            valid = true;
-                        else System.out.println("Invalid input! Please try again!");
-                    } while (!valid);
+                        //name
+                        System.out.println("name: ");
+                        songName = inp.nextLine();
 
-                    //name
-                    System.out.println("Enter song name to be modified: ");
-                    songName = inp.nextLine();
+                        // set song
 
-                    Song song = this.controllerAdmin.getSongList().findByID(songName);
-                    if (song == null)  //modify only existing song
-                        System.out.println("This song doesn't exist!");
-                    else {
-                        // set modified song
-                        switch (type) {
-                            case "Classical" -> {
-                                classical.setName(songName);
-                                classical.setSinger(song.getSinger());
+                        Song song = this.controllerAdmin.getSongList().findByID(songName);
+                        if (song != null)  //set song to album if it already exists in the song list
+                            album.addSong(song); // add input song to album
+                        else {
+                            song.setName(songName);
 
-                                System.out.println("The number of attributes you want to modify: ");
-                                Scanner nrModifA = new Scanner(System.in);
-                                int counter1 = nrModifA.nextInt();
+                            //rating
+                            System.out.println("rating: ");
+                            float rating = inp.nextFloat();
 
-                                do {
-                                    System.out.println("Enter what you want to modify (1.rating," +
-                                            " 2.stream count): ");
-                                    Scanner choice3 = new Scanner(System.in);
-                                    int inp1 = choice3.nextInt();
+                            //release date
+                            System.out.println("release date: ");
+                            String date = inp.nextLine();
+                            Date release = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 
-                                    if (inp1 == 1) {
-                                        System.out.println("Enter the new rating: ");
-                                        Scanner rating = new Scanner(System.in);
-                                        float newRating = rating.nextFloat();
-                                        classical.setRating(newRating);
-                                    } else if (inp1 == 2) {
-                                        System.out.println("Enter the new stream count: ");
-                                        Scanner streamCount = new Scanner(System.in);
-                                        int newStreamCount = streamCount.nextInt();
-                                        classical.setStreamCount(newStreamCount);
-                                    } else {
-                                        System.out.println("Invalid input! Choose between 1-2. You still have " + counter1 + " modifications to do");
-                                        counter1++;
-                                    }
 
-                                    counter1--;
-                                } while (counter1 > 0);
+                            //language of album
+                            System.out.println("\nlanguage of album: ");
+                            String language = inp.nextLine();
+                            album.setLanguage(language);
 
-                                this.controllerAdmin.modifySong(classical);
-                                System.out.println("Song modified successfully!");
-                            }
-                            case "Pop" -> {
-                                pop.setName(songName);
-                                pop.setSinger(song.getSinger());
+                            //production cost
+                            System.out.println("production cost: ");
+                            float productionCost = inp.nextFloat();
+                            album.setProductionCost(productionCost);
 
-                                System.out.println("The number of attributes you want to modify: ");
-                                Scanner nrModifA = new Scanner(System.in);
-                                int counter1 = nrModifA.nextInt();
+                            // copies sold
+                            System.out.println("copies sold: ");
+                            int copies = inp.nextInt();
+                            album.setCopiesSold(copies);
 
-                                do {
-                                    System.out.println("Enter what you want to modify (1.rating," +
-                                            " 2.stream count): ");
-                                    Scanner choice3 = new Scanner(System.in);
-                                    int inp1 = choice3.nextInt();
+                            // disc price
+                            System.out.println("copies sold: ");
+                            float price = inp.nextFloat();
+                            album.setDiscPrice(price);
 
-                                    if (inp1 == 1) {
-                                        System.out.println("Enter the new rating: ");
-                                        Scanner rating = new Scanner(System.in);
-                                        float newRating = rating.nextFloat();
-                                        pop.setRating(newRating);
-                                    } else if (inp1 == 2) {
-                                        System.out.println("Enter the new stream count: ");
-                                        Scanner streamCount = new Scanner(System.in);
-                                        int newStreamCount = streamCount.nextInt();
-                                        pop.setStreamCount(newStreamCount);
-                                    } else {
-                                        System.out.println("Invalid input! Choose between 1-2. You still have " + counter1 + " modifications to do");
-                                        counter1++;
-                                    }
+                            song.setRating(rating);
+                            song.setReleaseDate(release);
+                            song.setSinger(artist);
 
-                                    counter1--;
-                                } while (counter1 > 0);
-
-                                this.controllerAdmin.modifySong(pop);
-                                System.out.println("Song modified successfully!");
-                            }
-                            case "Rap" -> {
-                                rap.setName(songName);
-                                rap.setSinger(song.getSinger());
-
-                                System.out.println("The number of attributes you want to modify: ");
-                                Scanner nrModifA = new Scanner(System.in);
-                                int counter1 = nrModifA.nextInt();
-
-                                do {
-                                    System.out.println("Enter what you want to modify (1.rating," +
-                                            " 2.stream count): ");
-                                    Scanner choice3 = new Scanner(System.in);
-                                    int inp1 = choice3.nextInt();
-
-                                    if (inp1 == 1) {
-                                        System.out.println("Enter the new rating: ");
-                                        Scanner rating = new Scanner(System.in);
-                                        float newRating = rating.nextFloat();
-                                        rap.setRating(newRating);
-                                    } else if (inp1 == 2) {
-                                        System.out.println("Enter the new stream count: ");
-                                        Scanner streamCount = new Scanner(System.in);
-                                        int newStreamCount = streamCount.nextInt();
-                                        rap.setStreamCount(newStreamCount);
-                                    } else {
-                                        System.out.println("Invalid input! Choose between 1-2. You still have " + counter1 + " modifications to do");
-                                        counter1++;
-                                    }
-
-                                    counter1--;
-                                } while (counter1 > 0);
-
-                                this.controllerAdmin.modifySong(rap);
-                                System.out.println("Song modified successfully!");
-                            }
-                            case "Rock" -> {
-                                rock.setName(songName);
-                                rock.setSinger(song.getSinger());
-
-                                System.out.println("The number of attributes you want to modify: ");
-                                Scanner nrModifA = new Scanner(System.in);
-                                int counter1 = nrModifA.nextInt();
-
-                                do {
-                                    System.out.println("Enter what you want to modify (1.rating," +
-                                            " 2.stream count): ");
-                                    Scanner choice3 = new Scanner(System.in);
-                                    int inp1 = choice3.nextInt();
-
-                                    if (inp1 == 1) {
-                                        System.out.println("Enter the new rating: ");
-                                        Scanner rating = new Scanner(System.in);
-                                        float newRating = rating.nextFloat();
-                                        rock.setRating(newRating);
-                                    } else if (inp1 == 2) {
-                                        System.out.println("Enter the new stream count: ");
-                                        Scanner streamCount = new Scanner(System.in);
-                                        int newStreamCount = streamCount.nextInt();
-                                        rock.setStreamCount(newStreamCount);
-                                    } else {
-                                        System.out.println("Invalid input! Choose between 1-2. You still have " + counter1 + " modifications to do");
-                                        counter1++;
-                                    }
-
-                                    counter1--;
-                                } while (counter1 > 0);
-
-                                this.controllerAdmin.modifySong(rock);
-                                System.out.println("Song modified successfully!");
-                            }
-
+                            album.addSong(song); // add input song to album
                         }
+                        nr--;
 
-                    }
+                    } while (nr > 0);
+
+                    // add new album to the list of albums (at this point, album must be valid)
+                    controllerAdmin.addAlbum(album);
                 }
 
                 case 19 -> {
